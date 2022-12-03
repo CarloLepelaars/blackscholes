@@ -11,7 +11,7 @@ class BlackScholesPut(BlackScholesBase):
 
     :param S: Price of underlying asset
     :param K: Strike price
-    :param T: Time till expiration (in years)
+    :param T: Time till expiration in years (1/12 indicates 1 month)
     :param r: Risk-free interest rate (0.05 indicates 5%)
     :param sigma: Volatility (standard deviation) of stock (0.15 indicates 15%)
     """
@@ -25,6 +25,9 @@ class BlackScholesPut(BlackScholesBase):
     def delta(self):
         """ Rate of change in option price with respect to the asset price (1st derivative). """
         return norm.cdf(self._d1) - 1
+
+    def get_all_greeks(self) -> dict:
+        return {}
 
     def in_the_money(self):
         """ Probability that put option will be in the money at maturity. """

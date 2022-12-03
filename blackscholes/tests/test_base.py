@@ -15,6 +15,9 @@ class BlackScholesMeta(BlackScholesBase):
     def in_the_money(self):
         ...
 
+    def get_all_greeks(self):
+        ...
+
 
 class TestBlackScholesBase:
     test_S = 55.  # Asset price of 55

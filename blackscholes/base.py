@@ -9,7 +9,7 @@ class BlackScholesBase(ABC):
 
     :param S: Price of underlying asset
     :param K: Strike price
-    :param T: Time till expiration (in years)
+    :param T: Time till expiration in years (1/12 indicates 1 month)
     :param r: Risk-free interest rate (0.05 indicates 5%)
     :param sigma: Volatility (standard deviation) of stock (0.15 indicates 15%)
     """
@@ -27,6 +27,11 @@ class BlackScholesBase(ABC):
     @abstractmethod
     def in_the_money(self) -> float:
         """ Probability that option will be in the money at maturity. """
+        ...
+
+    @abstractmethod
+    def get_all_greeks(self) -> dict:
+        """ Retrieve all Greeks implemented as a dictionary. """
         ...
 
     @property
