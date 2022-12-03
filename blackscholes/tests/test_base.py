@@ -25,6 +25,7 @@ class TestBlackScholesBase:
     test_T = 1.  # 1 year to maturity
     test_r = 0.0025  # 0.25% risk-free rate
     test_sigma = 0.15  # 15% vol
+    meta = BlackScholesMeta(S=test_S, K=test_K, T=test_T, r=test_r, sigma=test_sigma)
 
     def test_arg_assert(self):
         # Should not be able to initialize if S, K, T, or sigma is negative.
@@ -38,8 +39,13 @@ class TestBlackScholesBase:
         BlackScholesMeta(S=self.test_S, K=self.test_K, T=self.test_T, r=-self.test_r, sigma=self.test_sigma)
 
     def test_d(self):
-        meta = BlackScholesMeta(S=self.test_S, K=self.test_K, T=self.test_T, r=self.test_r, sigma=self.test_sigma)
         # d1 and d2 should be accurate up to at least 6 decimals
-        np.testing.assert_almost_equal(meta._d1, 0.7270678653621663, decimal=6)
-        np.testing.assert_almost_equal(meta._d2, 0.5770678653621663, decimal=6)
+        np.testing.assert_almost_equal(self.meta._d1, 0.7270678653621663, decimal=6)
+        np.testing.assert_almost_equal(self.meta._d2, 0.5770678653621663, decimal=6)
 
+    def test_gamma(self):
+        gamma = self.meta.gamma()
+        np.testing.assert_almost_equal(gamma, 0.03712496688031454, decimal=6)
+
+    def test_vega(self):
+        ...

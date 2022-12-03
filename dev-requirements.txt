@@ -1,3 +1,6 @@
+isort
 mkdocs
 pytest
+black
+flake8
 pre-commit

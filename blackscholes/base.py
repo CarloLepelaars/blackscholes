@@ -1,4 +1,5 @@
 import numpy as np
+from scipy.stats import norm
 from abc import ABC, abstractmethod
 
 
@@ -33,6 +34,13 @@ class BlackScholesBase(ABC):
     def get_all_greeks(self) -> dict:
         """ Retrieve all Greeks implemented as a dictionary. """
         ...
+
+    def gamma(self) -> float:
+        """
+        Rate of change in delta with respect to the underlying stock price (2nd derivative).
+        NOTE: Gamma is the same for calls and puts.
+        """
+        return norm.pdf(self._d1) / (self.S * self.sigma * np.sqrt(self.T))
 
     @property
     def _d1(self) -> float:
