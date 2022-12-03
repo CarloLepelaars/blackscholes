@@ -31,6 +31,12 @@ class BlackScholesCall(BlackScholesBase):
         with respect to the asset price (1st derivative)."""
         return norm.cdf(self._d1)
 
+    def rho(self) -> float:
+        """Rate of change in option price
+        with respect to the risk-free rate.
+        """
+        return self.K * self.T * np.exp(-self.r * self.T) * norm.cdf(self._d2)
+
     def get_all_greeks(self) -> dict:
         # TODO Implement after implementing all individual Greeks
         return {}

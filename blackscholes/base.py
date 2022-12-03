@@ -53,7 +53,7 @@ class BlackScholesBase(ABC):
 
         NOTE: Vega is the same for calls and puts.
         """
-        return self.S * norm.pdf(self._d1) * np.sqrt(self.T) / 100
+        return self.S * norm.pdf(self._d1) * np.sqrt(self.T)
 
     @property
     def _d1(self) -> float:

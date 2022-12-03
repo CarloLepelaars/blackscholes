@@ -80,4 +80,4 @@ class TestBlackScholesBase:
 
     def test_vega(self):
         vega = self.meta.vega()
-        np.testing.assert_almost_equal(vega, 0.168455, decimal=6)
+        np.testing.assert_almost_equal(vega, 16.84545372194272, decimal=6)

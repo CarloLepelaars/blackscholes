@@ -29,6 +29,10 @@ class TestBlackScholesPut:
         )
         assert call.delta() - put_delta == 1.0
 
+    def test_rho(self):
+        put_rho = self.put.rho()
+        np.testing.assert_almost_equal(put_rho, -14.062140947956918, decimal=6)
+
     def test_in_the_money(self):
         itm_prob = self.put.in_the_money()
         np.testing.assert_almost_equal(itm_prob, 0.2819468056232066, decimal=6)
