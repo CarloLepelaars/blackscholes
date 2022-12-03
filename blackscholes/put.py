@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.stats import norm
 
-from base import BlackScholesBase
+from .base import BlackScholesBase
 
 
 class BlackScholesPut(BlackScholesBase):

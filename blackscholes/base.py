@@ -16,7 +16,7 @@ class BlackScholesBase(ABC):
     def __init__(self, S: float, K: float, T: float, r: float, sigma: float):
         # Some parameters must be positive
         for param in [S, K, T, sigma]:
-            assert param > 0., f"Param {param=} cannot be negative. Got '{param}'."
+            assert param >= 0., f"Some parameters cannot be negative. Got '{param}' as an argument."
         self.S, self.K, self.T, self.r, self.sigma = S, K, T, r, sigma
 
     @abstractmethod
