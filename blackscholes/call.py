@@ -23,10 +23,9 @@ class BlackScholesCall(BlackScholesBase):
         return norm.cdf(self._d1) * self.S - norm.cdf(self._d2) * self.K * np.exp(-self.r * self.T)
 
     def delta(self) -> float:
+        """ Rate of change in option price with respect to the asset price (1st derivative). """
         return norm.cdf(self._d1)
 
     def in_the_money(self):
-        """
-        Calculate probability that option will be in the money at maturity.
-        """
+        """ Probability that call option will be in the money at maturity. """
         return norm.cdf(self._d2)

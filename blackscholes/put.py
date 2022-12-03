@@ -23,11 +23,9 @@ class BlackScholesPut(BlackScholesBase):
         return norm.cdf(-self._d2) * self.K * np.exp(-self.r * self.T) - norm.cdf(-self._d1) * self.S
 
     def delta(self):
+        """ Rate of change in option price with respect to the asset price (1st derivative). """
         return norm.cdf(self._d1) - 1
 
     def in_the_money(self):
-        """
-        Calculate probability that put option will be in the money at
-        maturity.
-        """
+        """ Probability that put option will be in the money at maturity. """
         return 1 - norm.cdf(self._d2)
