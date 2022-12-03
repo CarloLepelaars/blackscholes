@@ -27,8 +27,9 @@ class BlackScholesPut(BlackScholesBase):
         return norm.cdf(self._d1) - 1
 
     def get_all_greeks(self) -> dict:
+        # TODO Implement after implementing all individual Greeks
         return {}
 
     def in_the_money(self):
-        """ Probability that put option will be in the money at maturity. """
+        """ Naive Probability that put option will be in the money at maturity. """
         return 1 - norm.cdf(self._d2)

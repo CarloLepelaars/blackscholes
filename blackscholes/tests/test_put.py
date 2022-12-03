@@ -11,6 +11,10 @@ class TestBlackScholesPut:
     test_sigma = 0.15  # 15% vol
     put = BlackScholesPut(S=test_S, K=test_K, T=test_T, r=test_r, sigma=test_sigma)
 
+    def test_price(self):
+        put_price = self.put.price()
+        np.testing.assert_almost_equal(put_price, 1.214564, decimal=4)
+
     def test_delta(self):
         put_delta = self.put.delta()
         np.testing.assert_almost_equal(put_delta, -0.233592191490538, decimal=6)
@@ -19,3 +23,7 @@ class TestBlackScholesPut:
         call = BlackScholesCall(S=self.test_S, K=self.test_K, T=self.test_T,
                                 r=self.test_r, sigma=self.test_sigma)
         assert call.delta() - put_delta == 1.
+
+    def test_in_the_money(self):
+        itm_prob = self.put.in_the_money()
+        np.testing.assert_almost_equal(itm_prob, 0.2819468056232066, decimal=6)

@@ -27,8 +27,9 @@ class BlackScholesCall(BlackScholesBase):
         return norm.cdf(self._d1)
 
     def get_all_greeks(self) -> dict:
+        # TODO Implement after implementing all individual Greeks
         return {}
 
     def in_the_money(self):
-        """ Probability that call option will be in the money at maturity. """
+        """ Naive Probability that call option will be in the money at maturity. """
         return norm.cdf(self._d2)

@@ -26,7 +26,7 @@ class BlackScholesBase(ABC):
 
     @abstractmethod
     def in_the_money(self) -> float:
-        """ Probability that option will be in the money at maturity. """
+        """ Naive probability that option will be in the money at maturity. """
         ...
 
     @abstractmethod
