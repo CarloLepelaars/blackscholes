@@ -29,6 +29,21 @@ class TestBlackScholesPut:
         )
         assert call.delta() - put_delta == 1.0
 
+    def test_dual_delta(self):
+        put_delta = self.put.dual_delta()
+        assert 0.0 < put_delta < 1.0
+        np.testing.assert_almost_equal(put_delta, 0.2812428189591384, decimal=6)
+
+        # Due to put-call parity, Call dual delta + Put dual delta should be 1.
+        call = BlackScholesCall(
+            S=self.test_S,
+            K=self.test_K,
+            T=self.test_T,
+            r=self.test_r,
+            sigma=self.test_sigma,
+        )
+        np.testing.assert_almost_equal(call.dual_delta() + put_delta, 1.0, decimal=2)
+
     def test_theta(self):
         put_theta = self.put.theta()
         np.testing.assert_almost_equal(put_theta, -1.2282536767758119, decimal=6)
@@ -50,4 +65,5 @@ class TestBlackScholesPut:
 
     def test_in_the_money(self):
         itm_prob = self.put.in_the_money()
+        assert 0.0 < itm_prob < 1.0
         np.testing.assert_almost_equal(itm_prob, 0.2819468056232066, decimal=6)

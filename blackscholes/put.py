@@ -34,6 +34,12 @@ class BlackScholesPut(BlackScholesBase):
         """
         return norm.cdf(self._d1) - 1
 
+    def dual_delta(self):
+        """1st derivative in option price
+        with respect to strike price.
+        """
+        return np.exp(-self.r * self.T) * norm.cdf(-self._d2)
+
     def theta(self):
         """Rate of change in option price
         with respect to time (i.e. time decay).

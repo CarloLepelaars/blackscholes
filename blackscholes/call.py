@@ -28,8 +28,16 @@ class BlackScholesCall(BlackScholesBase):
 
     def delta(self) -> float:
         """Rate of change in option price
-        with respect to the asset price (1st derivative)."""
+        with respect to the asset price (1st derivative).
+        Proxy for probability of the option expiring in the money.
+        """
         return norm.cdf(self._d1)
+
+    def dual_delta(self) -> float:
+        """1st derivative in option price
+        with respect to strike price.
+        """
+        return np.exp(-self.r * self.T) * norm.cdf(self._d2)
 
     def theta(self):
         """Rate of change in option price
