@@ -5,16 +5,26 @@ from base import BlackScholesBase
 
 
 class BlackScholesPut(BlackScholesBase):
-    def price(self, S, K, T, r, sigma):
-        """ Main method for calculating price of a put option """
-        d1 = self._d1(S, K, T, r, sigma)
-        d2 = self._d2(S, K, T, r, sigma)
-        return norm.cdf(-d2) * K * np.exp(-r * T) - norm.cdf(-d1) * S
+    """
+    Class to calculate (European) call option prices and Greeks with the Black-Scholes-Merton formula
+    (without dividends).
 
-    def in_the_money(self, S, K, T, r, sigma):
+    :param S: Price of underlying asset
+    :param K: Strike price
+    :param T: Time till expiration (in years)
+    :param r: Risk-free interest rate (0.05 indicates 5%)
+    :param sigma: Volatility (standard deviation) of stock (0.15 indicates 15%)
+    """
+    def __init__(self, S: float, K: float, T: float, r: float, sigma: float):
+        super().__init__(S=S, K=K, T=T, r=r, sigma=sigma)
+
+    def price(self):
+        """ Price of a put option. """
+        return norm.cdf(-self._d2) * self.K * np.exp(-self.r * self.T) - norm.cdf(-self._d1) * self.S
+
+    def in_the_money(self):
         """
         Calculate probability that put option will be in the money at
         maturity.
         """
-        d2 = self._d2(S, K, T, r, sigma)
-        return 1 - norm.cdf(d2)
+        return 1 - norm.cdf(self._d2)
