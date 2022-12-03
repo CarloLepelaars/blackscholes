@@ -31,11 +31,22 @@ class TestBlackScholesPut:
 
     def test_theta(self):
         put_theta = self.put.theta()
-        np.testing.assert_almost_equal(put_theta, -0.003365, decimal=6)
+        np.testing.assert_almost_equal(put_theta, -1.2282536767758119, decimal=6)
 
     def test_rho(self):
         put_rho = self.put.rho()
         np.testing.assert_almost_equal(put_rho, -14.062140947956918, decimal=6)
+
+    def test_get_core_greeks(self):
+        core_greeks = self.put.get_core_greeks()
+        expected_result = {
+            "delta": -0.233592191490538,
+            "gamma": 0.03712496688031454,
+            "vega": 16.84545372194272,
+            "theta": -1.2282536767758119,
+            "rho": -14.062140947956918,
+        }
+        assert core_greeks == expected_result
 
     def test_in_the_money(self):
         itm_prob = self.put.in_the_money()

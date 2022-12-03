@@ -36,8 +36,9 @@ class BlackScholesBase(ABC):
         ...
 
     @abstractmethod
-    def get_all_greeks(self) -> dict:
-        """Retrieve all Greeks implemented as a dictionary."""
+    def delta(self) -> float:
+        """Rate of change in option price
+        with respect to the asset price (1st derivative)."""
         ...
 
     def gamma(self) -> float:
@@ -54,6 +55,41 @@ class BlackScholesBase(ABC):
         NOTE: Vega is the same for calls and puts.
         """
         return self.S * norm.pdf(self._d1) * np.sqrt(self.T)
+
+    def theta(self) -> float:
+        """
+        Rate of change in option price
+        with respect to time (i.e. time decay).
+        """
+        ...
+
+    def rho(self) -> float:
+        """Rate of change in option price
+        with respect to the risk-free rate.
+        """
+        ...
+
+    def get_core_greeks(self) -> dict:
+        """
+        Get the top 5 most well known Greeks.
+        1. Delta
+        2. Gamma
+        3. Vega
+        4. Theta
+        5. Rho
+        """
+        return {
+            "delta": self.delta(),
+            "gamma": self.gamma(),
+            "vega": self.vega(),
+            "theta": self.theta(),
+            "rho": self.rho(),
+        }
+
+    @abstractmethod
+    def get_all_greeks(self) -> dict:
+        """Retrieve all Greeks implemented as a dictionary."""
+        ...
 
     @property
     def _d1(self) -> float:

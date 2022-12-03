@@ -31,11 +31,22 @@ class TestBlackScholesCall:
 
     def test_theta(self):
         call_theta = self.call.theta()
-        np.testing.assert_almost_equal(call_theta, -0.003707, decimal=6)
+        np.testing.assert_almost_equal(call_theta, -1.3529415670754943, decimal=6)
 
     def test_rho(self):
         call_rho = self.call.rho()
         np.testing.assert_almost_equal(call_rho, 35.813015171916085, decimal=6)
+
+    def test_get_core_greeks(self):
+        core_greeks = self.call.get_core_greeks()
+        expected_result = {
+            "delta": 0.766407808509462,
+            "gamma": 0.03712496688031454,
+            "vega": 16.84545372194272,
+            "theta": -1.3529415670754943,
+            "rho": 35.813015171916085,
+        }
+        assert core_greeks == expected_result
 
     def test_in_the_money(self):
         itm_prob_call = self.call.in_the_money()
