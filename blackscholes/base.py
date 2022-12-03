@@ -14,20 +14,20 @@ class BlackScholesBase(ABC):
     :param sigma: Volatility (standard deviation) of stock (0.15 indicates 15%)
     """
     @staticmethod
-    def _d1(S, K, T, r, sigma):
+    def _d1(S, K, T, r, sigma) -> float:
+        """ 1st probability factor that acts as a multiplication factor for stock prices. """
         return (1 / (sigma * np.sqrt(T))) * (np.log(S / K) + (r + sigma ** 2 / 2) * T)
 
-    def _d2(self, S, K, T, r, sigma):
+    def _d2(self, S, K, T, r, sigma) -> float:
+        """ 2nd probability parameter that acts as a multiplication factor for discounting. """
         return self._d1(S, K, T, r, sigma) - sigma * np.sqrt(T)
 
     @abstractmethod
-    def price(self, S, K, T, r, sigma):
+    def price(self, S, K, T, r, sigma) -> float:
         """ Price for option. """
         ...
 
     @abstractmethod
-    def in_the_money(self, S, K, T, r, sigma):
-        """
-        Calculate probability that option will be in the money at maturity.
-        """
+    def in_the_money(self, S, K, T, r, sigma) -> float:
+        """ Probability that option will be in the money at maturity. """
         ...
