@@ -34,6 +34,15 @@ class BlackScholesPut(BlackScholesBase):
         """
         return norm.cdf(self._d1) - 1
 
+    def theta(self):
+        """Rate of change in option price
+        with respect to time (i.e. time decay).
+        """
+        return (
+            ((-self.S * norm.pdf(self._d1) * self.sigma) / (2 * np.sqrt(self.T)))
+            + (self.r * self.K * np.exp(-self.r * self.T) * norm.cdf(-self._d2))
+        ) / 365.0
+
     def rho(self) -> float:
         """Rate of change in option price
         with respect to the risk-free rate.

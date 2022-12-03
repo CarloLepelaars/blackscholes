@@ -29,6 +29,10 @@ class TestBlackScholesCall:
         )
         assert call_delta - put.delta() == 1.0
 
+    def test_theta(self):
+        call_theta = self.call.theta()
+        np.testing.assert_almost_equal(call_theta, -0.003707, decimal=6)
+
     def test_rho(self):
         call_rho = self.call.rho()
         np.testing.assert_almost_equal(call_rho, 35.813015171916085, decimal=6)
