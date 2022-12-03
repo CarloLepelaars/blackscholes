@@ -22,6 +22,9 @@ class BlackScholesPut(BlackScholesBase):
         """ Price of a put option. """
         return norm.cdf(-self._d2) * self.K * np.exp(-self.r * self.T) - norm.cdf(-self._d1) * self.S
 
+    def delta(self):
+        return norm.cdf(self._d1) - 1
+
     def in_the_money(self):
         """
         Calculate probability that put option will be in the money at

@@ -22,9 +22,11 @@ class BlackScholesCall(BlackScholesBase):
         """ Price of a call option. """
         return norm.cdf(self._d1) * self.S - norm.cdf(self._d2) * self.K * np.exp(-self.r * self.T)
 
+    def delta(self) -> float:
+        return norm.cdf(self._d1)
+
     def in_the_money(self):
         """
-        Calculate probability that option will be in the money at
-        maturity.
+        Calculate probability that option will be in the money at maturity.
         """
         return norm.cdf(self._d2)
