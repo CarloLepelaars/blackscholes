@@ -83,14 +83,32 @@ class BlackScholesBase(ABC):
         return self.delta() * self.S / self.price()
 
     def vanna(self) -> float:
+        """Sensitivity op delta with respect to change in vol."""
         return -norm.pdf(self._d1) * self._d2 / self.sigma
 
     def charm(self) -> float:
+        """Rate of change of delta over time (also known as delta decay)."""
         return (
             -norm.pdf(self._d1)
             * (2 * self.r * self.T - self._d2 * self.sigma * np.sqrt(self.T))
             / (2 * self.T * self.sigma * np.sqrt(self.T))
         )
+
+    def veta(self):
+        """Rate of change in `vega` with respect to time."""
+        return (
+            -self.S
+            * norm.pdf(self._d1)
+            * np.sqrt(self.T)
+            * (
+                self.r * self._d1 / (self.sigma * np.sqrt(self.T))
+                - (1 + self._d1 * self._d2) / (2 * self.T)
+            )
+        )
+
+    def zomma(self):
+        """Rate of change of gamma with respect to changes in vol."""
+        return self.gamma() * ((self._d1 * self._d2 - 1) / self.sigma)
 
     def get_core_greeks(self) -> dict:
         """

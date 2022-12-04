@@ -101,3 +101,11 @@ class TestBlackScholesBase:
     def test_charm(self):
         charm = self.meta.charm()
         np.testing.assert_almost_equal(charm, 0.0832677717846717, decimal=6)
+
+    def test_veta(self):
+        veta = self.meta.veta()
+        np.testing.assert_almost_equal(veta, 11.752499520643353, decimal=6)
+
+    def test_zomma(self):
+        zomma = self.meta.zomma()
+        np.testing.assert_almost_equal(zomma, -0.14365691533482322, decimal=6)

@@ -67,7 +67,7 @@ class TestBlackScholesCall:
         itm_proxies = self.call.get_itm_proxies()
         expected_result = {
             "naive_itm": 0.7180531943767934,
-            "dual_delta": 0.7162603034383217
+            "dual_delta": 0.7162603034383217,
         }
         assert itm_proxies == expected_result
 
