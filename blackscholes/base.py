@@ -113,7 +113,11 @@ class BlackScholesBase(ABC):
         """Rate of change of gamma with respect to changes in vol."""
         return self.gamma() * ((self._d1 * self._d2 - 1) / self.sigma)
 
-
+    def color(self):
+        return - norm.pdf(self._d1) / \
+               (2 * self.S * self.T * self.sigma * np.sqrt(self.T)) \
+               * (1 + (2 * self.r * self.T - self._d2 * self.sigma *
+                       np.sqrt(self.T)) / (self.sigma * np.sqrt(self.T)) * self._d1)
 
     def get_core_greeks(self) -> dict:
         """

@@ -113,3 +113,7 @@ class TestBlackScholesBase:
     def test_speed(self):
         speed = self.meta.speed()
         np.testing.assert_almost_equal(speed, -0.003946801873134375, decimal=6)
+
+    def test_color(self):
+        color = self.meta.color()
+        np.testing.assert_almost_equal(color, -0.011224141490466934, decimal=6)
