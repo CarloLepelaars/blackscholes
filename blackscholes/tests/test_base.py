@@ -19,6 +19,9 @@ class BlackScholesMeta(BlackScholesBase):
     def delta(self):
         ...
 
+    def dual_delta(self):
+        ...
+
     def theta(self):
         ...
 

@@ -41,6 +41,10 @@ class BlackScholesBase(ABC):
         with respect to the asset price (1st derivative)."""
         ...
 
+    @abstractmethod
+    def dual_delta(self) -> float:
+        ...
+
     def gamma(self) -> float:
         """
         Rate of change in delta with respect to the underlying stock price (2nd derivative).
@@ -104,6 +108,12 @@ class BlackScholesBase(ABC):
             "theta": self.theta(),
             "rho": self.rho(),
         }
+
+    def get_itm_proxies(self) -> dict:
+        """Get multiple ways of calculating probability
+        of option being in the money.
+        """
+        return {"naive_itm": self.in_the_money(), "dual_delta": self.dual_delta()}
 
     @abstractmethod
     def get_all_greeks(self) -> dict:

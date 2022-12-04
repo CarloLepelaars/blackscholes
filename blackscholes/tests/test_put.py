@@ -63,6 +63,14 @@ class TestBlackScholesPut:
         }
         assert core_greeks == expected_result
 
+    def test_get_itm_proxies(self):
+        itm_proxies = self.put.get_itm_proxies()
+        expected_result = {
+                "naive_itm": 0.2819468056232066,
+                "dual_delta": 0.2812428189591384
+        }
+        assert itm_proxies == expected_result
+
     def test_in_the_money(self):
         itm_prob = self.put.in_the_money()
         assert 0.0 < itm_prob < 1.0

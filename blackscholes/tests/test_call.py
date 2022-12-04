@@ -63,6 +63,14 @@ class TestBlackScholesCall:
         }
         assert core_greeks == expected_result
 
+    def test_get_itm_proxies(self):
+        itm_proxies = self.call.get_itm_proxies()
+        expected_result = {
+            "naive_itm": 0.7180531943767934,
+            "dual_delta": 0.7162603034383217
+        }
+        assert itm_proxies == expected_result
+
     def test_in_the_money(self):
         itm_prob_call = self.call.in_the_money()
         assert 0.0 < itm_prob_call < 1.0
