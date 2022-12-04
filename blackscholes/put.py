@@ -32,7 +32,7 @@ class BlackScholesPut(BlackScholesBase):
         Rate of change in option price
         with respect to the asset price (1st derivative).
         """
-        return norm.cdf(self._d1) - 1
+        return -norm.cdf(-self._d1)
 
     def dual_delta(self):
         """1st derivative in option price

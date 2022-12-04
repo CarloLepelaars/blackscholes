@@ -78,6 +78,16 @@ class BlackScholesBase(ABC):
         """
         return self.delta() * self.S / self.price()
 
+    def vanna(self) -> float:
+        return -norm.pdf(self._d1) * self._d2 / self.sigma
+
+    def charm(self) -> float:
+        return (
+            -norm.pdf(self._d1)
+            * (2 * self.r * self.T - self._d2 * self.sigma * np.sqrt(self.T))
+            / (2 * self.T * self.sigma * np.sqrt(self.T))
+        )
+
     def get_core_greeks(self) -> dict:
         """
         Get the top 5 most well known Greeks.

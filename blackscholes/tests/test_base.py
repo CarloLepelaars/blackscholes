@@ -90,3 +90,11 @@ class TestBlackScholesBase:
     def test_vega(self):
         vega = self.meta.vega()
         np.testing.assert_almost_equal(vega, 16.84545372194272, decimal=6)
+
+    def test_vanna(self):
+        vanna = self.meta.vanna()
+        np.testing.assert_almost_equal(vanna, -1.178299396409533, decimal=6)
+
+    def test_charm(self):
+        charm = self.meta.charm()
+        np.testing.assert_almost_equal(charm, 0.0832677717846717, decimal=6)
