@@ -109,3 +109,7 @@ class TestBlackScholesBase:
     def test_zomma(self):
         zomma = self.meta.zomma()
         np.testing.assert_almost_equal(zomma, -0.14365691533482322, decimal=6)
+
+    def test_speed(self):
+        speed = self.meta.speed()
+        np.testing.assert_almost_equal(speed, -0.003946801873134375, decimal=6)

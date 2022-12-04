@@ -106,9 +106,14 @@ class BlackScholesBase(ABC):
             )
         )
 
+    def speed(self):
+        return - self.gamma() / self.S * (self._d1 / (self.sigma * np.sqrt(self.T)) + 1)
+
     def zomma(self):
         """Rate of change of gamma with respect to changes in vol."""
         return self.gamma() * ((self._d1 * self._d2 - 1) / self.sigma)
+
+
 
     def get_core_greeks(self) -> dict:
         """
