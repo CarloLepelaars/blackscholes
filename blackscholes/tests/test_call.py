@@ -61,7 +61,10 @@ class TestBlackScholesCall:
             "theta": -1.3529415670754943,
             "rho": 35.813015171916085,
         }
-        assert core_greeks == expected_result
+        for key in expected_result.keys():
+            np.testing.assert_almost_equal(core_greeks[key],
+                                           expected_result[key],
+                                           decimal=5)
 
     def test_get_itm_proxies(self):
         itm_proxies = self.call.get_itm_proxies()
@@ -69,7 +72,10 @@ class TestBlackScholesCall:
             "naive_itm": 0.7180531943767934,
             "dual_delta": 0.7162603034383217,
         }
-        assert itm_proxies == expected_result
+        for key in expected_result.keys():
+            np.testing.assert_almost_equal(itm_proxies[key],
+                                           expected_result[key],
+                                           decimal=5)
 
     def test_in_the_money(self):
         itm_prob_call = self.call.in_the_money()
