@@ -1,1 +1,17 @@
 site_name: blackscholes
+theme:
+  name: material
+  palette:
+    primary: red
+    accent: cyan
+  font:
+    text: Ubuntu
+  icon:
+    logo: material/cloud
+markdown_extensions:
+  - footnotes
+  - codehilite:
+      linennums: true
+
+plugins:
+  - mkdocstrings
