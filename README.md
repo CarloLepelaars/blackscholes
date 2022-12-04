@@ -56,3 +56,9 @@ Install the pre-commit hooks with:
 You can view the docs locally if you have dev-requirements installed:
 
 `mkdocs serve`
+
+## TODO
+- Cross reference 2nd and 3rd order Greeks with Bloomberg. 
+- Clear documentation (mkdocs)
+- pip check and upload to PyPi
+- Github Actions workflow

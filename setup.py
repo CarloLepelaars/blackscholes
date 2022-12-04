@@ -5,14 +5,14 @@ from setuptools import setup, find_packages
 
 
 setup(
-    name='vollib',
+    name='blackscholes',
     version='0.0.1',
     description='',
     maintainer='carlolepelaars',
     license='MIT',
-    # install_requires = [
-    #     'numpy',
-    #     'pandas'
-    # ],
+    install_requires=[
+        'numpy',
+        'scipy'
+    ],
     packages=find_packages(exclude=['docs'])
 )
