@@ -93,5 +93,5 @@ class TestBlackScholesCall:
         assert itm_prob_call + put.in_the_money() == 1.0
 
     def test_lambda(self):
-        lambda_greek = self.call.lamdba()
+        lambda_greek = self.call.lambda_greek()
         np.testing.assert_almost_equal(lambda_greek, 6.6492624553539335, decimal=6)
