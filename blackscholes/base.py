@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
+from typing import Dict
 
 import numpy as np
-from typing import Dict
 from scipy.stats import norm
 
 
@@ -53,6 +53,13 @@ class BlackScholesBase(ABC):
         """
         return norm.pdf(self._d1) / (self.S * self.sigma * np.sqrt(self.T))
 
+    def dual_gamma(self) -> float:
+        return (
+            np.exp(-self.r * self.T)
+            * norm.pdf(self._d2)
+            / (self.K * self.sigma * np.sqrt(self.T))
+        )
+
     def vega(self) -> float:
         """
         Rate of change in option price with respect to the volatility of the asset.
@@ -96,8 +103,7 @@ class BlackScholesBase(ABC):
         )
 
     def vomma(self) -> float:
-        """2nd order sensitivity to vol.
-        """
+        """2nd order sensitivity to vol."""
         return self.vega() * self._d1 * self._d2 / self.sigma
 
     def veta(self) -> float:
@@ -113,27 +119,35 @@ class BlackScholesBase(ABC):
         )
 
     def speed(self) -> float:
-        return - self.gamma() / self.S * (self._d1 / (self.sigma * np.sqrt(self.T)) + 1)
+        return -self.gamma() / self.S * (self._d1 / (self.sigma * np.sqrt(self.T)) + 1)
 
     def zomma(self) -> float:
         """Rate of change of gamma with respect to changes in vol."""
         return self.gamma() * ((self._d1 * self._d2 - 1) / self.sigma)
 
     def color(self) -> float:
-        """Rate of change of gamma over time.
-        """
-        return - norm.pdf(self._d1) / \
-               (2 * self.S * self.T * self.sigma * np.sqrt(self.T)) \
-               * (1 + (2 * self.r * self.T - self._d2 * self.sigma *
-                       np.sqrt(self.T)) / (self.sigma * np.sqrt(self.T)) * self._d1)
+        """Rate of change of gamma over time."""
+        return (
+            -norm.pdf(self._d1)
+            / (2 * self.S * self.T * self.sigma * np.sqrt(self.T))
+            * (
+                1
+                + (2 * self.r * self.T - self._d2 * self.sigma * np.sqrt(self.T))
+                / (self.sigma * np.sqrt(self.T))
+                * self._d1
+            )
+        )
 
     def ultima(self) -> float:
         """Sensitivity of vomma with respect to change in vol.
         3rd order derivative of option value to vol.
         """
         d1d2 = self._d1 * self._d2
-        return - self.vega() / self.sigma**2 *\
-               (d1d2 * (1 - d1d2) + self._d1**2 + self._d2**2)
+        return (
+            -self.vega()
+            / self.sigma**2
+            * (d1d2 * (1 - d1d2) + self._d1**2 + self._d2**2)
+        )
 
     def get_core_greeks(self) -> Dict[str, float]:
         """

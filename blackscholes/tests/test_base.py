@@ -90,6 +90,10 @@ class TestBlackScholesBase:
         gamma = self.meta.gamma()
         np.testing.assert_almost_equal(gamma, 0.03712496688031454, decimal=6)
 
+    def test_dual_gamma(self):
+        dual_gamma = self.meta.dual_gamma()
+        np.testing.assert_almost_equal(dual_gamma, 0.0449212099251806, decimal=6)
+
     def test_vega(self):
         vega = self.meta.vega()
         np.testing.assert_almost_equal(vega, 16.84545372194272, decimal=6)
