@@ -102,6 +102,10 @@ class TestBlackScholesBase:
         charm = self.meta.charm()
         np.testing.assert_almost_equal(charm, 0.0832677717846717, decimal=6)
 
+    def test_vomma(self):
+        vomma = self.meta.vomma()
+        np.testing.assert_almost_equal(vomma, 47.11869947977544, decimal=6)
+
     def test_veta(self):
         veta = self.meta.veta()
         np.testing.assert_almost_equal(veta, 11.752499520643353, decimal=6)
@@ -117,3 +121,7 @@ class TestBlackScholesBase:
     def test_color(self):
         color = self.meta.color()
         np.testing.assert_almost_equal(color, -0.011224141490466934, decimal=6)
+
+    def test_ultima(self):
+        ultima = self.meta.ultima()
+        np.testing.assert_almost_equal(ultima, -827.4229433648609, decimal=6)

@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 
 import numpy as np
+from typing import Dict
 from scipy.stats import norm
 
 
@@ -94,7 +95,12 @@ class BlackScholesBase(ABC):
             / (2 * self.T * self.sigma * np.sqrt(self.T))
         )
 
-    def veta(self):
+    def vomma(self) -> float:
+        """2nd order sensitivity to vol.
+        """
+        return self.vega() * self._d1 * self._d2 / self.sigma
+
+    def veta(self) -> float:
         """Rate of change in `vega` with respect to time."""
         return (
             -self.S
@@ -106,20 +112,30 @@ class BlackScholesBase(ABC):
             )
         )
 
-    def speed(self):
+    def speed(self) -> float:
         return - self.gamma() / self.S * (self._d1 / (self.sigma * np.sqrt(self.T)) + 1)
 
-    def zomma(self):
+    def zomma(self) -> float:
         """Rate of change of gamma with respect to changes in vol."""
         return self.gamma() * ((self._d1 * self._d2 - 1) / self.sigma)
 
-    def color(self):
+    def color(self) -> float:
+        """Rate of change of gamma over time.
+        """
         return - norm.pdf(self._d1) / \
                (2 * self.S * self.T * self.sigma * np.sqrt(self.T)) \
                * (1 + (2 * self.r * self.T - self._d2 * self.sigma *
                        np.sqrt(self.T)) / (self.sigma * np.sqrt(self.T)) * self._d1)
 
-    def get_core_greeks(self) -> dict:
+    def ultima(self) -> float:
+        """Sensitivity of vomma with respect to change in vol.
+        3rd order derivative of option value to vol.
+        """
+        d1d2 = self._d1 * self._d2
+        return - self.vega() / self.sigma**2 *\
+               (d1d2 * (1 - d1d2) + self._d1**2 + self._d2**2)
+
+    def get_core_greeks(self) -> Dict[str, float]:
         """
         Get the top 5 most well known Greeks.
         1. Delta
@@ -136,14 +152,14 @@ class BlackScholesBase(ABC):
             "rho": self.rho(),
         }
 
-    def get_itm_proxies(self) -> dict:
+    def get_itm_proxies(self) -> Dict[str, float]:
         """Get multiple ways of calculating probability
         of option being in the money.
         """
         return {"naive_itm": self.in_the_money(), "dual_delta": self.dual_delta()}
 
     @abstractmethod
-    def get_all_greeks(self) -> dict:
+    def get_all_greeks(self) -> Dict[str, float]:
         """Retrieve all Greeks implemented as a dictionary."""
         ...
 
