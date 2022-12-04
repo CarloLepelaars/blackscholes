@@ -92,6 +92,7 @@ class TestBlackScholesBase:
 
     def test_dual_gamma(self):
         dual_gamma = self.meta.dual_gamma()
+        print(dual_gamma)
         np.testing.assert_almost_equal(dual_gamma, 0.0449212099251806, decimal=6)
 
     def test_vega(self):
@@ -113,6 +114,10 @@ class TestBlackScholesBase:
     def test_veta(self):
         veta = self.meta.veta()
         np.testing.assert_almost_equal(veta, 11.752499520643353, decimal=6)
+
+    def test_phi(self):
+        phi = self.meta.phi()
+        np.testing.assert_almost_equal(phi, 0.04492120992518061, decimal=6)
 
     def test_zomma(self):
         zomma = self.meta.zomma()

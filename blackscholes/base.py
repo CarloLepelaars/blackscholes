@@ -118,6 +118,20 @@ class BlackScholesBase(ABC):
             )
         )
 
+    def phi(self) -> float:
+        sigma2 = self.sigma**2
+        exp_factor = (
+            -1
+            / (2 * sigma2 * self.T)
+            * (np.log(self.K / self.S) - (self.r - 0.5 * sigma2) * self.T) ** 2
+        )
+        return (
+            np.exp(-self.r * self.T)
+            * (1 / self.K)
+            * (1 / np.sqrt(2 * np.pi * sigma2 * self.T))
+            * np.exp(exp_factor)
+        )
+
     def speed(self) -> float:
         return -self.gamma() / self.S * (self._d1 / (self.sigma * np.sqrt(self.T)) + 1)
 
