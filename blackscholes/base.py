@@ -11,11 +11,11 @@ class BlackScholesBase(ABC):
     and Greeks with the Black-Scholes-Merton formula
     (without dividends).
 
-    :param S: Price of underlying asset
-    :param K: Strike price
-    :param T: Time till expiration in years (1/12 indicates 1 month)
-    :param r: Risk-free interest rate (0.05 indicates 5%)
-    :param sigma: Volatility (standard deviation) of stock (0.15 indicates 15%)
+    :param S: Price of underlying asset \n
+    :param K: Strike price \n
+    :param T: Time till expiration in years (1/12 indicates 1 month) \n
+    :param r: Risk-free interest rate (0.05 indicates 5%) \n
+    :param sigma: Volatility (standard deviation) of stock (0.15 indicates 15%) \n
     """
 
     def __init__(self, S: float, K: float, T: float, r: float, sigma: float):
@@ -84,8 +84,10 @@ class BlackScholesBase(ABC):
     def lambda_greek(self) -> float:
         """Percentage change in option value per %
         change in asset price. Also called gearing.
+
         As defined on Wikipedia:
         https://en.wikipedia.org/wiki/Greeks_(finance)#Lambda
+
         NOTE: Lambda is the same for call and puts.
         """
         return self.delta() * self.S / self.price()

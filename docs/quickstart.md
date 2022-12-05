@@ -1,0 +1,43 @@
+# Quickstart
+
+Ok, let's skip the fluff and explain how you can quickly
+get started.
+
+### 1. Define 5 inputs for computing Black Scholes:
+```python3
+S = 55.0  # Asset price
+K = 50.0  # Strike price
+T = 1.0  # 1 year to maturity
+r = 0.0025  # 0.25% risk-free rate
+sigma = 0.15  # 15% vol
+```
+### 2. Initialize class for call and/or puts
+```python3
+# 2. Initialize class for call and/or puts
+from blackscholes import BlackScholesCall, BlackScholesPut
+call = BlackScholesCall(S, K, T, r, sigma)
+put = BlackScholesPut(S, K, T, r, sigma)
+```
+
+###  3. Get the attributes you want
+```python
+# Fair value estimate
+call.price() 
+## 6.339408
+
+call.get_core_greeks() # Dictionary with 5 most important Greeks
+{"delta": 0.766407808509462,
+ "gamma": 0.03712496688031454,
+ "vega": 16.84545372194272,
+ "theta": -1.3529415670754943,
+ "rho": 35.813015171916085,
+}
+
+call.get_itm_proxies() # Dictionary with in-the-money proxies
+## {"naive_itm": 0.7180531943767934, "dual_delta": 0.7162603034383217}
+
+call.delta()  # Get Delta Greek
+## 0.766407808509462
+```
+
+### 4. (optional) Check "The Greeks" section in docs to dive deeper

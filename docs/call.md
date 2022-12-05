@@ -1,3 +1,0 @@
-
-
-::: blackscholes.call.BlackScholesCall

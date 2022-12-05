@@ -1,0 +1,44 @@
+<script
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+  type="text/javascript">
+</script>
+
+
+# In-the-money proxies
+
+There are currently two ways to 
+estimate the probability of an option being
+"in-the-money" in `blackscholes`.
+
+- [Naive estimate](#itm)
+- [Through `dual_delta`](#dual-delta)
+
+## Naive estimate <a name="itm"></a>
+
+### Call
+
+$$\Phi(d_2)$$
+
+::: blackscholes.call.BlackScholesCall.in_the_money
+
+
+### Put
+
+$$1 - \Phi(d_2)$$
+
+::: blackscholes.put.BlackScholesPut.in_the_money
+
+## Dual Delta <a name="dual-delta"></a>
+
+### Call
+
+$$-e^{-rT}\Phi(d_2)$$
+
+::: blackscholes.call.BlackScholesCall.dual_delta
+
+
+### Put
+
+$$e^{-rT}\Phi(-d_2)$$
+
+::: blackscholes.put.BlackScholesPut.dual_delta

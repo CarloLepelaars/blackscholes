@@ -10,11 +10,11 @@ class BlackScholesCall(BlackScholesBase):
     and Greeks with the Black-Scholes-Merton formula
     (without dividends).
 
-    :param S: Price of underlying asset
-    :param K: Strike price
-    :param T: Time till expiration in years (1/12 indicates 1 month)
-    :param r: Risk-free interest rate (0.05 indicates 5%)
-    :param sigma: Volatility (standard deviation) of stock (0.15 indicates 15%)
+    :param S: Price of underlying asset \n
+    :param K: Strike price \n
+    :param T: Time till expiration in years (1/12 indicates 1 month) \n
+    :param r: Risk-free interest rate (0.05 indicates 5%) \n
+    :param sigma ($/sigma$): Volatility (standard deviation) of stock (0.15 indicates 15%)
     """
 
     def __init__(self, S: float, K: float, T: float, r: float, sigma: float):
