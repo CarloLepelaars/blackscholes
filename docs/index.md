@@ -1,5 +1,15 @@
 # blackscholes
 
+Documentation structure:
+- Quickstart
+- Price calculation
+- All Greeks
+- In-the-money proxies
+- Explanation of all Greeks
+- Contribution guide
+- Source Code References
+- Disclaimer
+
 Black Scholes calculator for Python including all Greeks.
 
 Currently only supports European options.

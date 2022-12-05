@@ -1,0 +1,20 @@
+# Contributing
+
+The goal of this library is to be the go-to library
+for calculating everything related to the Black-Scholes-Merton formula.
+There are still cool augmentations that can implemented.
+Check out the Github issues if you are interested in picking up an existing issue.
+
+## Before you build a feature
+1. Discuss what you want to implement on Github before creating a Pull Request.
+2. Consider and communicate if you would be open to maintain this feature in the future.
+
+## Tests
+We write tests for every new feature that is implemented.
+When dealing with complicated formulas, see if you can check your outputs
+against an existing software library to guarantee good output.
+If you don't know how to do this, the community might be able to help out with performing checks.
+
+Also don't forget to document your new feature. 
+Check out this documentation to decide if you should create a new Markdown file or
+add a section to an existing doc file.
