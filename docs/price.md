@@ -1,1 +1,23 @@
+<script
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+  type="text/javascript">
+</script>
+
 # Option price calculation
+
+In `blackscholes` you can easily get a fair value
+estimate of an option according to the Black-Scholes-Merton formula.
+
+## Call
+
+$$S \Phi(d_1) - e^{-rT}K\Phi(d_2)$$
+
+::: blackscholes.call.BlackScholesCall.price
+
+
+
+## Put
+
+$$e^{-rT}K\Phi(-d_2) - S\Phi(-d_1)$$
+
+::: blackscholes.put.BlackScholesPut.price
