@@ -1,6 +1,6 @@
 # blackscholes
 
-Documentation structure:
+## Documentation structure:
 
 1. Quickstart
 
