@@ -1,14 +1,22 @@
 # blackscholes
 
 Documentation structure:
-- Quickstart
-- Price calculation
-- All Greeks
-- In-the-money proxies
-- Explanation of all Greeks
-- Contribution guide
-- Source Code References
-- Disclaimer
+
+1. Quickstart
+
+2. Price calculation
+
+3. All Greeks
+
+4. In-the-money proxies
+
+5. Explanation of all Greeks
+
+6. Contribution guide
+
+7. Source Code References
+
+8. Disclaimer
 
 Black Scholes calculator for Python including all Greeks.
 
@@ -62,15 +70,3 @@ Install the pre-commit hooks with:
 You can view the docs locally if you have dev-requirements installed:
 
 `mkdocs serve`
-
-## TODO
-- Cross reference 2nd and 3rd order Greeks with Bloomberg. 
-- Clear documentation (mkdocs)
-- pip check and upload to PyPi
-- 
-## DISCLAIMER 
-
-DISCLAIMER: Software is provided AS IS under an MIT licence. 
-We can never guarantee that all computations will be correct. The software 
-is tested to the best of our ability, but we cannot guarantee correct results.
-Always verify results before using 3rd-party libraries like this in high stakes situations.
