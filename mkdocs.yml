@@ -8,6 +8,12 @@ theme:
     text: Ubuntu
   icon:
     logo: material/cloud
+  features:
+    - navigation.top
+    - navigation.tabs
+    - navigation.tracking
+    - navigation.tabs.sticky
+    - navigation.expand
 markdown_extensions:
   - footnotes
   - codehilite:

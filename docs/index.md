@@ -10,13 +10,11 @@ Documentation structure:
 
 4. In-the-money proxies
 
-5. Explanation of all Greeks
+5. Contribution guide
 
-6. Contribution guide
+6. Source Code References
 
-7. Source Code References
-
-8. Disclaimer
+7. Disclaimer
 
 Black Scholes calculator for Python including all Greeks.
 
