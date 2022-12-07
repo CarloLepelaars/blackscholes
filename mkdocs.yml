@@ -2,7 +2,7 @@ site_name: blackscholes
 theme:
   name: material
   palette:
-    primary: red
+    primary: black
     accent: cyan
   font:
     text: Ubuntu
