@@ -22,8 +22,8 @@ sigma = 0.15  # 15% vol
 ```python3
 from blackscholes import BlackScholesCall
 call = BlackScholesCall(S=S, K=K, T=T, r=r, sigma=sigma)
-call.price()  # Call Option price
-call.delta()  # Call Delta
+call.price()  ## 6.339408
+call.delta()  ## 0.766407
 ```
 
 ### Put
@@ -31,8 +31,8 @@ call.delta()  # Call Delta
 ```python3
 from blackscholes import BlackScholesPut
 put = BlackScholesPut(S=S, K=K, T=T, r=r, sigma=sigma)
-put.price()  # Put option price
-put.delta()  # Put Delta
+put.price()  ## 1.214564
+put.delta()  ## -0.23359
 ```
 
 ## Contributing
