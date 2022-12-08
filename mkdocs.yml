@@ -7,7 +7,7 @@ theme:
   font:
     text: Ubuntu
   icon:
-    logo: material/cloud
+    logo: material/library-shelves
   features:
     - navigation.top
     - navigation.tabs

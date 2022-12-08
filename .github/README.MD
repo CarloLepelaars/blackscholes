@@ -42,9 +42,3 @@ to see what is currently being worked on.
 
 Also check out `5. Contributing` in the documentation to learn more about 
 contributing to `blackscholes`.
-
-## Documentation
-
-You can always build the docs locally if you have dev-requirements installed:
-
-`mkdocs serve`
