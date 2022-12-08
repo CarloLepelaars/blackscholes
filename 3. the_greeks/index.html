@@ -1,0 +1,2028 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+    
+    
+      
+        <title>3. The Greeks - blackscholes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.975780f9.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Ubuntu";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="cyan">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#3-the-greeks" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="blackscholes" class="md-header__button md-logo" aria-label="blackscholes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 9V1.5h-3V9h-3V1.5h-3V9h-3V1.5H4.65V9H3v1.5h18V9h-1.5m0 4.5h-3V21h-3v-7.5h-3V21h-3v-7.5H4.65V21H3v1.5h18V21h-1.5v-7.5Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            blackscholes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3. The Greeks
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href=".." class="md-tabs__link">
+      blackscholes
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../1.%20quickstart/" class="md-tabs__link">
+      1. Quickstart
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../2.%20price/" class="md-tabs__link">
+      2. Price calculation
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="./" class="md-tabs__link md-tabs__link--active">
+      3. The Greeks
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../4.%20itm/" class="md-tabs__link">
+      4. In-The-Money proxies
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../5.%20contributing/" class="md-tabs__link">
+      5. Contributing
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../6.%20references/" class="md-tabs__link">
+      6. Source Code References
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../7.%20disclaimer/" class="md-tabs__link">
+      7. Disclaimer
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="blackscholes" class="md-nav__button md-logo" aria-label="blackscholes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 9V1.5h-3V9h-3V1.5h-3V9h-3V1.5H4.65V9H3v1.5h18V9h-1.5m0 4.5h-3V21h-3v-7.5h-3V21h-3v-7.5H4.65V21H3v1.5h18V21h-1.5v-7.5Z"/></svg>
+
+    </a>
+    blackscholes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        blackscholes
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.%20quickstart/" class="md-nav__link">
+        1. Quickstart
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.%20price/" class="md-nav__link">
+        2. Price calculation
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          3. The Greeks
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        3. The Greeks
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delta-delta" class="md-nav__link">
+    Delta ($\Delta$) 
+  </a>
+  
+    <nav class="md-nav" aria-label="Delta ($\Delta$) ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#call" class="md-nav__link">
+    Call
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.call.BlackScholesCall.delta" class="md-nav__link">
+    blackscholes.call.BlackScholesCall.delta
+  </a>
+  
+    <nav class="md-nav" aria-label="blackscholes.call.BlackScholesCall.delta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#put" class="md-nav__link">
+    Put
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.put.BlackScholesPut.delta" class="md-nav__link">
+    blackscholes.put.BlackScholesPut.delta
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gamma-gamma" class="md-nav__link">
+    Gamma ($\Gamma$) 
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.gamma" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.gamma
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vega-mathcalv" class="md-nav__link">
+    Vega ($\mathcal{V}$) 
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.vega" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.vega
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#theta" class="md-nav__link">
+    Theta
+  </a>
+  
+    <nav class="md-nav" aria-label="Theta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#call_1" class="md-nav__link">
+    Call
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.call.BlackScholesCall.theta" class="md-nav__link">
+    blackscholes.call.BlackScholesCall.theta
+  </a>
+  
+    <nav class="md-nav" aria-label="blackscholes.call.BlackScholesCall.theta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#put_1" class="md-nav__link">
+    Put
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.put.BlackScholesPut.theta" class="md-nav__link">
+    blackscholes.put.BlackScholesPut.theta
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rho" class="md-nav__link">
+    Rho
+  </a>
+  
+    <nav class="md-nav" aria-label="Rho">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#call_2" class="md-nav__link">
+    Call
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.call.BlackScholesCall.rho" class="md-nav__link">
+    blackscholes.call.BlackScholesCall.rho
+  </a>
+  
+    <nav class="md-nav" aria-label="blackscholes.call.BlackScholesCall.rho">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#put_2" class="md-nav__link">
+    Put
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.put.BlackScholesPut.rho" class="md-nav__link">
+    blackscholes.put.BlackScholesPut.rho
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#epsilon" class="md-nav__link">
+    Epsilon
+  </a>
+  
+    <nav class="md-nav" aria-label="Epsilon">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#call_3" class="md-nav__link">
+    Call
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#put_3" class="md-nav__link">
+    Put
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lambda" class="md-nav__link">
+    Lambda
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.lambda_greek" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.lambda_greek
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vanna" class="md-nav__link">
+    Vanna
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.vanna" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.vanna
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#charm" class="md-nav__link">
+    Charm
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.charm" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.charm
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vomma" class="md-nav__link">
+    Vomma
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.vomma" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.vomma
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#veta" class="md-nav__link">
+    Veta
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.veta" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.veta
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phi" class="md-nav__link">
+    Phi
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.phi" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.phi
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#speed" class="md-nav__link">
+    Speed
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.speed" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.speed
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zomma" class="md-nav__link">
+    Zomma
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.zomma" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.zomma
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#color" class="md-nav__link">
+    Color
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.color" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.color
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ultima" class="md-nav__link">
+    Ultima
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.ultima" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.ultima
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dual-delta" class="md-nav__link">
+    Dual Delta
+  </a>
+  
+    <nav class="md-nav" aria-label="Dual Delta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#call_4" class="md-nav__link">
+    Call
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.call.BlackScholesCall.dual_delta" class="md-nav__link">
+    blackscholes.call.BlackScholesCall.dual_delta
+  </a>
+  
+    <nav class="md-nav" aria-label="blackscholes.call.BlackScholesCall.dual_delta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#put_4" class="md-nav__link">
+    Put
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.put.BlackScholesPut.dual_delta" class="md-nav__link">
+    blackscholes.put.BlackScholesPut.dual_delta
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dual-gamma" class="md-nav__link">
+    Dual Gamma
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.dual_gamma" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.dual_gamma
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.%20itm/" class="md-nav__link">
+        4. In-The-Money proxies
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.%20contributing/" class="md-nav__link">
+        5. Contributing
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6.%20references/" class="md-nav__link">
+        6. Source Code References
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7.%20disclaimer/" class="md-nav__link">
+        7. Disclaimer
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delta-delta" class="md-nav__link">
+    Delta ($\Delta$) 
+  </a>
+  
+    <nav class="md-nav" aria-label="Delta ($\Delta$) ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#call" class="md-nav__link">
+    Call
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.call.BlackScholesCall.delta" class="md-nav__link">
+    blackscholes.call.BlackScholesCall.delta
+  </a>
+  
+    <nav class="md-nav" aria-label="blackscholes.call.BlackScholesCall.delta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#put" class="md-nav__link">
+    Put
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.put.BlackScholesPut.delta" class="md-nav__link">
+    blackscholes.put.BlackScholesPut.delta
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gamma-gamma" class="md-nav__link">
+    Gamma ($\Gamma$) 
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.gamma" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.gamma
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vega-mathcalv" class="md-nav__link">
+    Vega ($\mathcal{V}$) 
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.vega" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.vega
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#theta" class="md-nav__link">
+    Theta
+  </a>
+  
+    <nav class="md-nav" aria-label="Theta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#call_1" class="md-nav__link">
+    Call
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.call.BlackScholesCall.theta" class="md-nav__link">
+    blackscholes.call.BlackScholesCall.theta
+  </a>
+  
+    <nav class="md-nav" aria-label="blackscholes.call.BlackScholesCall.theta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#put_1" class="md-nav__link">
+    Put
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.put.BlackScholesPut.theta" class="md-nav__link">
+    blackscholes.put.BlackScholesPut.theta
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rho" class="md-nav__link">
+    Rho
+  </a>
+  
+    <nav class="md-nav" aria-label="Rho">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#call_2" class="md-nav__link">
+    Call
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.call.BlackScholesCall.rho" class="md-nav__link">
+    blackscholes.call.BlackScholesCall.rho
+  </a>
+  
+    <nav class="md-nav" aria-label="blackscholes.call.BlackScholesCall.rho">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#put_2" class="md-nav__link">
+    Put
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.put.BlackScholesPut.rho" class="md-nav__link">
+    blackscholes.put.BlackScholesPut.rho
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#epsilon" class="md-nav__link">
+    Epsilon
+  </a>
+  
+    <nav class="md-nav" aria-label="Epsilon">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#call_3" class="md-nav__link">
+    Call
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#put_3" class="md-nav__link">
+    Put
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lambda" class="md-nav__link">
+    Lambda
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.lambda_greek" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.lambda_greek
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vanna" class="md-nav__link">
+    Vanna
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.vanna" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.vanna
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#charm" class="md-nav__link">
+    Charm
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.charm" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.charm
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vomma" class="md-nav__link">
+    Vomma
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.vomma" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.vomma
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#veta" class="md-nav__link">
+    Veta
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.veta" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.veta
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phi" class="md-nav__link">
+    Phi
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.phi" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.phi
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#speed" class="md-nav__link">
+    Speed
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.speed" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.speed
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zomma" class="md-nav__link">
+    Zomma
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.zomma" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.zomma
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#color" class="md-nav__link">
+    Color
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.color" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.color
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ultima" class="md-nav__link">
+    Ultima
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.ultima" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.ultima
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dual-delta" class="md-nav__link">
+    Dual Delta
+  </a>
+  
+    <nav class="md-nav" aria-label="Dual Delta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#call_4" class="md-nav__link">
+    Call
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.call.BlackScholesCall.dual_delta" class="md-nav__link">
+    blackscholes.call.BlackScholesCall.dual_delta
+  </a>
+  
+    <nav class="md-nav" aria-label="blackscholes.call.BlackScholesCall.dual_delta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#put_4" class="md-nav__link">
+    Put
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.put.BlackScholesPut.dual_delta" class="md-nav__link">
+    blackscholes.put.BlackScholesPut.dual_delta
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dual-gamma" class="md-nav__link">
+    Dual Gamma
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.base.BlackScholesBase.dual_gamma" class="md-nav__link">
+    blackscholes.base.BlackScholesBase.dual_gamma
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="3-the-greeks">3. The Greeks</h1>
+<script src="//yihui.org/js/math-code.js" defer></script>
+<!-- Just one possible MathJax CDN below. You may use others. -->
+<script defer
+  src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<h2 id="parameters">Parameters</h2>
+<p><code>$S$</code> = Asset price</p>
+<p><code>$K$</code> = Strike price</p>
+<p><code>$T$</code> = Time to maturity (in years)</p>
+<p><code>$r$</code> = Risk-free rate</p>
+<p><code>$\sigma$</code> = Volatility</p>
+<p><code>$\phi(.)$</code> = Probability Density Function (PDF) of  <code>$\mathcal{N}(0, 1)$</code></p>
+<p><code>$\Phi(.)$</code> = Cumulative Density Function (CDF) of  <code>$\mathcal{N}(0, 1)$</code></p>
+<p><code>$d_1 = \frac{ln(\frac{S}{K}) + (r+\frac{1}{2}\sigma^2)T}{\sigma\sqrt{T}}$</code></p>
+<p><code>$d_2 = d_1 - \sigma\sqrt{T}$</code></p>
+<h2 id="delta-delta">Delta (<code>$\Delta$</code>) <a name="delta"></a></h2>
+<h3 id="call">Call</h3>
+<p>$$ \Phi(d_2)$$</p>
+
+
+<div class="doc doc-object doc-function">
+
+
+<a id="blackscholes.call.BlackScholesCall.delta"></a>
+  <div class="doc doc-contents first">
+  
+      <p>Rate of change in option price
+with respect to the asset price (1st derivative).
+Proxy for probability of the option expiring in the money.</p>
+
+      <details class="quote">
+        <summary>Source code in <code>blackscholes/call.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">delta</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Rate of change in option price</span>
+<span class="sd">    with respect to the asset price (1st derivative).</span>
+<span class="sd">    Proxy for probability of the option expiring in the money.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h3 id="put">Put</h3>
+<p>$$ -\Phi(-d_2)$$</p>
+
+
+<div class="doc doc-object doc-function">
+
+
+<a id="blackscholes.put.BlackScholesPut.delta"></a>
+  <div class="doc doc-contents first">
+  
+      <p>Rate of change in option price
+with respect to the asset price (1st derivative).</p>
+
+      <details class="quote">
+        <summary>Source code in <code>blackscholes/put.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">delta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Rate of change in option price</span>
+<span class="sd">    with respect to the asset price (1st derivative).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="gamma-gamma">Gamma (<code>$\Gamma$</code>) <a name="gamma"></a></h2>
+<p>$$\frac{\phi(d_1)}{S\sigma\sqrt{T}}$$</p>
+
+
+<div class="doc doc-object doc-function">
+
+
+<a id="blackscholes.base.BlackScholesBase.gamma"></a>
+  <div class="doc doc-contents first">
+  
+      <p>Rate of change in delta with respect to the underlying stock price (2nd derivative).
+NOTE: Gamma is the same for calls and puts.</p>
+
+      <details class="quote">
+        <summary>Source code in <code>blackscholes/base.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">gamma</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Rate of change in delta with respect to the underlying stock price (2nd derivative).</span>
+<span class="sd">    NOTE: Gamma is the same for calls and puts.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">S</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="vega-mathcalv">Vega (<code>$\mathcal{V}$</code>) <a name="vega"></a></h2>
+<p>$$S\phi(d_1)\sqrt(T)$$</p>
+
+
+<div class="doc doc-object doc-function">
+
+
+<a id="blackscholes.base.BlackScholesBase.vega"></a>
+  <div class="doc doc-contents first">
+  
+      <p>Rate of change in option price with respect to the volatility of the asset.</p>
+<p>NOTE: Vega is the same for calls and puts.</p>
+
+      <details class="quote">
+        <summary>Source code in <code>blackscholes/base.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">vega</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Rate of change in option price with respect to the volatility of the asset.</span>
+
+<span class="sd">    NOTE: Vega is the same for calls and puts.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">S</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="theta">Theta</h2>
+<h3 id="call_1">Call</h3>
+<p>$$\frac{S\phi(d_1)\sigma}{2\sqrt{T}} - rKe^{-rT}\Phi(d_2)$$</p>
+
+
+<div class="doc doc-object doc-function">
+
+
+<a id="blackscholes.call.BlackScholesCall.theta"></a>
+  <div class="doc doc-contents first">
+  
+      <p>Rate of change in option price
+with respect to time (i.e. time decay).</p>
+
+      <details class="quote">
+        <summary>Source code in <code>blackscholes/call.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">theta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Rate of change in option price</span>
+<span class="sd">    with respect to time (i.e. time decay).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">((</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">S</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)))</span> <span class="o">-</span> <span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h3 id="put_1">Put</h3>
+<p>$$rKe^{-rT}\Phi(-d_2)$$</p>
+
+
+<div class="doc doc-object doc-function">
+
+
+<a id="blackscholes.put.BlackScholesPut.theta"></a>
+  <div class="doc doc-contents first">
+  
+      <p>Rate of change in option price
+with respect to time (i.e. time decay).</p>
+
+      <details class="quote">
+        <summary>Source code in <code>blackscholes/put.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">theta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Rate of change in option price</span>
+<span class="sd">    with respect to time (i.e. time decay).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">((</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">S</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)))</span> <span class="o">+</span> <span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="rho">Rho</h2>
+<h3 id="call_2">Call</h3>
+<p>$$KTe^{-rT}\Phi(d_2)$$</p>
+
+
+<div class="doc doc-object doc-function">
+
+
+<a id="blackscholes.call.BlackScholesCall.rho"></a>
+  <div class="doc doc-contents first">
+  
+      <p>Rate of change in option price
+with respect to the risk-free rate.</p>
+
+      <details class="quote">
+        <summary>Source code in <code>blackscholes/call.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">rho</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Rate of change in option price</span>
+<span class="sd">    with respect to the risk-free rate.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h3 id="put_2">Put</h3>
+<p>$$-KTe^{-rT}\Phi(-d_2)$$</p>
+
+
+<div class="doc doc-object doc-function">
+
+
+<a id="blackscholes.put.BlackScholesPut.rho"></a>
+  <div class="doc doc-contents first">
+  
+      <p>Rate of change in option price
+with respect to the risk-free rate.</p>
+
+      <details class="quote">
+        <summary>Source code in <code>blackscholes/put.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">rho</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Rate of change in option price</span>
+<span class="sd">    with respect to the risk-free rate.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="epsilon">Epsilon</h2>
+<p>Will be implemented when dividend support is added.</p>
+<p><code>$q$</code> will denote annual dividend yield.</p>
+<p>Also known as psi. % change in option value
+against change in underlying dividend yield.</p>
+<h3 id="call_3">Call</h3>
+<p>$$-STe^{-qr}\Phi(d_1)$$</p>
+<h3 id="put_3">Put</h3>
+<p>$$STe^{-qr}\Phi(-d_1)$$</p>
+<h2 id="lambda">Lambda</h2>
+<p>$$\Delta \frac{S}{V}$$</p>
+<p>where <code>$\Delta$</code> indicates the <a href="#delta">Delta Greek</a>.</p>
+
+
+<div class="doc doc-object doc-function">
+
+
+<a id="blackscholes.base.BlackScholesBase.lambda_greek"></a>
+  <div class="doc doc-contents first">
+  
+      <p>Percentage change in option value per %
+change in asset price. Also called gearing.</p>
+<p>As defined on Wikipedia:
+https://en.wikipedia.org/wiki/Greeks_(finance)#Lambda</p>
+
+      <details class="quote">
+        <summary>Source code in <code>blackscholes/base.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">lambda_greek</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Percentage change in option value per %</span>
+<span class="sd">    change in asset price. Also called gearing.</span>
+
+<span class="sd">    As defined on Wikipedia:</span>
+<span class="sd">    https://en.wikipedia.org/wiki/Greeks_(finance)#Lambda</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">S</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="vanna">Vanna</h2>
+<p>$$\frac{\mathcal{V}}{S}\bigg[ 1-\frac{d_1}{\sigma\sqrt{T}} \bigg]$$</p>
+<p>where <code>$\mathcal{V}$</code> indicates the <a href="#vega">Vega Greek</a>.</p>
+
+
+<div class="doc doc-object doc-function">
+
+
+<a id="blackscholes.base.BlackScholesBase.vanna"></a>
+  <div class="doc doc-contents first">
+  
+      <p>Sensitivity of delta with respect to change in vol.</p>
+
+      <details class="quote">
+        <summary>Source code in <code>blackscholes/base.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">vanna</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Sensitivity of delta with respect to change in vol.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d2</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="charm">Charm</h2>
+<p>$$-\phi(d_1) \frac{2rT - d_2\sigma\sqrt{T}}{2T\sigma\sqrt{T}}$$</p>
+<p>Charm is the same for calls and puts unless you include
+dividend yield. </p>
+
+
+<div class="doc doc-object doc-function">
+
+
+<a id="blackscholes.base.BlackScholesBase.charm"></a>
+  <div class="doc doc-contents first">
+  
+      <p>Rate of change of delta over time (also known as delta decay).</p>
+
+      <details class="quote">
+        <summary>Source code in <code>blackscholes/base.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">charm</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Rate of change of delta over time (also known as delta decay).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="o">-</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">)</span>
+        <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+        <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="vomma">Vomma</h2>
+<p>$$\mathcal{V}\frac{d_1 d_2}{\sigma}$$</p>
+<p>where <code>$\mathcal{V}$</code> indicates the <a href="#vega">Vega Greek</a>.</p>
+
+
+<div class="doc doc-object doc-function">
+
+
+<a id="blackscholes.base.BlackScholesBase.vomma"></a>
+  <div class="doc doc-contents first">
+  
+      <p>2nd order sensitivity to vol.</p>
+
+      <details class="quote">
+        <summary>Source code in <code>blackscholes/base.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">vomma</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;2nd order sensitivity to vol.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vega</span><span class="p">()</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d2</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="veta">Veta</h2>
+<p>$$-S\phi(d_1)\sqrt{T} \bigg[ \frac{rd_1}{\sigma\sqrt{T}} - \frac{1+d_1d_2}{2T} \bigg]$$</p>
+
+
+<div class="doc doc-object doc-function">
+
+
+<a id="blackscholes.base.BlackScholesBase.veta"></a>
+  <div class="doc doc-contents first">
+  
+      <p>Rate of change in <code>vega</code> with respect to time.</p>
+
+      <details class="quote">
+        <summary>Source code in <code>blackscholes/base.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">veta</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Rate of change in `vega` with respect to time.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">S</span>
+        <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">)</span>
+        <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="o">*</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+            <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="phi">Phi</h2>
+<p>$$e^{-rT} \frac{1}{K} \frac{1}{\sqrt{2\pi\sigma^2T}} e^{-\frac{1}{2\sigma^2 r} \bigg[ ln(\frac{K}{S}) - (r - \frac{1}{2}\sigma^2)T  \bigg]^2}$$</p>
+
+
+<div class="doc doc-object doc-function">
+
+
+<a id="blackscholes.base.BlackScholesBase.phi"></a>
+  <div class="doc doc-contents first">
+
+      <details class="quote">
+        <summary>Source code in <code>blackscholes/base.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">phi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="n">sigma2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">exp_factor</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="o">-</span><span class="mi">1</span>
+        <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sigma2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">S</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sigma2</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">K</span><span class="p">)</span>
+        <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">sigma2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+        <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">exp_factor</span><span class="p">)</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="speed">Speed</h2>
+<p>$$-\frac{\Gamma}{S} \bigg( \frac{d_1}{\sigma\sqrt{T}} + 1 \bigg)$$</p>
+<p>where <code>$\Gamma$</code> is the <a href="#gamma">Gamma Greek</a>.</p>
+
+
+<div class="doc doc-object doc-function">
+
+
+<a id="blackscholes.base.BlackScholesBase.speed"></a>
+  <div class="doc doc-contents first">
+
+      <details class="quote">
+        <summary>Source code in <code>blackscholes/base.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">135</span>
+<span class="normal">136</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">speed</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">()</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">S</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="zomma">Zomma</h2>
+<p>$$\Gamma \frac{d_1 d_2 - 1}{\sigma}$$</p>
+<p>where <code>$\Gamma$</code> is the <a href="#gamma">Gamma Greek</a>.</p>
+
+
+<div class="doc doc-object doc-function">
+
+
+<a id="blackscholes.base.BlackScholesBase.zomma"></a>
+  <div class="doc doc-contents first">
+  
+      <p>Rate of change of gamma with respect to changes in vol.</p>
+
+      <details class="quote">
+        <summary>Source code in <code>blackscholes/base.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">zomma</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Rate of change of gamma with respect to changes in vol.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">()</span> <span class="o">*</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="color">Color</h2>
+<p>$$\frac{\phi(d_1)}{2ST\sigma\sqrt{T}} \bigg[ 1 + \frac{2rT - d_2\sigma\sqrt{T}}{\sigma\sqrt{T}}d_1   \bigg]$$</p>
+
+
+<div class="doc doc-object doc-function">
+
+
+<a id="blackscholes.base.BlackScholesBase.color"></a>
+  <div class="doc doc-contents first">
+  
+      <p>Rate of change of gamma over time.</p>
+
+      <details class="quote">
+        <summary>Source code in <code>blackscholes/base.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">color</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Rate of change of gamma over time.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="o">-</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">)</span>
+        <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">S</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+        <span class="o">*</span> <span class="p">(</span>
+            <span class="mi">1</span>
+            <span class="o">+</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+            <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+            <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d1</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="ultima">Ultima</h2>
+<p>$$\frac{-\mathcal{V}}{\sigma^2} \big[ d_1 d_2 (1 - d_1 d_2) + d_1^2 + d_2^2 \big]$$</p>
+<p>where <code>$\mathcal{V}$</code> indicates the <a href="#vega">Vega Greek</a>.</p>
+
+
+<div class="doc doc-object doc-function">
+
+
+<a id="blackscholes.base.BlackScholesBase.ultima"></a>
+  <div class="doc doc-contents first">
+  
+      <p>Sensitivity of vomma with respect to change in vol.
+3rd order derivative of option value to vol.</p>
+
+      <details class="quote">
+        <summary>Source code in <code>blackscholes/base.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">ultima</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Sensitivity of vomma with respect to change in vol.</span>
+<span class="sd">    3rd order derivative of option value to vol.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">d1d2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d2</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">vega</span><span class="p">()</span>
+        <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span>
+        <span class="o">*</span> <span class="p">(</span><span class="n">d1d2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">d1d2</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="dual-delta">Dual Delta</h2>
+<h3 id="call_4">Call</h3>
+<p>$$-e^{-rT}\Phi(d_2)$$</p>
+
+
+<div class="doc doc-object doc-function">
+
+
+<a id="blackscholes.call.BlackScholesCall.dual_delta"></a>
+  <div class="doc doc-contents first">
+  
+      <p>1st derivative in option price
+with respect to strike price.</p>
+
+      <details class="quote">
+        <summary>Source code in <code>blackscholes/call.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">dual_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;1st derivative in option price</span>
+<span class="sd">    with respect to strike price.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h3 id="put_4">Put</h3>
+<p>$$e^{-rT}\Phi(-d_2)$$</p>
+
+
+<div class="doc doc-object doc-function">
+
+
+<a id="blackscholes.put.BlackScholesPut.dual_delta"></a>
+  <div class="doc doc-contents first">
+  
+      <p>1st derivative in option price
+with respect to strike price.</p>
+
+      <details class="quote">
+        <summary>Source code in <code>blackscholes/put.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">dual_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;1st derivative in option price</span>
+<span class="sd">    with respect to strike price.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="dual-gamma">Dual Gamma</h2>
+<p>$$e^{-rT} \frac{\phi(d_2)}{K\sigma\sqrt{T}}$$</p>
+
+
+<div class="doc doc-object doc-function">
+
+
+<a id="blackscholes.base.BlackScholesBase.dual_gamma"></a>
+  <div class="doc doc-contents first">
+
+      <details class="quote">
+        <summary>Source code in <code>blackscholes/base.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">dual_gamma</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span>
+        <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../2.%20price/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 2. Price calculation" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              2. Price calculation
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../4.%20itm/" class="md-footer__link md-footer__link--next" aria-label="Next: 4. In-The-Money proxies" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              4. In-The-Money proxies
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "navigation.tabs", "navigation.tracking", "navigation.tabs.sticky", "navigation.expand"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      
+    
+    
+  </body>
+</html>
