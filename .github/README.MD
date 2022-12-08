@@ -37,16 +37,14 @@ put.delta()  # Put Delta
 
 ## Contributing
 
-Install dev-requirements:
+We very much welcome new contributions! Check out the [Github Issues](https://github.com/CarloLepelaars/blackscholes/issues)
+to see what is currently being worked on.
 
-`pip install -r dev-requirements.txt`
-
-Install the pre-commit hooks with:
-
-`pre-commit install`
+Also check out `5. Contributing` in the documentation to learn more about 
+contributing to `blackscholes`.
 
 ## Documentation
 
-You can view the docs locally if you have dev-requirements installed:
+You can always build the docs locally if you have dev-requirements installed:
 
 `mkdocs serve`
