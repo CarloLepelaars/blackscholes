@@ -87,13 +87,11 @@ class BlackScholesBase(ABC):
 
         As defined on Wikipedia:
         https://en.wikipedia.org/wiki/Greeks_(finance)#Lambda
-
-        NOTE: Lambda is the same for call and puts.
         """
         return self.delta() * self.S / self.price()
 
     def vanna(self) -> float:
-        """Sensitivity op delta with respect to change in vol."""
+        """Sensitivity of delta with respect to change in vol."""
         return -norm.pdf(self._d1) * self._d2 / self.sigma
 
     def charm(self) -> float:
