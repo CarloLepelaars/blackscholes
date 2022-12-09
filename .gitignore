@@ -128,4 +128,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# Pycharm
 .idea/
+
+# Poetry
+# Lock file can be useful when the machine it runs on is similar (docker)
+poetry.lock
