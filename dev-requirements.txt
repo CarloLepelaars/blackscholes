@@ -1,9 +1,0 @@
-isort
-mkdocs
-mkdocs-material
-mkdocstrings
-mkdocstrings-python
-pytest
-black
-flake8
-pre-commit

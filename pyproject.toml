@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "blackscholes"
+version = "0.0.2"
+description = "Black Scholes calculator for Python including all Greeks"
+authors = ["CarloLepelaars <info@carlolepelaars.nl>"]
+license = "MIT"
+readme = ".github/README.MD"
+
+[tool.poetry.dependencies]
+python = "^3.8.1"
+scipy = "^1.9.3"
+numpy = "^1.23.5"
+
+[tool.poetry.group.dev.dependencies]
+isort = "5.10.1"
+mkdocs = "^1.4.2"
+mkdocs-material = "^8.5.11"
+mkdocstrings-python = "^0.8.2"
+mkdocstrings = "^0.19.0"
+pytest = "^7.2.0"
+black = "^22.10.0"
+flake8 = "^6.0.0"
+pre-commit = "^2.20.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
