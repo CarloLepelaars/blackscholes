@@ -2,19 +2,19 @@
 
 ## Documentation structure:
 
-1. Quickstart
+[1. Quickstart](https://carlolepelaars.github.io/blackscholes/1.quickstart)
 
-2. Price calculation
+[2. Price calculation](https://carlolepelaars.github.io/blackscholes/2.price)
 
-3. All Greeks
+[3. All Greeks](https://carlolepelaars.github.io/blackscholes/3.the_greeks)
 
-4. In-the-money proxies
+[4. In-the-money proxies](https://carlolepelaars.github.io/blackscholes/4.itm)
 
-5. Contribution guide
+[5. Contribution guide](https://carlolepelaars.github.io/blackscholes/5.contributing)
 
-6. Source Code References
+[6. Source Code References](https://carlolepelaars.github.io/blackscholes/6.references)
 
-7. Disclaimer
+[7. Disclaimer](https://carlolepelaars.github.io/blackscholes/7.disclaimer)
 
 Black Scholes calculator for Python including all Greeks.
 
