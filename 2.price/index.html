@@ -542,7 +542,7 @@ estimate of a call or put option according to the <a href="https://en.wikipedia.
 <p><code>$d_1 = \frac{ln(\frac{S}{K}) + (r+\frac{1}{2}\sigma^2)T}{\sigma\sqrt{T}}$</code></p>
 <p><code>$d_2 = d_1 - \sigma\sqrt{T}$</code></p>
 <h2 id="call">Call</h2>
-<p>$$S e^{-qr} \Phi(d_1) - e^{-rT}K\Phi(d_2)$$</p>
+<p>$$ S e^{-qT} \Phi(d_1) - e^{-rT}K\Phi(d_2)$$</p>
 
 
 <div class="doc doc-object doc-function">
@@ -571,7 +571,7 @@ estimate of a call or put option according to the <a href="https://en.wikipedia.
   </div>
 
 </div><h2 id="put">Put</h2>
-<p>$$e^{-rT}K\Phi(-d_2) - S e^{-qr} \Phi(-d_1)$$</p>
+<p>$$e^{-rT}K\Phi(-d_2) - S e^{-qT} \Phi(-d_1)$$</p>
 
 
 <div class="doc doc-object doc-function">
