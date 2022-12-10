@@ -1,6 +1,5 @@
 # blackscholes
 
-![](https://img.shields.io/github/stars/carlolepelaars/blackscholes?style=social) | 
 ![](https://img.shields.io/pypi/dm/blackscholes) | 
 ![](https://img.shields.io/pypi/pyversions/blackscholes)
 
