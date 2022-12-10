@@ -60,6 +60,11 @@ class BlackScholesCall(BlackScholesBase):
         """
         return self.K * self.T * np.exp(-self.r * self.T) * norm.cdf(self._d2)
 
+    def epsilon(self) -> float:
+        """Change in option price with respect to underlying dividend yield. \n
+        Also known as psi."""
+        return -self.S * self.T * np.exp(-self.q * self.T) * norm.cdf(self._d1)
+
     def in_the_money(self):
         """Naive Probability that call option will be in the money at maturity."""
         return norm.cdf(self._d2)

@@ -48,6 +48,10 @@ class TestBlackScholesCall:
         call_theta = self.call.theta()
         np.testing.assert_almost_equal(call_theta, -1.3529415670754943, decimal=6)
 
+    def test_epsilon(self):
+        call_epsilon = self.call.epsilon()
+        np.testing.assert_almost_equal(call_epsilon, -42.15242946802041, decimal=6)
+
     def test_rho(self):
         call_rho = self.call.rho()
         np.testing.assert_almost_equal(call_rho, 35.813015171916085, decimal=6)
@@ -61,6 +65,7 @@ class TestBlackScholesCall:
             "theta": -1.3529415670754943,
             "rho": 35.813015171916085,
         }
+        assert set(core_greeks.keys()) == set(expected_result.keys())
         for key in expected_result.keys():
             np.testing.assert_almost_equal(
                 core_greeks[key], expected_result[key], decimal=5
@@ -72,6 +77,7 @@ class TestBlackScholesCall:
             "naive_itm": 0.7180531943767934,
             "dual_delta": 0.7162603034383217,
         }
+        assert set(itm_proxies.keys()) == set(expected_result.keys())
         for key in expected_result.keys():
             np.testing.assert_almost_equal(
                 itm_proxies[key], expected_result[key], decimal=5
@@ -103,6 +109,7 @@ class TestBlackScholesCall:
             "gamma": 0.03712496688031454,
             "vega": 16.84545372194272,
             "theta": -1.3529415670754943,
+            "epsilon": -42.15242946802041,
             "rho": 35.813015171916085,
             "lambda": 6.6492624553539255,
             "vanna": -1.178299396409533,
@@ -117,6 +124,7 @@ class TestBlackScholesCall:
             "dual_delta": 0.7162603034383217,
             "dual_gamma": 0.0449212099251806,
         }
+        assert set(all_greeks.keys()) == set(expected_result.keys())
         for key in expected_result.keys():
             np.testing.assert_almost_equal(
                 all_greeks[key], expected_result[key], decimal=5

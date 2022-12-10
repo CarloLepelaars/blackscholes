@@ -27,6 +27,9 @@ class BlackScholesMeta(BlackScholesBase):
     def theta(self):
         ...
 
+    def epsilon(self):
+        ...
+
     def rho(self):
         ...
 

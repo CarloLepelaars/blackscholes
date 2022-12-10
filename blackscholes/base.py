@@ -69,6 +69,7 @@ class BlackScholesBase(ABC):
         """
         return self.S * norm.pdf(self._d1) * np.sqrt(self.T)
 
+    @abstractmethod
     def theta(self) -> float:
         """
         Rate of change in option price
@@ -76,6 +77,13 @@ class BlackScholesBase(ABC):
         """
         ...
 
+    @abstractmethod
+    def epsilon(self) -> float:
+        """Change in option price with respect to underlying dividend yield. \n
+        Also known as psi."""
+        ...
+
+    @abstractmethod
     def rho(self) -> float:
         """Rate of change in option price
         with respect to the risk-free rate.
@@ -194,6 +202,7 @@ class BlackScholesBase(ABC):
             "gamma": self.gamma(),
             "vega": self.vega(),
             "theta": self.theta(),
+            "epsilon": self.epsilon(),
             "rho": self.rho(),
             "lambda": self.lambda_greek(),
             "vanna": self.vanna(),
