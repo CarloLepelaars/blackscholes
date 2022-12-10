@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "blackscholes"
-version = "0.0.4"
+version = "0.0.5"
 description = "Black Scholes calculator for Python including all Greeks"
 authors = ["CarloLepelaars <info@carlolepelaars.nl>"]
 license = "MIT"
