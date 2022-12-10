@@ -102,6 +102,10 @@ class TestBlackScholesCall:
         lambda_greek = self.call.lambda_greek()
         np.testing.assert_almost_equal(lambda_greek, 6.6492624553539335, decimal=6)
 
+    def test_charm(self):
+        charm = self.call.charm()
+        np.testing.assert_almost_equal(charm, 0.0832677717846717, decimal=6)
+
     def test_all_greeks(self):
         all_greeks = self.call.get_all_greeks()
         expected_result = {

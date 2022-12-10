@@ -56,6 +56,10 @@ class TestBlackScholesPut:
         put_rho = self.put.rho()
         np.testing.assert_almost_equal(put_rho, -14.062140947956918, decimal=6)
 
+    def test_charm(self):
+        charm = self.put.charm()
+        np.testing.assert_almost_equal(charm, 0.0832677717846717, decimal=6)
+
     def test_get_core_greeks(self):
         core_greeks = self.put.get_core_greeks()
         expected_result = {

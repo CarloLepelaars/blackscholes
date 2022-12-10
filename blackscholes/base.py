@@ -103,14 +103,6 @@ class BlackScholesBase(ABC):
         """Sensitivity of delta with respect to change in vol."""
         return -norm.pdf(self._d1) * self._d2 / self.sigma
 
-    def charm(self) -> float:
-        """Rate of change of delta over time (also known as delta decay)."""
-        return (
-            -norm.pdf(self._d1)
-            * (2 * self.r * self.T - self._d2 * self.sigma * np.sqrt(self.T))
-            / (2 * self.T * self.sigma * np.sqrt(self.T))
-        )
-
     def vomma(self) -> float:
         """2nd order sensitivity to vol."""
         return self.vega() * self._d1 * self._d2 / self.sigma
