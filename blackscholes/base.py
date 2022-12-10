@@ -150,11 +150,10 @@ class BlackScholesBase(ABC):
     def color(self) -> float:
         """Rate of change of gamma over time."""
         return (
-            -norm.pdf(self._d1)
+            -np.exp(-self.q * self.T) * norm.pdf(self._d1)
             / (2 * self.S * self.T * self.sigma * np.sqrt(self.T))
-            * (
-                1
-                + (2 * self.r * self.T - self._d2 * self.sigma * np.sqrt(self.T))
+            * (2 * self.q * self.T + 1
+                + (2 * (self.r - self.q) * self.T - self._d2 * self.sigma * np.sqrt(self.T))
                 / (self.sigma * np.sqrt(self.T))
                 * self._d1
             )
