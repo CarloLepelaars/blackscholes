@@ -97,9 +97,6 @@ class BlackScholesBase(ABC):
     def lambda_greek(self) -> float:
         """Percentage change in option value per %
         change in asset price. Also called gearing.
-
-        As defined on Wikipedia:
-        https://en.wikipedia.org/wiki/Greeks_(finance)#Lambda
         """
         return self.delta() * self.S / self.price()
 
