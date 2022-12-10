@@ -33,6 +33,9 @@ class BlackScholesMeta(BlackScholesBase):
     def rho(self):
         ...
 
+    def charm(self):
+        ...
+
 
 class TestBlackScholesBase:
     test_S = 55.0  # Asset price of 55

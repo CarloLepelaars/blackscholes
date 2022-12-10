@@ -1,5 +1,4 @@
-import numpy as np
-from scipy.stats import norm
+from math import exp, sqrt
 
 from .base import BlackScholesBase
 
@@ -25,56 +24,56 @@ class BlackScholesPut(BlackScholesBase):
 
     def price(self):
         """Price of a put option."""
-        return norm.cdf(-self._d2) * self.K * np.exp(
-            -self.r * self.T
-        ) - self.S * np.exp(-self.q * self.T) * norm.cdf(-self._d1)
+        return self._cdf(-self._d2) * self.K * exp(-self.r * self.T) - self.S * exp(
+            -self.q * self.T
+        ) * self._cdf(-self._d1)
 
     def delta(self):
         """
         Rate of change in option price
         with respect to the asset price (1st derivative).
         """
-        return -np.exp(-self.q * self.T) * norm.cdf(-self._d1)
+        return -exp(-self.q * self.T) * self._cdf(-self._d1)
 
     def dual_delta(self):
         """1st derivative in option price
         with respect to strike price.
         """
-        return np.exp(-self.r * self.T) * norm.cdf(-self._d2)
+        return exp(-self.r * self.T) * self._cdf(-self._d2)
 
     def theta(self):
         """Rate of change in option price
         with respect to time (i.e. time decay).
         """
         return (
-            (-np.exp(self.q * self.T) * self.S * norm.pdf(self._d1) * self.sigma)
-            / (2 * np.sqrt(self.T))
+            (-exp(self.q * self.T) * self.S * self._pdf(self._d1) * self.sigma)
+            / (2 * sqrt(self.T))
         ) + (
-            self.r * self.K * np.exp(-self.r * self.T) * norm.cdf(-self._d2)
-            - self.q * self.S * np.exp(-self.q * self.T) * norm.cdf(-self._d1)
+            self.r * self.K * exp(-self.r * self.T) * self._cdf(-self._d2)
+            - self.q * self.S * exp(-self.q * self.T) * self._cdf(-self._d1)
         )
 
     def rho(self) -> float:
         """Rate of change in option price
         with respect to the risk-free rate.
         """
-        return -self.K * self.T * np.exp(-self.r * self.T) * norm.cdf(-self._d2)
+        return -self.K * self.T * exp(-self.r * self.T) * self._cdf(-self._d2)
 
     def epsilon(self) -> float:
         """Change in option price with respect to underlying dividend yield. \n
         Also known as psi."""
-        return self.S * self.T * np.exp(-self.q * self.T) * norm.cdf(-self._d1)
+        return self.S * self.T * exp(-self.q * self.T) * self._cdf(-self._d1)
 
     def charm(self) -> float:
         """Rate of change of delta over time (also known as delta decay)."""
-        return -self.q * np.exp(-self.q * self.T) * norm.cdf(-self._d1) - np.exp(
+        return -self.q * exp(-self.q * self.T) * self._cdf(-self._d1) - exp(
             -self.q * self.T
-        ) * norm.pdf(self._d1) * (
-            2 * (self.r - self.q) * self.T - self._d2 * self.sigma * np.sqrt(self.T)
+        ) * self._pdf(self._d1) * (
+            2 * (self.r - self.q) * self.T - self._d2 * self.sigma * sqrt(self.T)
         ) / (
-            2 * self.T * self.sigma * np.sqrt(self.T)
+            2 * self.T * self.sigma * sqrt(self.T)
         )
 
     def in_the_money(self):
         """Naive Probability that put option will be in the money at maturity."""
-        return 1 - norm.cdf(self._d2)
+        return 1 - self._cdf(self._d2)

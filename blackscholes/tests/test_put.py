@@ -27,7 +27,7 @@ class TestBlackScholesPut:
             r=self.test_r,
             sigma=self.test_sigma,
         )
-        assert call.delta() - put_delta == 1.0
+        np.testing.assert_almost_equal(call.delta() - put_delta, 1.0, decimal=5)
 
     def test_dual_delta(self):
         put_delta = self.put.dual_delta()
