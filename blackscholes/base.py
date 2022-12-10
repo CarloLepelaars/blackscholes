@@ -1,8 +1,6 @@
 from abc import ABC, abstractmethod
+from math import erf, exp, log, pi, sqrt
 from typing import Dict
-
-import numpy as np
-from scipy.stats import norm
 
 
 class BlackScholesBase(ABC):
@@ -53,16 +51,16 @@ class BlackScholesBase(ABC):
         NOTE: Gamma is the same for calls and puts.
         """
         return (
-            np.exp(-self.q * self.T)
-            * norm.pdf(self._d1)
-            / (self.S * self.sigma * np.sqrt(self.T))
+            exp(-self.q * self.T)
+            * self._pdf(self._d1)
+            / (self.S * self.sigma * sqrt(self.T))
         )
 
     def dual_gamma(self) -> float:
         return (
-            np.exp(-self.r * self.T)
-            * norm.pdf(self._d2)
-            / (self.K * self.sigma * np.sqrt(self.T))
+            exp(-self.r * self.T)
+            * self._pdf(self._d2)
+            / (self.K * self.sigma * sqrt(self.T))
         )
 
     def vega(self) -> float:
@@ -71,7 +69,7 @@ class BlackScholesBase(ABC):
 
         NOTE: Vega is the same for calls and puts.
         """
-        return self.S * norm.pdf(self._d1) * np.sqrt(self.T)
+        return self.S * self._pdf(self._d1) * sqrt(self.T)
 
     @abstractmethod
     def theta(self) -> float:
@@ -102,7 +100,12 @@ class BlackScholesBase(ABC):
 
     def vanna(self) -> float:
         """Sensitivity of delta with respect to change in vol."""
-        return -norm.pdf(self._d1) * self._d2 / self.sigma
+        return -self._pdf(self._d1) * self._d2 / self.sigma
+
+    @abstractmethod
+    def charm(self) -> float:
+        """Rate of change of delta over time (also known as delta decay)."""
+        ...
 
     def vomma(self) -> float:
         """2nd order sensitivity to vol."""
@@ -112,12 +115,12 @@ class BlackScholesBase(ABC):
         """Rate of change in `vega` with respect to time."""
         return (
             -self.S
-            * np.exp(-self.q * self.T)
-            * norm.pdf(self._d1)
-            * np.sqrt(self.T)
+            * exp(-self.q * self.T)
+            * self._pdf(self._d1)
+            * sqrt(self.T)
             * (
                 self.q
-                + (self.r - self.q) * self._d1 / (self.sigma * np.sqrt(self.T))
+                + (self.r - self.q) * self._d1 / (self.sigma * sqrt(self.T))
                 - (1 + self._d1 * self._d2) / (2 * self.T)
             )
         )
@@ -127,18 +130,17 @@ class BlackScholesBase(ABC):
         exp_factor = (
             -1
             / (2 * sigma2 * self.T)
-            * (np.log(self.K / self.S) - ((self.r - self.q) - 0.5 * sigma2) * self.T)
-            ** 2
+            * (log(self.K / self.S) - ((self.r - self.q) - 0.5 * sigma2) * self.T) ** 2
         )
         return (
-            np.exp(-self.r * self.T)
+            exp(-self.r * self.T)
             * (1 / self.K)
-            * (1 / np.sqrt(2 * np.pi * sigma2 * self.T))
-            * np.exp(exp_factor)
+            * (1 / sqrt(2 * pi * sigma2 * self.T))
+            * exp(exp_factor)
         )
 
     def speed(self) -> float:
-        return -self.gamma() / self.S * (self._d1 / (self.sigma * np.sqrt(self.T)) + 1)
+        return -self.gamma() / self.S * (self._d1 / (self.sigma * sqrt(self.T)) + 1)
 
     def zomma(self) -> float:
         """Rate of change of gamma with respect to changes in vol."""
@@ -147,17 +149,17 @@ class BlackScholesBase(ABC):
     def color(self) -> float:
         """Rate of change of gamma over time."""
         return (
-            -np.exp(-self.q * self.T)
-            * norm.pdf(self._d1)
-            / (2 * self.S * self.T * self.sigma * np.sqrt(self.T))
+            -exp(-self.q * self.T)
+            * self._pdf(self._d1)
+            / (2 * self.S * self.T * self.sigma * sqrt(self.T))
             * (
                 2 * self.q * self.T
                 + 1
                 + (
                     2 * (self.r - self.q) * self.T
-                    - self._d2 * self.sigma * np.sqrt(self.T)
+                    - self._d2 * self.sigma * sqrt(self.T)
                 )
-                / (self.sigma * np.sqrt(self.T))
+                / (self.sigma * sqrt(self.T))
                 * self._d1
             )
         )
@@ -222,11 +224,21 @@ class BlackScholesBase(ABC):
     @property
     def _d1(self) -> float:
         """1st probability factor that acts as a multiplication factor for stock prices."""
-        return (1 / (self.sigma * np.sqrt(self.T))) * (
-            np.log(self.S / self.K) + (self.r + self.sigma**2 / 2) * self.T
+        return (1 / (self.sigma * sqrt(self.T))) * (
+            log(self.S / self.K) + (self.r + self.sigma**2 / 2) * self.T
         )
 
     @property
     def _d2(self) -> float:
         """2nd probability parameter that acts as a multiplication factor for discounting."""
-        return self._d1 - self.sigma * np.sqrt(self.T)
+        return self._d1 - self.sigma * sqrt(self.T)
+
+    @staticmethod
+    def _pdf(x: float) -> float:
+        """PDF of standard normal distribution."""
+        return exp(-(x**2) / 2) / sqrt(2 * pi)
+
+    @staticmethod
+    def _cdf(x):
+        """CDF of standard normal distribution."""
+        return (1.0 + erf(x / sqrt(2.0))) / 2.0
