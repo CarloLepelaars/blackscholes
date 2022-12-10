@@ -52,7 +52,11 @@ class BlackScholesBase(ABC):
         Rate of change in delta with respect to the underlying stock price (2nd derivative).
         NOTE: Gamma is the same for calls and puts.
         """
-        return np.exp(-self.q*self.T) * norm.pdf(self._d1) / (self.S * self.sigma * np.sqrt(self.T))
+        return (
+            np.exp(-self.q * self.T)
+            * norm.pdf(self._d1)
+            / (self.S * self.sigma * np.sqrt(self.T))
+        )
 
     def dual_gamma(self) -> float:
         return (
@@ -111,10 +115,12 @@ class BlackScholesBase(ABC):
         """Rate of change in `vega` with respect to time."""
         return (
             -self.S
+            * np.exp(-self.q * self.T)
             * norm.pdf(self._d1)
             * np.sqrt(self.T)
             * (
-                self.r * self._d1 / (self.sigma * np.sqrt(self.T))
+                self.q
+                + (self.r - self.q) * self._d1 / (self.sigma * np.sqrt(self.T))
                 - (1 + self._d1 * self._d2) / (2 * self.T)
             )
         )

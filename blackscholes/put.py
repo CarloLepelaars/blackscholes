@@ -67,11 +67,12 @@ class BlackScholesPut(BlackScholesBase):
 
     def charm(self) -> float:
         """Rate of change of delta over time (also known as delta decay)."""
-        return (
-            - self.q * np.exp(-self.q * self.T) * norm.cdf(-self._d1)
-            - np.exp(-self.q * self.T) * norm.pdf(self._d1)
-            * (2 * (self.r - self.q) * self.T - self._d2 * self.sigma * np.sqrt(self.T))
-            / (2 * self.T * self.sigma * np.sqrt(self.T))
+        return -self.q * np.exp(-self.q * self.T) * norm.cdf(-self._d1) - np.exp(
+            -self.q * self.T
+        ) * norm.pdf(self._d1) * (
+            2 * (self.r - self.q) * self.T - self._d2 * self.sigma * np.sqrt(self.T)
+        ) / (
+            2 * self.T * self.sigma * np.sqrt(self.T)
         )
 
     def in_the_money(self):
