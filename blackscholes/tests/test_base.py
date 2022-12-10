@@ -7,8 +7,10 @@ from blackscholes.base import BlackScholesBase
 class BlackScholesMeta(BlackScholesBase):
     """Dummy class for testing base methods."""
 
-    def __init__(self, S: float, K: float, T: float, r: float, sigma: float):
-        super().__init__(S=S, K=K, T=T, r=r, sigma=sigma)
+    def __init__(
+        self, S: float, K: float, T: float, r: float, sigma: float, q: float = 0.0
+    ):
+        super().__init__(S=S, K=K, T=T, r=r, sigma=sigma, q=q)
 
     def price(self):
         ...

@@ -16,15 +16,16 @@ class BlackScholesBase(ABC):
     :param T: Time till expiration in years (1/12 indicates 1 month) \n
     :param r: Risk-free interest rate (0.05 indicates 5%) \n
     :param sigma: Volatility (standard deviation) of stock (0.15 indicates 15%) \n
+    :param q: Annual dividend yield (0.05 indicates 5% yield)
     """
 
-    def __init__(self, S: float, K: float, T: float, r: float, sigma: float):
+    def __init__(self, S: float, K: float, T: float, r: float, sigma: float, q: float):
         # Some parameters must be positive
-        for param in [S, K, T, sigma]:
+        for param in [S, K, T, sigma, q]:
             assert (
                 param >= 0.0
             ), f"Some parameters cannot be negative. Got '{param}' as an argument."
-        self.S, self.K, self.T, self.r, self.sigma = S, K, T, r, sigma
+        self.S, self.K, self.T, self.r, self.sigma, self.q = S, K, T, r, sigma, q
 
     @abstractmethod
     def price(self) -> float:

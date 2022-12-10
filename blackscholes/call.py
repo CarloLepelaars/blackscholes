@@ -14,17 +14,20 @@ class BlackScholesCall(BlackScholesBase):
     :param K: Strike price \n
     :param T: Time till expiration in years (1/12 indicates 1 month) \n
     :param r: Risk-free interest rate (0.05 indicates 5%) \n
-    :param sigma ($/sigma$): Volatility (standard deviation) of stock (0.15 indicates 15%)
+    :param sigma: Volatility (standard deviation) of stock (0.15 indicates 15%) \n
+    :param q: Annual dividend yield (0.05 indicates 5% yield)
     """
 
-    def __init__(self, S: float, K: float, T: float, r: float, sigma: float):
-        super().__init__(S=S, K=K, T=T, r=r, sigma=sigma)
+    def __init__(
+        self, S: float, K: float, T: float, r: float, sigma: float, q: float = 0.0
+    ):
+        super().__init__(S=S, K=K, T=T, r=r, sigma=sigma, q=q)
 
     def price(self):
         """Price of a call option."""
-        return norm.cdf(self._d1) * self.S - norm.cdf(self._d2) * self.K * np.exp(
-            -self.r * self.T
-        )
+        return self.S * np.exp(-self.q * self.r) * norm.cdf(self._d1) - norm.cdf(
+            self._d2
+        ) * self.K * np.exp(-self.r * self.T)
 
     def delta(self) -> float:
         """Rate of change in option price
