@@ -130,7 +130,8 @@ class BlackScholesBase(ABC):
         exp_factor = (
             -1
             / (2 * sigma2 * self.T)
-            * (np.log(self.K / self.S) - (self.r - 0.5 * sigma2) * self.T) ** 2
+            * (np.log(self.K / self.S) - ((self.r - self.q) - 0.5 * sigma2) * self.T)
+            ** 2
         )
         return (
             np.exp(-self.r * self.T)
