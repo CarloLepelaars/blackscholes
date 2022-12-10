@@ -30,9 +30,6 @@ class BlackScholesMeta(BlackScholesBase):
     def rho(self):
         ...
 
-    def get_all_greeks(self):
-        ...
-
 
 class TestBlackScholesBase:
     test_S = 55.0  # Asset price of 55

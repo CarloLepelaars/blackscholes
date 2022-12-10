@@ -25,16 +25,17 @@ class BlackScholesCall(BlackScholesBase):
 
     def price(self):
         """Price of a call option."""
-        return self.S * np.exp(-self.q * self.r) * norm.cdf(self._d1) - norm.cdf(
-            self._d2
-        ) * self.K * np.exp(-self.r * self.T)
+        return (
+            self.S * np.exp(-self.q * self.T) * norm.cdf(self._d1)
+            - norm.cdf(self._d2) * np.exp(-self.r * self.T) * self.K
+        )
 
     def delta(self) -> float:
         """Rate of change in option price
         with respect to the asset price (1st derivative).
         Proxy for probability of the option expiring in the money.
         """
-        return norm.cdf(self._d1)
+        return np.exp(-self.q * self.T) * norm.cdf(self._d1)
 
     def dual_delta(self) -> float:
         """1st derivative in option price
@@ -55,10 +56,6 @@ class BlackScholesCall(BlackScholesBase):
         with respect to the risk-free rate.
         """
         return self.K * self.T * np.exp(-self.r * self.T) * norm.cdf(self._d2)
-
-    def get_all_greeks(self) -> dict:
-        # TODO Implement after implementing all individual Greeks
-        return {}
 
     def in_the_money(self):
         """Naive Probability that call option will be in the money at maturity."""

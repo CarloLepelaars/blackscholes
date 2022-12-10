@@ -95,3 +95,29 @@ class TestBlackScholesCall:
     def test_lambda(self):
         lambda_greek = self.call.lambda_greek()
         np.testing.assert_almost_equal(lambda_greek, 6.6492624553539335, decimal=6)
+
+    def test_all_greeks(self):
+        all_greeks = self.call.get_all_greeks()
+        expected_result = {
+            "delta": 0.766407808509462,
+            "gamma": 0.03712496688031454,
+            "vega": 16.84545372194272,
+            "theta": -1.3529415670754943,
+            "rho": 35.813015171916085,
+            "lambda": 6.6492624553539255,
+            "vanna": -1.178299396409533,
+            "charm": 0.0832677717846717,
+            "vomma": 47.11869947977544,
+            "veta": 11.752499520643353,
+            "phi": 0.04492120992518061,
+            "speed": -0.003946801873134375,
+            "zomma": -0.14365691533482322,
+            "color": -0.011224141490466934,
+            "ultima": -827.4229433648609,
+            "dual_delta": 0.7162603034383217,
+            "dual_gamma": 0.0449212099251806,
+        }
+        for key in expected_result.keys():
+            np.testing.assert_almost_equal(
+                all_greeks[key], expected_result[key], decimal=5
+            )

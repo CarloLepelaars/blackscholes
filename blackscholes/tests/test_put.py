@@ -81,3 +81,29 @@ class TestBlackScholesPut:
         itm_prob = self.put.in_the_money()
         assert 0.0 < itm_prob < 1.0
         np.testing.assert_almost_equal(itm_prob, 0.2819468056232066, decimal=6)
+
+    def test_all_greeks(self):
+        all_greeks = self.put.get_all_greeks()
+        expected_result = {
+            "delta": -0.233592191490538,
+            "gamma": 0.03712496688031454,
+            "vega": 16.84545372194272,
+            "theta": -1.2282536767758119,
+            "rho": -14.062140947956918,
+            "lambda": -10.57787211261979,
+            "vanna": -1.178299396409533,
+            "charm": 0.0832677717846717,
+            "vomma": 47.11869947977544,
+            "veta": 11.752499520643353,
+            "phi": 0.04492120992518061,
+            "speed": -0.003946801873134375,
+            "zomma": -0.14365691533482322,
+            "color": -0.011224141490466934,
+            "ultima": -827.4229433648609,
+            "dual_delta": 0.2812428189591384,
+            "dual_gamma": 0.0449212099251806,
+        }
+        for key in expected_result.keys():
+            np.testing.assert_almost_equal(
+                all_greeks[key], expected_result[key], decimal=5
+            )

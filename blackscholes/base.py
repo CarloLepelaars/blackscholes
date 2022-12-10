@@ -187,10 +187,27 @@ class BlackScholesBase(ABC):
         """
         return {"naive_itm": self.in_the_money(), "dual_delta": self.dual_delta()}
 
-    @abstractmethod
     def get_all_greeks(self) -> Dict[str, float]:
         """Retrieve all Greeks implemented as a dictionary."""
-        ...
+        return {
+            "delta": self.delta(),
+            "gamma": self.gamma(),
+            "vega": self.vega(),
+            "theta": self.theta(),
+            "rho": self.rho(),
+            "lambda": self.lambda_greek(),
+            "vanna": self.vanna(),
+            "charm": self.charm(),
+            "vomma": self.vomma(),
+            "veta": self.veta(),
+            "phi": self.phi(),
+            "speed": self.speed(),
+            "zomma": self.zomma(),
+            "color": self.color(),
+            "ultima": self.ultima(),
+            "dual_delta": self.dual_delta(),
+            "dual_gamma": self.dual_gamma(),
+        }
 
     @property
     def _d1(self) -> float:
