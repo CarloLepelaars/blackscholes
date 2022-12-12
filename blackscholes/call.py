@@ -69,9 +69,9 @@ class BlackScholesCall(BlackScholesBase):
         return self.q * exp(-self.q * self.T) * self._cdf(self._d1) - exp(
             -self.q * self.T
         ) * self._pdf(self._d1) * (
-            2 * (self.r - self.q) * self.T - self._d2 * self.sigma * sqrt(self.T)
+            2.0 * (self.r - self.q) * self.T - self._d2 * self.sigma * sqrt(self.T)
         ) / (
-            2 * self.T * self.sigma * sqrt(self.T)
+            2.0 * self.T * self.sigma * sqrt(self.T)
         )
 
     def in_the_money(self):

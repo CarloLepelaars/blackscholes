@@ -121,42 +121,42 @@ class BlackScholesBase(ABC):
             * (
                 self.q
                 + (self.r - self.q) * self._d1 / (self.sigma * sqrt(self.T))
-                - (1 + self._d1 * self._d2) / (2 * self.T)
+                - (1.0 + self._d1 * self._d2) / (2.0 * self.T)
             )
         )
 
     def phi(self) -> float:
         sigma2 = self.sigma**2
         exp_factor = (
-            -1
-            / (2 * sigma2 * self.T)
+            -1.0
+            / (2.0 * sigma2 * self.T)
             * (log(self.K / self.S) - ((self.r - self.q) - 0.5 * sigma2) * self.T) ** 2
         )
         return (
             exp(-self.r * self.T)
-            * (1 / self.K)
-            * (1 / sqrt(2 * pi * sigma2 * self.T))
+            * (1.0 / self.K)
+            * (1.0 / sqrt(2.0 * pi * sigma2 * self.T))
             * exp(exp_factor)
         )
 
     def speed(self) -> float:
-        return -self.gamma() / self.S * (self._d1 / (self.sigma * sqrt(self.T)) + 1)
+        return -self.gamma() / self.S * (self._d1 / (self.sigma * sqrt(self.T)) + 1.0)
 
     def zomma(self) -> float:
         """Rate of change of gamma with respect to changes in vol."""
-        return self.gamma() * ((self._d1 * self._d2 - 1) / self.sigma)
+        return self.gamma() * ((self._d1 * self._d2 - 1.0) / self.sigma)
 
     def color(self) -> float:
         """Rate of change of gamma over time."""
         return (
             -exp(-self.q * self.T)
             * self._pdf(self._d1)
-            / (2 * self.S * self.T * self.sigma * sqrt(self.T))
+            / (2.0 * self.S * self.T * self.sigma * sqrt(self.T))
             * (
-                2 * self.q * self.T
-                + 1
+                2.0 * self.q * self.T
+                + 1.0
                 + (
-                    2 * (self.r - self.q) * self.T
+                    2.0 * (self.r - self.q) * self.T
                     - self._d2 * self.sigma * sqrt(self.T)
                 )
                 / (self.sigma * sqrt(self.T))
@@ -172,7 +172,7 @@ class BlackScholesBase(ABC):
         return (
             -self.vega()
             / self.sigma**2
-            * (d1d2 * (1 - d1d2) + self._d1**2 + self._d2**2)
+            * (d1d2 * (1.0 - d1d2) + self._d1**2 + self._d2**2)
         )
 
     def get_core_greeks(self) -> Dict[str, float]:
@@ -224,8 +224,8 @@ class BlackScholesBase(ABC):
     @property
     def _d1(self) -> float:
         """1st probability factor that acts as a multiplication factor for stock prices."""
-        return (1 / (self.sigma * sqrt(self.T))) * (
-            log(self.S / self.K) + (self.r + self.sigma**2 / 2) * self.T
+        return (1.0 / (self.sigma * sqrt(self.T))) * (
+            log(self.S / self.K) + (self.r + self.sigma**2 / 2.0) * self.T
         )
 
     @property
@@ -236,7 +236,7 @@ class BlackScholesBase(ABC):
     @staticmethod
     def _pdf(x: float) -> float:
         """PDF of standard normal distribution."""
-        return exp(-(x**2) / 2) / sqrt(2 * pi)
+        return exp(-(x**2) / 2.0) / sqrt(2.0 * pi)
 
     @staticmethod
     def _cdf(x):

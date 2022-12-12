@@ -47,7 +47,7 @@ class BlackScholesPut(BlackScholesBase):
         """
         return (
             (-exp(self.q * self.T) * self.S * self._pdf(self._d1) * self.sigma)
-            / (2 * sqrt(self.T))
+            / (2.0 * sqrt(self.T))
         ) + (
             self.r * self.K * exp(-self.r * self.T) * self._cdf(-self._d2)
             - self.q * self.S * exp(-self.q * self.T) * self._cdf(-self._d1)
@@ -69,11 +69,11 @@ class BlackScholesPut(BlackScholesBase):
         return -self.q * exp(-self.q * self.T) * self._cdf(-self._d1) - exp(
             -self.q * self.T
         ) * self._pdf(self._d1) * (
-            2 * (self.r - self.q) * self.T - self._d2 * self.sigma * sqrt(self.T)
+            2.0 * (self.r - self.q) * self.T - self._d2 * self.sigma * sqrt(self.T)
         ) / (
-            2 * self.T * self.sigma * sqrt(self.T)
+            2.0 * self.T * self.sigma * sqrt(self.T)
         )
 
     def in_the_money(self):
         """Naive Probability that put option will be in the money at maturity."""
-        return 1 - self._cdf(self._d2)
+        return 1.0 - self._cdf(self._d2)
