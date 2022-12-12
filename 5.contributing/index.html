@@ -486,28 +486,34 @@ for calculating everything related to the Black-Scholes-Merton model.
 There are always exciting ideas that can still be implemented.
 Check out the <a href="https://github.com/CarloLepelaars/blackscholes/issues">Github Issues</a> if you are interested in picking up an existing issue.</p>
 <h2 id="before-you-build-a-feature">Before you build a feature</h2>
-<ul>
-<li>Technical preparation:</li>
-</ul>
-<p>Install including development dependencies:</p>
+<ol>
+<li>
+<p>Fork <a href="https://github.com/CarloLepelaars/blackscholes">CarloLepelaars/blackscholes</a> from Github.</p>
+</li>
+<li>
+<p>Install <code>blackscholes</code> including development dependencies:</p>
+</li>
+</ol>
 <div class="codehilite"><pre><span></span><code>pip install poetry
 poetry install
 </code></pre></div>
 
-<p>Install the pre-commit hooks with:</p>
+<ol>
+<li>Install the pre-commit hooks with:</li>
+</ol>
 <p><code>pre-commit install</code></p>
-<ul>
+<ol>
 <li>Discuss what you want to implement on <a href="https://github.com/CarloLepelaars/blackscholes/issues">Github Issues</a> before creating a Pull Request.</li>
 <li>Consider and communicate if you would be open to maintain this feature in the future.</li>
-</ul>
+</ol>
 <h2 id="tests">Tests</h2>
 <p>Please write tests for every new feature that is implemented.
 When dealing with complicated formulas, see if you can check your outputs
 against an existing software library to guarantee good output.
 If you don't know how to do this, the community might be able to help out with performing checks.</p>
 <p>Also don't forget to document your new feature. 
-Check out this documentation to decide if you should create a new Markdown file or
-add a section to an existing doc file.</p>
+Check out this documentation to decide if you should
+add a section to an existing doc file or even create a new Markdown file.</p>
 
 
 
