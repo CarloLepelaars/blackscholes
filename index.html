@@ -565,14 +565,15 @@
 <h3 id="input-variables">Input variables</h3>
 <div class="codehilite"><pre><span></span><code><span class="n">S</span> <span class="o">=</span> <span class="mf">55.0</span>  <span class="c1"># Asset price of 55</span>
 <span class="n">K</span> <span class="o">=</span> <span class="mf">50.0</span>  <span class="c1"># Strike price of 50</span>
-<span class="n">T</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># 1 year to maturity</span>
-<span class="n">r</span> <span class="o">=</span> <span class="mf">0.0025</span>  <span class="c1"># 0.25% risk-free rate</span>
-<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.15</span>  <span class="c1"># 15% vol</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># 1 Year to maturity</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">0.0025</span>  <span class="c1"># 0.25% Risk-free rate</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.15</span>  <span class="c1"># 15% Volatiltiy</span>
+<span class="n">q</span> <span class="o">=</span> <span class="mf">0.</span>  <span class="c1"># 0% Annual Dividend Yield</span>
 </code></pre></div>
 
 <h3 id="call">Call</h3>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesCall</span>
-<span class="n">call</span> <span class="o">=</span> <span class="n">BlackScholesCall</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span>
+<span class="n">call</span> <span class="o">=</span> <span class="n">BlackScholesCall</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="n">q</span><span class="p">)</span>
 <span class="n">call</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## 6.339408</span>
 <span class="n">call</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## 0.766407</span>
 <span class="n">call</span><span class="o">.</span><span class="n">charm</span><span class="p">()</span>  <span class="c1">## 0.083267</span>
@@ -580,7 +581,7 @@
 
 <h3 id="put">Put</h3>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesPut</span>
-<span class="n">put</span> <span class="o">=</span> <span class="n">BlackScholesPut</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span>
+<span class="n">put</span> <span class="o">=</span> <span class="n">BlackScholesPut</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="n">q</span><span class="p">)</span>
 <span class="n">put</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## 1.214564</span>
 <span class="n">put</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## -0.23359</span>
 <span class="n">put</span><span class="o">.</span><span class="n">charm</span><span class="p">()</span>  <span class="c1">## 0.083267</span>

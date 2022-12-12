@@ -669,6 +669,7 @@ estimate the probability of an option being
 <li><a href="#dual-delta">Through <code>dual_delta</code></a></li>
 </ol>
 <h2 id="parameters">Parameters</h2>
+<p>Reference of all symbols that are used in the formulas:</p>
 <p><code>$T$</code> = Time to maturity (in years)</p>
 <p><code>$r$</code> = Risk-free rate</p>
 <p><code>$\Phi(.)$</code> = Cumulative Density Function (CDF) of  <code>$\mathcal{N}(0, 1)$</code></p>
@@ -718,7 +719,7 @@ In other words, the estimate of a call plus that of a put with same input parame
 <span class="normal">78</span>
 <span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">in_the_money</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Naive Probability that put option will be in the money at maturity.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
