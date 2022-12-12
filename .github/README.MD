@@ -18,7 +18,7 @@ K = 50.0  # Strike price of 50
 T = 1.0  # 1 Year to maturity
 r = 0.0025  # 0.25% Risk-free rate
 sigma = 0.15  # 15% Volatility
-q = 0. # 0% Annual Dividend Yield
+q = 0.0 # 0% Annual Dividend Yield
 ```
 
 ### Call
