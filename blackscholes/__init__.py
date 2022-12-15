@@ -1,4 +1,4 @@
-from .call import BlackScholesCall
-from .put import BlackScholesPut
+from .call import Black76Call, BlackScholesCall
+from .put import Black76Put, BlackScholesPut
 
-__all__ = ["BlackScholesCall", "BlackScholesPut"]
+__all__ = ["BlackScholesCall", "Black76Call", "BlackScholesPut", "Black76Put"]

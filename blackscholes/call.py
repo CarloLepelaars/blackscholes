@@ -1,6 +1,6 @@
 from math import exp, sqrt
 
-from .base import BlackScholesBase
+from .base import Black76Base, BlackScholesBase
 
 
 class BlackScholesCall(BlackScholesBase):
@@ -77,3 +77,20 @@ class BlackScholesCall(BlackScholesBase):
     def in_the_money(self):
         """Naive Probability that call option will be in the money at maturity."""
         return self._cdf(self._d2)
+
+
+class Black76Call(Black76Base):
+    def __init__(self, F: float, K: float, T: float, r: float, sigma: float):
+        super().__init__(F=F, K=K, T=T, r=r, sigma=sigma)
+
+    def price(self):
+        ...
+
+    def delta(self):
+        ...
+
+    def theta(self):
+        ...
+
+    def rho(self):
+        ...

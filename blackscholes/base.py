@@ -63,30 +63,64 @@ class Black76Base(ABC, StandardNormalMixin):
         )
 
     def vega(self) -> float:
+        """Rate of change in option price with respect to the volatility
+        of underlying futures contract.
+        """
         return self.F * exp(-self.r * self.T) * self._pdf(self._d1) * sqrt(self.T)
 
     @abstractmethod
     def theta(self) -> float:
+        """
+        Rate of change in option price
+        with respect to time (i.e. time decay).
+        """
         ...
 
     @abstractmethod
     def rho(self) -> float:
+        """Rate of change in option price
+        with respect to the risk-free rate.
+        """
         ...
 
     def vanna(self) -> float:
+        """Sensitivity of delta with respect to change in volatility."""
         return self.vega() / self.F * (1 - self._d1 / (self.sigma * sqrt(self.T)))
 
     def vomma(self) -> float:
+        """2nd order sensitivity to volatility."""
         return self.vega() * self._d1 * self._d2 / self.sigma
+
+    def get_core_greeks(self) -> Dict[str, float]:
+        """
+        Get the top 5 most well known Greeks.
+        1. Delta
+        2. Gamma
+        3. Vega
+        4. Theta
+        5. Rho
+        """
+        return {
+            "delta": self.delta(),
+            "gamma": self.gamma(),
+            "vega": self.vega(),
+            "theta": self.theta(),
+            "rho": self.rho(),
+        }
+
+    def get_all_greeks(self) -> Dict[str, float]:
+        """Retrieve all Greeks for the Black76 model implemented as a dictionary."""
 
     @property
     def _d1(self) -> float:
+        """1st probability factor that acts as a multiplication factor for futures contracts."""
         return (log(self.F / self.K) + 0.5 * self.sigma**2 * self.T) / (
             self.sigma * sqrt(self.T)
         )
 
     @property
     def _d2(self) -> float:
+        """2nd probability parameter that acts as a multiplication factor for discounting."""
         return self._d1 - self.sigma * sqrt(self.T)
 
 
@@ -129,6 +163,7 @@ class BlackScholesBase(ABC, StandardNormalMixin):
 
     @abstractmethod
     def dual_delta(self) -> float:
+        """1st derivative of option price with respect to the strike price."""
         ...
 
     def gamma(self) -> float:
@@ -142,6 +177,9 @@ class BlackScholesBase(ABC, StandardNormalMixin):
         )
 
     def dual_gamma(self) -> float:
+        """
+        Rate of change in delta with respect to the strike price (2nd derivative).
+        """
         return (
             exp(-self.r * self.T)
             * self._pdf(self._d2)
@@ -151,8 +189,6 @@ class BlackScholesBase(ABC, StandardNormalMixin):
     def vega(self) -> float:
         """
         Rate of change in option price with respect to the volatility of the asset.
-
-        NOTE: Vega is the same for calls and puts.
         """
         return self.S * self._pdf(self._d1) * sqrt(self.T)
 
@@ -184,7 +220,7 @@ class BlackScholesBase(ABC, StandardNormalMixin):
         return self.delta() * self.S / self.price()
 
     def vanna(self) -> float:
-        """Sensitivity of delta with respect to change in vol."""
+        """Sensitivity of delta with respect to change in volatility."""
         return -self._pdf(self._d1) * self._d2 / self.sigma
 
     @abstractmethod
@@ -193,7 +229,7 @@ class BlackScholesBase(ABC, StandardNormalMixin):
         ...
 
     def vomma(self) -> float:
-        """2nd order sensitivity to vol."""
+        """2nd order sensitivity to volatility."""
         return self.vega() * self._d1 * self._d2 / self.sigma
 
     def veta(self) -> float:
@@ -225,10 +261,11 @@ class BlackScholesBase(ABC, StandardNormalMixin):
         )
 
     def speed(self) -> float:
+        """Rate of change in Gamma with respect to change in the underlying price."""
         return -self.gamma() / self.S * (self._d1 / (self.sigma * sqrt(self.T)) + 1.0)
 
     def zomma(self) -> float:
-        """Rate of change of gamma with respect to changes in vol."""
+        """Rate of change of gamma with respect to changes in volatility."""
         return self.gamma() * ((self._d1 * self._d2 - 1.0) / self.sigma)
 
     def color(self) -> float:
@@ -284,7 +321,8 @@ class BlackScholesBase(ABC, StandardNormalMixin):
         return {"naive_itm": self.in_the_money(), "dual_delta": self.dual_delta()}
 
     def get_all_greeks(self) -> Dict[str, float]:
-        """Retrieve all Greeks implemented as a dictionary."""
+        """Retrieve all Greeks for the Black-Scholes-Merton model
+        implemented as a dictionary."""
         return {
             "delta": self.delta(),
             "gamma": self.gamma(),
