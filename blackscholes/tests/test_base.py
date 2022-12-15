@@ -1,11 +1,20 @@
-import numpy as np
 import pytest
+import numpy as np
+from scipy.stats import norm
 
-from blackscholes.base import BlackScholesBase
+from blackscholes.base import Black76Base, BlackScholesBase, StandardNormalMixin
+
+
+class TestStandardNormalMixIn:
+    mix = StandardNormalMixin()
+    # PDF and CDF in mixin should be similar to SciPy's standard normal distribution
+    for n in range(-10, 10, 2):
+        np.testing.assert_almost_equal(norm.pdf(n), mix._pdf(n), decimal=5)
+        np.testing.assert_almost_equal(norm.cdf(n), mix._cdf(n), decimal=5)
 
 
 class BlackScholesMeta(BlackScholesBase):
-    """Dummy class for testing base methods."""
+    """Dummy class for testing Black Scholes base methods."""
 
     def __init__(
         self, S: float, K: float, T: float, r: float, sigma: float, q: float = 0.0
@@ -134,3 +143,52 @@ class TestBlackScholesBase:
     def test_ultima(self):
         ultima = self.meta.ultima()
         np.testing.assert_almost_equal(ultima, -827.4229433648609, decimal=6)
+
+
+class Black76Meta(Black76Base):
+    """Dummy class for testing Black76 base methods."""
+
+    def __init__(self, F: float, K: float, T: float, r: float, sigma: float):
+        super().__init__(F=F, K=K, T=T, r=r, sigma=sigma)
+
+    def price(self):
+        ...
+
+    def delta(self):
+        ...
+
+    def theta(self):
+        ...
+
+    def rho(self):
+        ...
+
+
+class TestBlack76Base:
+    test_F = 55.0  # Futures price of 55
+    test_K = 50.0  # Strike price of 50
+    test_T = 1.0  # 1 year to maturity
+    test_r = 0.0025  # 0.25% risk-free rate
+    test_sigma = 0.15  # 15% vol
+    meta = Black76Meta(F=test_F, K=test_K, T=test_T, r=test_r, sigma=test_sigma)
+
+    def test_d(self):
+        # d1 and d2 should be accurate up to at least 6 decimals
+        np.testing.assert_almost_equal(self.meta._d1, 0.7104011986954996, decimal=6)
+        np.testing.assert_almost_equal(self.meta._d2, 0.5604011986954995, decimal=6)
+
+    def test_gamma(self):
+        gamma = self.meta.gamma()
+        np.testing.assert_almost_equal(gamma, 0.03747854417414418, decimal=5)
+
+    def test_vega(self):
+        vega = self.meta.vega()
+        np.testing.assert_almost_equal(vega, 17.00588941901792, decimal=5)
+
+    def test_vanna(self):
+        vanna = self.meta.vanna()
+        np.testing.assert_almost_equal(vanna, -1.1551661594303946, decimal=5)
+
+    def test_vomma(self):
+        vomma = self.meta.vomma()
+        np.testing.assert_almost_equal(vomma, 45.13472833935059, decimal=5)

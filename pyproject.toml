@@ -20,6 +20,7 @@ black = "^22.10.0"
 flake8 = "^6.0.0"
 pre-commit = "^2.20.0"
 numpy = "^1.23.5"
+scipy = "^1.9.3"
 
 [build-system]
 requires = ["poetry-core"]

@@ -19,7 +19,7 @@ class StandardNormalMixin:
         return (1.0 + erf(x / sqrt(2.0))) / 2.0
 
 
-class BlackBase(ABC):
+class Black76Base(ABC, StandardNormalMixin):
     """
     Base functionality to calculate (European) prices
     and Greeks with the Black-76 formula. \n
@@ -56,7 +56,28 @@ class BlackBase(ABC):
         """
         Rate of change in delta with respect to the underlying stock price (2nd derivative).
         """
-        return self.K * exp(-self.r * self.T)
+        return (
+            exp(-self.r * self.T)
+            * self._pdf(self._d1)
+            / (self.F * self.sigma * sqrt(self.T))
+        )
+
+    def vega(self) -> float:
+        return self.F * exp(-self.r * self.T) * self._pdf(self._d1) * sqrt(self.T)
+
+    @abstractmethod
+    def theta(self) -> float:
+        ...
+
+    @abstractmethod
+    def rho(self) -> float:
+        ...
+
+    def vanna(self) -> float:
+        return self.vega() / self.F * (1 - self._d1 / (self.sigma * sqrt(self.T)))
+
+    def vomma(self) -> float:
+        return self.vega() * self._d1 * self._d2 / self.sigma
 
     @property
     def _d1(self) -> float:
