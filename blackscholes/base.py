@@ -3,11 +3,76 @@ from math import erf, exp, log, pi, sqrt
 from typing import Dict
 
 
-class BlackScholesBase(ABC):
+class StandardNormalMixin:
+    """
+    Fast PDF and CDF calculations for standard normal distribution.
+    """
+
+    @staticmethod
+    def _pdf(x: float) -> float:
+        """PDF of standard normal distribution."""
+        return exp(-(x**2) / 2.0) / sqrt(2.0 * pi)
+
+    @staticmethod
+    def _cdf(x):
+        """CDF of standard normal distribution."""
+        return (1.0 + erf(x / sqrt(2.0))) / 2.0
+
+
+class BlackBase(ABC):
     """
     Base functionality to calculate (European) prices
-    and Greeks with the Black-Scholes-Merton formula
-    (without dividends).
+    and Greeks with the Black-76 formula. \n
+    This variant of the Black-Scholes-Merton model is
+    often used for pricing options on futures and bonds.
+
+    :param F: Futures price \n
+    :param K: Strike price \n
+    :param T: Time till expiration in years (1/12 indicates 1 month) \n
+    :param r: Risk-free interest rate (0.05 indicates 5%) \n
+    :param sigma: Volatility (standard deviation) of stock (0.15 indicates 15%) \n
+    """
+
+    def __init__(self, F: float, K: float, T: float, r: float, sigma: float):
+        # Some parameters must be positive
+        for param in [F, K, T, sigma]:
+            assert (
+                param >= 0.0
+            ), f"Some parameters cannot be negative. Got '{param}' as an argument."
+        self.F, self.K, self.T, self.r, self.sigma = F, K, T, r, sigma
+
+    @abstractmethod
+    def price(self):
+        """Fair value for option."""
+        ...
+
+    @abstractmethod
+    def delta(self):
+        """Rate of change in option price
+        with respect to the futures price (1st derivative)."""
+        ...
+
+    def gamma(self) -> float:
+        """
+        Rate of change in delta with respect to the underlying stock price (2nd derivative).
+        """
+        return self.K * exp(-self.r * self.T)
+
+    @property
+    def _d1(self) -> float:
+        return (log(self.F / self.K) + 0.5 * self.sigma**2 * self.T) / (
+            self.sigma * sqrt(self.T)
+        )
+
+    @property
+    def _d2(self) -> float:
+        return self._d1 - self.sigma * sqrt(self.T)
+
+
+class BlackScholesBase(ABC, StandardNormalMixin):
+    """
+    Base functionality to calculate (European) prices
+    and Greeks with the Black-Scholes-Merton formula.
 
     :param S: Price of underlying asset \n
     :param K: Strike price \n
@@ -27,7 +92,7 @@ class BlackScholesBase(ABC):
 
     @abstractmethod
     def price(self) -> float:
-        """Price for option."""
+        """Fair value for option."""
         ...
 
     @abstractmethod
@@ -48,7 +113,6 @@ class BlackScholesBase(ABC):
     def gamma(self) -> float:
         """
         Rate of change in delta with respect to the underlying stock price (2nd derivative).
-        NOTE: Gamma is the same for calls and puts.
         """
         return (
             exp(-self.q * self.T)
@@ -225,20 +289,10 @@ class BlackScholesBase(ABC):
     def _d1(self) -> float:
         """1st probability factor that acts as a multiplication factor for stock prices."""
         return (1.0 / (self.sigma * sqrt(self.T))) * (
-            log(self.S / self.K) + (self.r + self.sigma**2 / 2.0) * self.T
+            log(self.S / self.K) + (self.r - self.q + 0.5 * self.sigma**2) * self.T
         )
 
     @property
     def _d2(self) -> float:
         """2nd probability parameter that acts as a multiplication factor for discounting."""
         return self._d1 - self.sigma * sqrt(self.T)
-
-    @staticmethod
-    def _pdf(x: float) -> float:
-        """PDF of standard normal distribution."""
-        return exp(-(x**2) / 2.0) / sqrt(2.0 * pi)
-
-    @staticmethod
-    def _cdf(x):
-        """CDF of standard normal distribution."""
-        return (1.0 + erf(x / sqrt(2.0))) / 2.0
