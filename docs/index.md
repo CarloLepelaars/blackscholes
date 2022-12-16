@@ -6,15 +6,17 @@
 
 [2. Price calculation](https://carlolepelaars.github.io/blackscholes/2.price)
 
-[3. All Greeks](https://carlolepelaars.github.io/blackscholes/3.the_greeks)
+[3. The Greeks (Black-Scholes)](https://carlolepelaars.github.io/blackscholes/3.the_greeks_blackscholes)
 
-[4. In-the-money proxies](https://carlolepelaars.github.io/blackscholes/4.itm)
+[4. The Greeks (Black-76)](https://carlolepelaars.github.io/blackscholes/4.the_greeks_black76)
 
-[5. Contribution guide](https://carlolepelaars.github.io/blackscholes/5.contributing)
+[5. In-the-money proxies](https://carlolepelaars.github.io/blackscholes/5.itm)
 
-[6. Source Code References](https://carlolepelaars.github.io/blackscholes/6.references)
+[6. Contribution guide](https://carlolepelaars.github.io/blackscholes/6.contributing)
 
-[7. Disclaimer](https://carlolepelaars.github.io/blackscholes/7.disclaimer)
+[7. Source Code References](https://carlolepelaars.github.io/blackscholes/7.references)
+
+[8. Disclaimer](https://carlolepelaars.github.io/blackscholes/8.disclaimer)
 
 Black Scholes calculator for Python including all Greeks.
 
