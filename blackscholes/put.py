@@ -83,11 +83,16 @@ class Black76Put(Black76Base):
         super().__init__(F=F, K=K, T=T, r=r, sigma=sigma)
 
     def price(self) -> float:
+        """Fair value of a Black-76 put option."""
         return exp(-self.r * self.T) * (
             self.K * self._cdf(-self._d2) - self.F * self._cdf(-self._d1)
         )
 
     def delta(self) -> float:
+        """Rate of change in option price
+        with respect to the underlying futures price (1st derivative).
+        Proxy for probability of the option expiring in the money.
+        """
         return -exp(-self.r * self.T) * self._cdf(-self._d1)
 
     def theta(self) -> float:

@@ -142,6 +142,11 @@ class BlackScholesBase(ABC, StandardNormalMixin):
         )
 
     def phi(self) -> float:
+        """2nd order partial derivative with respect to strike price. \n
+        Phi is used in the Breeden-Litzenberger formula. \n
+        Breeden-Litzenberger uses quoted option prices
+        to estimate risk-neutral probabilities.
+        """
         sigma2 = self.sigma**2
         exp_factor = (
             -1.0

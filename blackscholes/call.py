@@ -94,7 +94,7 @@ class Black76Call(Black76Base):
         super().__init__(F=F, K=K, T=T, r=r, sigma=sigma)
 
     def price(self) -> float:
-        """Fair value of Black-76 call option."""
+        """Fair value of a Black-76 call option."""
         return exp(-self.r * self.T) * (
             self.F * self._cdf(self._d1) - self.K * self._cdf(self._d2)
         )
