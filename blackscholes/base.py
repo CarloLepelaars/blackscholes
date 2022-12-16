@@ -19,111 +19,6 @@ class StandardNormalMixin:
         return (1.0 + erf(x / sqrt(2.0))) / 2.0
 
 
-class Black76Base(ABC, StandardNormalMixin):
-    """
-    Base functionality to calculate (European) prices
-    and Greeks with the Black-76 formula. \n
-    This variant of the Black-Scholes-Merton model is
-    often used for pricing options on futures and bonds.
-
-    :param F: Futures price \n
-    :param K: Strike price \n
-    :param T: Time till expiration in years (1/12 indicates 1 month) \n
-    :param r: Risk-free interest rate (0.05 indicates 5%) \n
-    :param sigma: Volatility (standard deviation) of stock (0.15 indicates 15%) \n
-    """
-
-    def __init__(self, F: float, K: float, T: float, r: float, sigma: float):
-        # Some parameters must be positive
-        for param in [F, K, T, sigma]:
-            assert (
-                param >= 0.0
-            ), f"Some parameters cannot be negative. Got '{param}' as an argument."
-        self.F, self.K, self.T, self.r, self.sigma = F, K, T, r, sigma
-
-    @abstractmethod
-    def price(self):
-        """Fair value for option."""
-        ...
-
-    @abstractmethod
-    def delta(self):
-        """Rate of change in option price
-        with respect to the futures price (1st derivative)."""
-        ...
-
-    def gamma(self) -> float:
-        """
-        Rate of change in delta with respect to the underlying stock price (2nd derivative).
-        """
-        return (
-            exp(-self.r * self.T)
-            * self._pdf(self._d1)
-            / (self.F * self.sigma * sqrt(self.T))
-        )
-
-    def vega(self) -> float:
-        """Rate of change in option price with respect to the volatility
-        of underlying futures contract.
-        """
-        return self.F * exp(-self.r * self.T) * self._pdf(self._d1) * sqrt(self.T)
-
-    @abstractmethod
-    def theta(self) -> float:
-        """
-        Rate of change in option price
-        with respect to time (i.e. time decay).
-        """
-        ...
-
-    @abstractmethod
-    def rho(self) -> float:
-        """Rate of change in option price
-        with respect to the risk-free rate.
-        """
-        ...
-
-    def vanna(self) -> float:
-        """Sensitivity of delta with respect to change in volatility."""
-        return self.vega() / self.F * (1 - self._d1 / (self.sigma * sqrt(self.T)))
-
-    def vomma(self) -> float:
-        """2nd order sensitivity to volatility."""
-        return self.vega() * self._d1 * self._d2 / self.sigma
-
-    def get_core_greeks(self) -> Dict[str, float]:
-        """
-        Get the top 5 most well known Greeks.
-        1. Delta
-        2. Gamma
-        3. Vega
-        4. Theta
-        5. Rho
-        """
-        return {
-            "delta": self.delta(),
-            "gamma": self.gamma(),
-            "vega": self.vega(),
-            "theta": self.theta(),
-            "rho": self.rho(),
-        }
-
-    def get_all_greeks(self) -> Dict[str, float]:
-        """Retrieve all Greeks for the Black76 model implemented as a dictionary."""
-
-    @property
-    def _d1(self) -> float:
-        """1st probability factor that acts as a multiplication factor for futures contracts."""
-        return (log(self.F / self.K) + 0.5 * self.sigma**2 * self.T) / (
-            self.sigma * sqrt(self.T)
-        )
-
-    @property
-    def _d2(self) -> float:
-        """2nd probability parameter that acts as a multiplication factor for discounting."""
-        return self._d1 - self.sigma * sqrt(self.T)
-
-
 class BlackScholesBase(ABC, StandardNormalMixin):
     """
     Base functionality to calculate (European) prices
@@ -349,6 +244,120 @@ class BlackScholesBase(ABC, StandardNormalMixin):
         """1st probability factor that acts as a multiplication factor for stock prices."""
         return (1.0 / (self.sigma * sqrt(self.T))) * (
             log(self.S / self.K) + (self.r - self.q + 0.5 * self.sigma**2) * self.T
+        )
+
+    @property
+    def _d2(self) -> float:
+        """2nd probability parameter that acts as a multiplication factor for discounting."""
+        return self._d1 - self.sigma * sqrt(self.T)
+
+
+class Black76Base(ABC, StandardNormalMixin):
+    """
+    Base functionality to calculate (European) prices
+    and Greeks with the Black-76 formula. \n
+    This variant of the Black-Scholes-Merton model is
+    often used for pricing options on futures and bonds.
+
+    :param F: Futures price \n
+    :param K: Strike price \n
+    :param T: Time till expiration in years (1/12 indicates 1 month) \n
+    :param r: Risk-free interest rate (0.05 indicates 5%) \n
+    :param sigma: Volatility (standard deviation) of stock (0.15 indicates 15%) \n
+    """
+
+    def __init__(self, F: float, K: float, T: float, r: float, sigma: float):
+        # Some parameters must be positive
+        for param in [F, K, T, sigma]:
+            assert (
+                param >= 0.0
+            ), f"Some parameters cannot be negative. Got '{param}' as an argument."
+        self.F, self.K, self.T, self.r, self.sigma = F, K, T, r, sigma
+
+    @abstractmethod
+    def price(self):
+        """Fair value for option."""
+        ...
+
+    @abstractmethod
+    def delta(self):
+        """Rate of change in option price
+        with respect to the futures price (1st derivative)."""
+        ...
+
+    def gamma(self) -> float:
+        """
+        Rate of change in delta with respect to the underlying stock price (2nd derivative).
+        """
+        return (
+            exp(-self.r * self.T)
+            * self._pdf(self._d1)
+            / (self.F * self.sigma * sqrt(self.T))
+        )
+
+    def vega(self) -> float:
+        """Rate of change in option price with respect to the volatility
+        of underlying futures contract.
+        """
+        return self.F * exp(-self.r * self.T) * self._pdf(self._d1) * sqrt(self.T)
+
+    @abstractmethod
+    def theta(self) -> float:
+        """
+        Rate of change in option price
+        with respect to time (i.e. time decay).
+        """
+        ...
+
+    @abstractmethod
+    def rho(self) -> float:
+        """Rate of change in option price
+        with respect to the risk-free rate.
+        """
+        ...
+
+    def vanna(self) -> float:
+        """Sensitivity of delta with respect to change in volatility."""
+        return self.vega() / self.F * (1 - self._d1 / (self.sigma * sqrt(self.T)))
+
+    def vomma(self) -> float:
+        """2nd order sensitivity to volatility."""
+        return self.vega() * self._d1 * self._d2 / self.sigma
+
+    def get_core_greeks(self) -> Dict[str, float]:
+        """
+        Get the top 5 most well known Greeks.
+        1. Delta
+        2. Gamma
+        3. Vega
+        4. Theta
+        5. Rho
+        """
+        return {
+            "delta": self.delta(),
+            "gamma": self.gamma(),
+            "vega": self.vega(),
+            "theta": self.theta(),
+            "rho": self.rho(),
+        }
+
+    def get_all_greeks(self) -> Dict[str, float]:
+        """Retrieve all Greeks for the Black76 model implemented as a dictionary."""
+        return {
+            "delta": self.delta(),
+            "gamma": self.gamma(),
+            "vega": self.vega(),
+            "theta": self.theta(),
+            "rho": self.rho(),
+            "vanna": self.vanna(),
+            "vomma": self.vomma(),
+        }
+
+    @property
+    def _d1(self) -> float:
+        """1st probability factor that acts as a multiplication factor for futures contracts."""
+        return (log(self.F / self.K) + 0.5 * self.sigma**2 * self.T) / (
+            self.sigma * sqrt(self.T)
         )
 
     @property

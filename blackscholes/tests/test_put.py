@@ -8,8 +8,6 @@ test_T = 1.0  # 1 year to maturity
 test_r = 0.0025  # 0.25% risk-free rate
 test_sigma = 0.15  # 15% vol
 
-test_F = 55.0  # Futures price of 55
-
 
 class TestBlackScholesPut:
     put = BlackScholesPut(S=test_S, K=test_K, T=test_T, r=test_r, sigma=test_sigma)
@@ -125,5 +123,63 @@ class TestBlackScholesPut:
 
 
 class TestBlack76Put:
-    put = Black76Put(F=test_F, K=test_K, T=test_T, r=test_r, sigma=test_sigma)
-    call = Black76Call(F=test_F, K=test_K, T=test_T, r=test_r, sigma=test_sigma)
+    put = Black76Put(F=test_S, K=test_K, T=test_T, r=test_r, sigma=test_sigma)
+
+    def test_price(self):
+        price = self.put.price()
+        np.testing.assert_almost_equal(price, 1.2470010007171901, decimal=6)
+
+    def test_delta(self):
+        delta = self.put.delta()
+        np.testing.assert_almost_equal(delta, -0.23813161620464113, decimal=5)
+
+        # Due to put-call parity, Call delta - Put delta should be 1.
+        call = Black76Call(
+            F=test_S,
+            K=test_K,
+            T=test_T,
+            r=test_r,
+            sigma=test_sigma,
+        )
+        np.testing.assert_almost_equal(call.delta() - delta, 1.0, decimal=2)
+
+    def test_theta(self):
+        theta = self.put.theta()
+        np.testing.assert_almost_equal(theta, -1.272324203924551, decimal=5)
+
+    def test_rho(self):
+        rho = self.put.rho()
+        np.testing.assert_almost_equal(rho, -1.2470010007171901, decimal=5)
+
+    def test_get_core_greeks(self):
+        core_greeks = self.put.get_core_greeks()
+        expected_result = {
+            "delta": -0.23813161620464113,
+            "gamma": 0.03747854417414418,
+            "vega": 17.00588941901792,
+            "theta": -1.272324203924551,
+            "rho": -1.2470010007171901,
+        }
+        assert set(core_greeks.keys()) == set(expected_result.keys())
+        for key in expected_result.keys():
+            np.testing.assert_almost_equal(
+                core_greeks[key], expected_result[key], decimal=5
+            )
+
+    def test_all_greeks(self):
+        all_greeks = self.put.get_all_greeks()
+        expected_result = {
+            "delta": -0.23813161620464113,
+            "gamma": 0.03747854417414418,
+            "vega": 17.00588941901792,
+            "theta": -1.272324203924551,
+            "rho": -1.2470010007171901,
+            "vanna": -1.1551661594303946,
+            "vomma": 45.13472833935059,
+        }
+
+        assert set(all_greeks.keys()) == set(expected_result.keys())
+        for key in expected_result.keys():
+            np.testing.assert_almost_equal(
+                all_greeks[key], expected_result[key], decimal=5
+            )

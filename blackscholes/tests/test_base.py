@@ -4,6 +4,12 @@ from scipy.stats import norm
 
 from blackscholes.base import Black76Base, BlackScholesBase, StandardNormalMixin
 
+test_S = 55.0  # Asset price of 55
+test_K = 50.0  # Strike price of 50
+test_T = 1.0  # 1 year to maturity
+test_r = 0.0025  # 0.25% risk-free rate
+test_sigma = 0.15  # 15% vol
+
 
 class TestStandardNormalMixIn:
     mix = StandardNormalMixin()
@@ -47,52 +53,47 @@ class BlackScholesMeta(BlackScholesBase):
 
 
 class TestBlackScholesBase:
-    test_S = 55.0  # Asset price of 55
-    test_K = 50.0  # Strike price of 50
-    test_T = 1.0  # 1 year to maturity
-    test_r = 0.0025  # 0.25% risk-free rate
-    test_sigma = 0.15  # 15% vol
     meta = BlackScholesMeta(S=test_S, K=test_K, T=test_T, r=test_r, sigma=test_sigma)
 
     def test_arg_assert(self):
         # Should not be able to initialize if S, K, T, or sigma is negative.
         with pytest.raises(AssertionError):
             BlackScholesMeta(
-                S=-self.test_S,
-                K=self.test_K,
-                T=self.test_T,
-                r=self.test_r,
-                sigma=self.test_sigma,
+                S=-test_S,
+                K=test_K,
+                T=test_T,
+                r=test_r,
+                sigma=test_sigma,
             )
             BlackScholesMeta(
-                S=self.test_S,
-                K=-self.test_K,
-                T=self.test_T,
-                r=self.test_r,
-                sigma=self.test_sigma,
+                S=test_S,
+                K=-test_K,
+                T=test_T,
+                r=test_r,
+                sigma=test_sigma,
             )
             BlackScholesMeta(
-                S=-self.test_S,
-                K=self.test_K,
-                T=-self.test_T,
-                r=self.test_r,
-                sigma=self.test_sigma,
+                S=-test_S,
+                K=test_K,
+                T=-test_T,
+                r=test_r,
+                sigma=test_sigma,
             )
             BlackScholesMeta(
-                S=self.test_S,
-                K=self.test_K,
-                T=self.test_T,
-                r=self.test_r,
-                sigma=-self.test_sigma,
+                S=test_S,
+                K=test_K,
+                T=test_T,
+                r=test_r,
+                sigma=-test_sigma,
             )
 
         # Initializing with negative r (interest rate) is possible.
         BlackScholesMeta(
-            S=self.test_S,
-            K=self.test_K,
-            T=self.test_T,
-            r=-self.test_r,
-            sigma=self.test_sigma,
+            S=test_S,
+            K=test_K,
+            T=test_T,
+            r=-test_r,
+            sigma=test_sigma,
         )
 
     def test_d(self):
@@ -165,12 +166,48 @@ class Black76Meta(Black76Base):
 
 
 class TestBlack76Base:
-    test_F = 55.0  # Futures price of 55
-    test_K = 50.0  # Strike price of 50
-    test_T = 1.0  # 1 year to maturity
-    test_r = 0.0025  # 0.25% risk-free rate
-    test_sigma = 0.15  # 15% vol
-    meta = Black76Meta(F=test_F, K=test_K, T=test_T, r=test_r, sigma=test_sigma)
+    meta = Black76Meta(F=test_S, K=test_K, T=test_T, r=test_r, sigma=test_sigma)
+
+    def test_arg_assert(self):
+        # Should not be able to initialize if F, K, T, or sigma is negative.
+        with pytest.raises(AssertionError):
+            Black76Meta(
+                F=-test_S,
+                K=test_K,
+                T=test_T,
+                r=test_r,
+                sigma=test_sigma,
+            )
+            Black76Meta(
+                F=test_S,
+                K=-test_K,
+                T=test_T,
+                r=test_r,
+                sigma=test_sigma,
+            )
+            Black76Meta(
+                F=-test_S,
+                K=test_K,
+                T=-test_T,
+                r=test_r,
+                sigma=test_sigma,
+            )
+            Black76Meta(
+                F=test_S,
+                K=test_K,
+                T=test_T,
+                r=test_r,
+                sigma=-test_sigma,
+            )
+
+        # Initializing with negative r (interest rate) is possible.
+        Black76Meta(
+            F=test_S,
+            K=test_K,
+            T=test_T,
+            r=-test_r,
+            sigma=test_sigma,
+        )
 
     def test_d(self):
         # d1 and d2 should be accurate up to at least 6 decimals

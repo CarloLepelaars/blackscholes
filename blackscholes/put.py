@@ -6,8 +6,7 @@ from .base import Black76Base, BlackScholesBase
 class BlackScholesPut(BlackScholesBase):
     """
     Class to calculate (European) call option prices
-    and Greeks with the Black-Scholes-Merton formula
-    (without dividends).
+    and Greeks with the Black-Scholes-Merton formula.
 
     :param S: Price of underlying asset \n
     :param K: Strike price \n
@@ -22,26 +21,26 @@ class BlackScholesPut(BlackScholesBase):
     ):
         super().__init__(S=S, K=K, T=T, r=r, sigma=sigma, q=q)
 
-    def price(self):
-        """Price of a put option."""
+    def price(self) -> float:
+        """Fair value of a Black-Scholes put option."""
         return self._cdf(-self._d2) * self.K * exp(-self.r * self.T) - self.S * exp(
             -self.q * self.T
         ) * self._cdf(-self._d1)
 
-    def delta(self):
+    def delta(self) -> float:
         """
         Rate of change in option price
         with respect to the asset price (1st derivative).
         """
         return -exp(-self.q * self.T) * self._cdf(-self._d1)
 
-    def dual_delta(self):
+    def dual_delta(self) -> float:
         """1st derivative in option price
         with respect to strike price.
         """
         return exp(-self.r * self.T) * self._cdf(-self._d2)
 
-    def theta(self):
+    def theta(self) -> float:
         """Rate of change in option price
         with respect to time (i.e. time decay).
         """
@@ -74,7 +73,7 @@ class BlackScholesPut(BlackScholesBase):
             2.0 * self.T * self.sigma * sqrt(self.T)
         )
 
-    def in_the_money(self):
+    def in_the_money(self) -> float:
         """Naive Probability that put option will be in the money at maturity."""
         return 1.0 - self._cdf(self._d2)
 
@@ -83,14 +82,34 @@ class Black76Put(Black76Base):
     def __init__(self, F: float, K: float, T: float, r: float, sigma: float):
         super().__init__(F=F, K=K, T=T, r=r, sigma=sigma)
 
-    def price(self):
-        ...
+    def price(self) -> float:
+        return exp(-self.r * self.T) * (
+            self.K * self._cdf(-self._d2) - self.F * self._cdf(-self._d1)
+        )
 
-    def delta(self):
-        ...
+    def delta(self) -> float:
+        return -exp(-self.r * self.T) * self._cdf(-self._d1)
 
-    def theta(self):
-        ...
+    def theta(self) -> float:
+        """Rate of change in option price
+        with respect to time (i.e. time decay).
+        """
+        return (
+            -self.F
+            * exp(-self.r * self.T)
+            * self._pdf(self._d1)
+            * self.sigma
+            / (2 * sqrt(self.T))
+            + self.r * self.K * exp(-self.r * self.T) * self._cdf(-self._d2)
+            - self.r * self.F * exp(-self.r * self.T) * self._cdf(-self._d1)
+        )
 
-    def rho(self):
-        ...
+    def rho(self) -> float:
+        """Rate of change in option price
+        with respect to the risk-free rate.
+        """
+        return (
+            -self.T
+            * exp(-self.r * self.T)
+            * (self.K * self._cdf(-self._d2) - self.F * self._cdf(-self._d1))
+        )
