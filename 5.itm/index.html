@@ -13,7 +13,7 @@
     
     
       
-        <title>4. In-The-Money proxies - blackscholes</title>
+        <title>5. In-The-Money proxies - blackscholes</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#4-in-the-money-proxies" class="md-skip">
+        <a href="#5-in-the-money-proxies" class="md-skip">
           Skip to content
         </a>
       
@@ -103,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              4. In-The-Money proxies
+              5. In-The-Money proxies
             
           </span>
         </div>
@@ -163,8 +163,20 @@
 
 
   <li class="md-tabs__item">
-    <a href="../3.the_greeks/" class="md-tabs__link">
-      3. The Greeks
+    <a href="../3.the_greeks_blackscholes/" class="md-tabs__link">
+      3. The Greeks (Black-Scholes)
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../4.the_greeks_black76/" class="md-tabs__link">
+      4. The Greeks (Black-76)
     </a>
   </li>
 
@@ -178,7 +190,7 @@
 
   <li class="md-tabs__item">
     <a href="./" class="md-tabs__link md-tabs__link--active">
-      4. In-The-Money proxies
+      5. In-The-Money proxies
     </a>
   </li>
 
@@ -189,8 +201,8 @@
 
 
   <li class="md-tabs__item">
-    <a href="../5.contributing/" class="md-tabs__link">
-      5. Contributing
+    <a href="../6.contributing/" class="md-tabs__link">
+      6. Contributing
     </a>
   </li>
 
@@ -201,8 +213,8 @@
 
 
   <li class="md-tabs__item">
-    <a href="../6.references/" class="md-tabs__link">
-      6. Source Code References
+    <a href="../7.references/" class="md-tabs__link">
+      7. Source Code References
     </a>
   </li>
 
@@ -213,8 +225,8 @@
 
 
   <li class="md-tabs__item">
-    <a href="../7.disclaimer/" class="md-tabs__link">
-      7. Disclaimer
+    <a href="../8.disclaimer/" class="md-tabs__link">
+      8. Disclaimer
     </a>
   </li>
 
@@ -310,8 +322,23 @@
   
   
     <li class="md-nav__item">
-      <a href="../3.the_greeks/" class="md-nav__link">
-        3. The Greeks
+      <a href="../3.the_greeks_blackscholes/" class="md-nav__link">
+        3. The Greeks (Black-Scholes)
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.the_greeks_black76/" class="md-nav__link">
+        4. The Greeks (Black-76)
       </a>
     </li>
   
@@ -335,12 +362,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          4. In-The-Money proxies
+          5. In-The-Money proxies
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        4. In-The-Money proxies
+        5. In-The-Money proxies
       </a>
       
         
@@ -475,8 +502,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../5.contributing/" class="md-nav__link">
-        5. Contributing
+      <a href="../6.contributing/" class="md-nav__link">
+        6. Contributing
       </a>
     </li>
   
@@ -490,8 +517,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../6.references/" class="md-nav__link">
-        6. Source Code References
+      <a href="../7.references/" class="md-nav__link">
+        7. Source Code References
       </a>
     </li>
   
@@ -505,8 +532,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../7.disclaimer/" class="md-nav__link">
-        7. Disclaimer
+      <a href="../8.disclaimer/" class="md-nav__link">
+        8. Disclaimer
       </a>
     </li>
   
@@ -654,7 +681,7 @@
                   
 
 
-<h1 id="4-in-the-money-proxies">4. In-The-Money proxies</h1>
+<h1 id="5-in-the-money-proxies">5. In-The-Money proxies</h1>
 <script src="//yihui.org/js/math-code.js" defer></script>
 <!-- Just one possible MathJax CDN below. You may use others. -->
 <script defer
@@ -663,7 +690,7 @@
 
 <p>There are currently two ways to 
 estimate the probability of an option being
-"in-the-money" in <code>blackscholes</code>.</p>
+"in-the-money" in using the <a href="https://en.wikipedia.org/wiki/Black%E2%80%93Scholes_model">Black-Scholes-Merton model</a>.</p>
 <ol>
 <li><a href="#itm">Naive estimate</a></li>
 <li><a href="#dual-delta">Through <code>dual_delta</code></a></li>
@@ -672,8 +699,9 @@ estimate the probability of an option being
 <p>Reference of all symbols that are used in the formulas:</p>
 <p><code>$T$</code> = Time to maturity (in years)</p>
 <p><code>$r$</code> = Risk-free rate</p>
+<p><code>$q$</code> = Annual dividend yield</p>
 <p><code>$\Phi(.)$</code> = Cumulative Density Function (CDF) of  <code>$\mathcal{N}(0, 1)$</code></p>
-<p><code>$d_1 = \frac{ln(\frac{S}{K}) + (r+\frac{1}{2}\sigma^2)T}{\sigma\sqrt{T}}$</code></p>
+<p><code>$d_1 = \frac{ln(\frac{S}{K}) + (r - q + \frac{1}{2}\sigma^2)T}{\sigma\sqrt{T}}$</code></p>
 <p><code>$d_2 = d_1 - \sigma\sqrt{T}$</code></p>
 <h2 id="1-naive-estimate">1. Naive estimate <a name="itm"></a></h2>
 <p>There is a parity between this estimate for calls and puts. 
@@ -692,9 +720,9 @@ In other words, the estimate of a call plus that of a put with same input parame
 
       <details class="quote">
         <summary>Source code in <code>blackscholes/call.py</code></summary>
-        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">in_the_money</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">in_the_money</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Naive Probability that call option will be in the money at maturity.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -715,9 +743,9 @@ In other words, the estimate of a call plus that of a put with same input parame
 
       <details class="quote">
         <summary>Source code in <code>blackscholes/put.py</code></summary>
-        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">in_the_money</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">in_the_money</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Naive Probability that put option will be in the money at maturity.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -744,11 +772,11 @@ with respect to strike price.</p>
 
       <details class="quote">
         <summary>Source code in <code>blackscholes/call.py</code></summary>
-        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">39</span>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">38</span>
+<span class="normal">39</span>
 <span class="normal">40</span>
 <span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">dual_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">42</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">dual_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;1st derivative in option price</span>
 <span class="sd">    with respect to strike price.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -772,11 +800,11 @@ with respect to strike price.</p>
 
       <details class="quote">
         <summary>Source code in <code>blackscholes/put.py</code></summary>
-        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">38</span>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">37</span>
+<span class="normal">38</span>
 <span class="normal">39</span>
 <span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">dual_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">41</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">dual_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;1st derivative in option price</span>
 <span class="sd">    with respect to strike price.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -811,7 +839,7 @@ with respect to strike price.</p>
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href="../3.the_greeks/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 3. The Greeks" rel="prev">
+        <a href="../4.the_greeks_black76/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 4. The Greeks (Black-76)" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -820,20 +848,20 @@ with respect to strike price.</p>
               <span class="md-footer__direction">
                 Previous
               </span>
-              3. The Greeks
+              4. The Greeks (Black-76)
             </div>
           </div>
         </a>
       
       
         
-        <a href="../5.contributing/" class="md-footer__link md-footer__link--next" aria-label="Next: 5. Contributing" rel="next">
+        <a href="../6.contributing/" class="md-footer__link md-footer__link--next" aria-label="Next: 6. Contributing" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              5. Contributing
+              6. Contributing
             </div>
           </div>
           <div class="md-footer__button md-icon">
