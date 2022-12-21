@@ -80,7 +80,7 @@ class TestBlackScholesPut:
     def test_get_itm_proxies(self):
         itm_proxies = self.put.get_itm_proxies()
         expected_result = {
-            "naive_itm": 0.2819468056232066,
+            "in_the_money": 0.2819468056232066,
             "dual_delta": 0.2812428189591384,
         }
         assert set(itm_proxies.keys()) == set(expected_result.keys())
@@ -103,7 +103,7 @@ class TestBlackScholesPut:
             "theta": -1.2282536767758119,
             "epsilon": 12.84757053197959,
             "rho": -14.062140947956918,
-            "lambda": -10.57787211261979,
+            "lambda_greek": -10.57787211261979,
             "vanna": -1.178299396409533,
             "charm": 0.0832677717846717,
             "vomma": 47.11869947977544,

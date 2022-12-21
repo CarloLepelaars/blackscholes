@@ -42,7 +42,7 @@ class BlackScholesBase(ABC, StandardNormalMixin):
 
     @abstractmethod
     def price(self) -> float:
-        """Fair value for option."""
+        """Fair str_method for option."""
         ...
 
     @abstractmethod
@@ -109,7 +109,7 @@ class BlackScholesBase(ABC, StandardNormalMixin):
         ...
 
     def lambda_greek(self) -> float:
-        """Percentage change in option value per %
+        """Percentage change in option str_method per %
         change in asset price. Also called gearing.
         """
         return self.delta() * self.S / self.price()
@@ -188,7 +188,7 @@ class BlackScholesBase(ABC, StandardNormalMixin):
 
     def ultima(self) -> float:
         """Sensitivity of vomma with respect to change in vol.
-        3rd order derivative of option value to vol.
+        3rd order derivative of option str_method to vol.
         """
         d1d2 = self._d1 * self._d2
         return (
@@ -218,7 +218,7 @@ class BlackScholesBase(ABC, StandardNormalMixin):
         """Get multiple ways of calculating probability
         of option being in the money.
         """
-        return {"naive_itm": self.in_the_money(), "dual_delta": self.dual_delta()}
+        return {"in_the_money": self.in_the_money(), "dual_delta": self.dual_delta()}
 
     def get_all_greeks(self) -> Dict[str, float]:
         """Retrieve all Greeks for the Black-Scholes-Merton model
@@ -230,7 +230,7 @@ class BlackScholesBase(ABC, StandardNormalMixin):
             "theta": self.theta(),
             "epsilon": self.epsilon(),
             "rho": self.rho(),
-            "lambda": self.lambda_greek(),
+            "lambda_greek": self.lambda_greek(),
             "vanna": self.vanna(),
             "charm": self.charm(),
             "vomma": self.vomma(),
@@ -281,7 +281,7 @@ class Black76Base(ABC, StandardNormalMixin):
 
     @abstractmethod
     def price(self):
-        """Fair value for option."""
+        """Fair str_method for option."""
         ...
 
     @abstractmethod

@@ -76,7 +76,7 @@ class TestBlackScholesCall:
     def test_get_itm_proxies(self):
         itm_proxies = self.call.get_itm_proxies()
         expected_result = {
-            "naive_itm": 0.7180531943767934,
+            "in_the_money": 0.7180531943767934,
             "dual_delta": 0.7162603034383217,
         }
         assert set(itm_proxies.keys()) == set(expected_result.keys())
@@ -117,7 +117,7 @@ class TestBlackScholesCall:
             "theta": -1.3529415670754943,
             "epsilon": -42.15242946802041,
             "rho": 35.813015171916085,
-            "lambda": 6.6492624553539255,
+            "lambda_greek": 6.6492624553539255,
             "vanna": -1.178299396409533,
             "charm": 0.0832677717846717,
             "vomma": 47.11869947977544,

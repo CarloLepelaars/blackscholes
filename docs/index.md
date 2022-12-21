@@ -14,9 +14,11 @@
 
 [6. Contribution guide](https://carlolepelaars.github.io/blackscholes/6.contributing)
 
-[7. Source Code References](https://carlolepelaars.github.io/blackscholes/7.references)
+[7. Option Structures](https://carlolepelaars.github.io/blackscholes/7.option_structures)
 
-[8. Disclaimer](https://carlolepelaars.github.io/blackscholes/8.disclaimer)
+[8. Source Code References](https://carlolepelaars.github.io/blackscholes/8.references)
+
+[9. Disclaimer](https://carlolepelaars.github.io/blackscholes/9.disclaimer)
 
 Black Scholes calculator for Python including all Greeks.
 
