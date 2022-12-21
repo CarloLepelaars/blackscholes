@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, Dict
 
 from . import BlackScholesCall, BlackScholesPut
 
@@ -44,13 +44,26 @@ class BlackScholesStraddle:
         for str_method in self.methods:
             setattr(self, str_method, self._compound_func(str_method))
 
-    def get_core_greeks(self) -> dict:
+    def get_core_greeks(self) -> Dict[str, float]:
+        """
+        Get the top 5 most well known Greeks for the straddle.
+        1. Delta
+        2. Gamma
+        3. Vega
+        4. Theta
+        5. Rho
+        """
         return self.__compound_dict("get_core_greeks")
 
-    def get_all_greeks(self) -> dict:
+    def get_all_greeks(self) -> Dict[str, float]:
+        """Retrieve all Greeks for the straddle
+        implemented as a dictionary."""
         return self.__compound_dict("get_all_greeks")
 
-    def get_itm_proxies(self) -> dict:
+    def get_itm_proxies(self) -> Dict[str, float]:
+        """Get multiple ways of calculating probability
+        of straddle being in the money.
+        """
         return self.__compound_dict("get_itm_proxies")
 
     def _compound_func(self, str_method: str) -> Callable:
@@ -70,8 +83,15 @@ class BlackScholesStraddle:
             func = lambda: -put_attr - call_attr  # noqa
         return func
 
-    def __compound_dict(self, str_method: str) -> dict:
-        d = {}
-        for func in getattr(self.call, str_method)().keys():
-            d[func] = self._compound_func(func)()
-        return d
+    def __compound_dict(self, str_method: str) -> Dict[str, float]:
+        """
+        Merge two dictionaries to create compounds for the straddle.
+
+        :param str_method: String pointing to method. \n
+        Method should be available in the call and put. \n
+        :return: Dictionary compounding values from call and put.
+        """
+        return {
+            func: self._compound_func(func)()
+            for func in getattr(self.call, str_method)().keys()
+        }
