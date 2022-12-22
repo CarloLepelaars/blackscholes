@@ -46,5 +46,6 @@ put.charm()  ## 0.083267
 We very much welcome new contributions! Check out the [Github Issues](https://github.com/CarloLepelaars/blackscholes/issues)
 to see what is currently being worked on.
 
-Also check out [5. Contributing](https://carlolepelaars.github.io/blackscholes/5.contributing/) in the documentation to learn more about 
+Also check out [6. Contributing](https://carlolepelaars.github.io/blackscholes/6.contributing/) in the documentation 
+to learn more about 
 contributing to [blackscholes](https://github.com/CarloLepelaars/blackscholes).
