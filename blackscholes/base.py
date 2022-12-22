@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from math import erf, exp, log, pi, sqrt
-from typing import Dict
+from typing import Dict, Callable
 
 
 class StandardNormalMixin:
@@ -33,11 +33,14 @@ class BlackScholesBase(ABC, StandardNormalMixin):
     """
 
     def __init__(self, S: float, K: float, T: float, r: float, sigma: float, q: float):
-        # Some parameters must be positive
-        for param in [S, K, T, sigma, q]:
-            assert (
-                param >= 0.0
-            ), f"Some parameters cannot be negative. Got '{param}' as an argument."
+        # Parameters checks
+        assert S > 0.0, f"Asset price (S) needs to be larger than 0. Got '{S}'"
+        assert K > 0.0, f"Strike price (K) needs to be larger than 0. Got '{K}'"
+        assert T > 0.0, f"Time to maturity (T) needs to be larger than 0. Got '{T}'"
+        assert (
+            sigma > 0.0
+        ), f"Volatility (sigma) needs to be larger than 0. Got '{sigma}'"
+        assert q >= 0.0, f"Annual dividend yield (q) cannot be negative. Got '{q}'"
         self.S, self.K, self.T, self.r, self.sigma, self.q = S, K, T, r, sigma, q
 
     @abstractmethod
@@ -369,3 +372,66 @@ class Black76Base(ABC, StandardNormalMixin):
     def _d2(self) -> float:
         """2nd probability parameter that acts as a multiplication factor for discounting."""
         return self._d1 - self.sigma * sqrt(self.T)
+
+
+class BlackScholesBaseCompound(ABC):
+    """
+    Create compound option structures.
+
+    :param option: Call or put option to extract keys from for dictionary compounds. \n
+    :param type: 'long' or 'short'
+    """
+
+    def __init__(self, option: BlackScholesBase, type: str):
+        self.option = option
+        self.type = type
+
+        assert self.type in [
+            "long",
+            "short",
+        ], f"Type can only be 'long' or 'short'. Got {self.type}"
+        # Initialize compound methods
+        self.methods = list(self.option.get_all_greeks().keys()) + [
+            "price",
+        ]
+        for str_method in self.methods:
+            setattr(self, str_method, self._compound_func(str_method))
+
+    @abstractmethod
+    def _compound_func(self, str_method: str) -> Callable:
+        """
+        Create compound callable given string method. \n
+        :param str_method: String pointing to method. \n
+        Method should be available in the call and put. \n
+        :return lambda function that executes compound function.
+        """
+        ...
+
+    def get_core_greeks(self) -> Dict[str, float]:
+        """
+        Get the top 5 most well known Greeks for the straddle.
+        1. Delta
+        2. Gamma
+        3. Vega
+        4. Theta
+        5. Rho
+        """
+        return self.__compound_dict("get_core_greeks")
+
+    def get_all_greeks(self) -> Dict[str, float]:
+        """Retrieve all Greeks for the straddle
+        implemented as a dictionary."""
+        return self.__compound_dict("get_all_greeks")
+
+    def __compound_dict(self, str_method: str) -> Dict[str, float]:
+        """
+        Merge two dictionaries to create compounds for the straddle.
+
+        :param str_method: String pointing to method. \n
+        Method should be available in the call and put. \n
+        :return: Dictionary compounding values from call and put.
+        """
+        return {
+            func: self._compound_func(func)()
+            for func in getattr(self.option, str_method)().keys()
+        }

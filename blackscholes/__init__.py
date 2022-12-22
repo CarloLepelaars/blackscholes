@@ -1,6 +1,9 @@
 from .call import Black76Call, BlackScholesCall
 from .put import Black76Put, BlackScholesPut
 from .straddle import BlackScholesStraddle
+from .strangle import BlackScholesStrangle
+from .butterfly import BlackScholesButterfly
+from .iron_condor import BlackScholesIronCondor
 
 __all__ = [
     "BlackScholesCall",
@@ -8,4 +11,7 @@ __all__ = [
     "BlackScholesPut",
     "Black76Put",
     "BlackScholesStraddle",
+    "BlackScholesStrangle",
+    "BlackScholesButterfly",
+    "BlackScholesIronCondor",
 ]

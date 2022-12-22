@@ -57,10 +57,10 @@ class TestBlackScholesBase:
     meta = BlackScholesMeta(S=test_S, K=test_K, T=test_T, r=test_r, sigma=test_sigma)
 
     def test_arg_assert(self):
-        # Should not be able to initialize if S, K, T, or sigma is negative.
+        # Should not be able to initialize with invalid values for S, K, T, or sigma.
         with pytest.raises(AssertionError):
             BlackScholesMeta(
-                S=-test_S,
+                S=0.0,
                 K=test_K,
                 T=test_T,
                 r=test_r,
@@ -68,15 +68,15 @@ class TestBlackScholesBase:
             )
             BlackScholesMeta(
                 S=test_S,
-                K=-test_K,
+                K=0.0,
                 T=test_T,
                 r=test_r,
                 sigma=test_sigma,
             )
             BlackScholesMeta(
-                S=-test_S,
+                S=test_S,
                 K=test_K,
-                T=-test_T,
+                T=0.0,
                 r=test_r,
                 sigma=test_sigma,
             )
@@ -85,7 +85,7 @@ class TestBlackScholesBase:
                 K=test_K,
                 T=test_T,
                 r=test_r,
-                sigma=-test_sigma,
+                sigma=0.0,
             )
 
         # Initializing with negative r (interest rate) is possible.
