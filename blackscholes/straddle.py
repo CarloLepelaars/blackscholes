@@ -60,12 +60,6 @@ class BlackScholesStraddle:
         implemented as a dictionary."""
         return self.__compound_dict("get_all_greeks")
 
-    def get_itm_proxies(self) -> Dict[str, float]:
-        """Get multiple ways of calculating probability
-        of straddle being in the money.
-        """
-        return self.__compound_dict("get_itm_proxies")
-
     def _compound_func(self, str_method: str) -> Callable:
         """
         Create compound callable given string method. \n
