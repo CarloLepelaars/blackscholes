@@ -22,26 +22,24 @@ class TestBlackScholesStraddle:
         straddle = BlackScholesStraddle(
             test_S, test_K, test_T, test_r, test_sigma, type="long"
         )
-        test_methods = list(straddle.call.get_all_greeks().keys()) + [
+        test_methods = list(straddle.call1.get_all_greeks().keys()) + [
             "price",
-            "in_the_money",
         ]
         for attr in test_methods:
             assert (
                 getattr(straddle, attr)()
-                == getattr(straddle.put, attr)() + getattr(straddle.call, attr)()
+                == getattr(straddle.put1, attr)() + getattr(straddle.call1, attr)()
             )
 
     def test_individual_methods_short(self):
         straddle = BlackScholesStraddle(
             test_S, test_K, test_T, test_r, test_sigma, type="short"
         )
-        test_methods = list(straddle.call.get_all_greeks().keys()) + [
+        test_methods = list(straddle.call1.get_all_greeks().keys()) + [
             "price",
-            "in_the_money",
         ]
         for attr in test_methods:
             assert (
                 getattr(straddle, attr)()
-                == -getattr(straddle.put, attr)() - getattr(straddle.call, attr)()
+                == -getattr(straddle.put1, attr)() - getattr(straddle.call1, attr)()
             )

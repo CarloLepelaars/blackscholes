@@ -28,8 +28,8 @@ class BlackScholesStraddle:
         q: float = 0.0,
         type: str = "long",
     ):
-        self.call = BlackScholesCall(S=S, K=K, T=T, r=r, sigma=sigma, q=q)
-        self.put = BlackScholesPut(S=S, K=K, T=T, r=r, sigma=sigma, q=q)
+        self.call1 = BlackScholesCall(S=S, K=K, T=T, r=r, sigma=sigma, q=q)
+        self.put1 = BlackScholesPut(S=S, K=K, T=T, r=r, sigma=sigma, q=q)
 
         self.type = type
         assert self.type in [
@@ -37,9 +37,8 @@ class BlackScholesStraddle:
             "short",
         ], f"Type can only be 'long' or 'short'. Got {self.type}"
         # Initialize compound methods
-        self.methods = list(self.call.get_all_greeks().keys()) + [
+        self.methods = list(self.call1.get_all_greeks().keys()) + [
             "price",
-            "in_the_money",
         ]
         for str_method in self.methods:
             setattr(self, str_method, self._compound_func(str_method))
@@ -67,8 +66,8 @@ class BlackScholesStraddle:
         Method should be available in the call and put. \n
         :return lambda function that executes compound function.
         """
-        put_attr = getattr(self.put, str_method)()
-        call_attr = getattr(self.call, str_method)()
+        put_attr = getattr(self.put1, str_method)()
+        call_attr = getattr(self.call1, str_method)()
         # Long Straddle
         if self.type == "long":
             func = lambda: put_attr + call_attr  # noqa
@@ -87,5 +86,5 @@ class BlackScholesStraddle:
         """
         return {
             func: self._compound_func(func)()
-            for func in getattr(self.call, str_method)().keys()
+            for func in getattr(self.call1, str_method)().keys()
         }
