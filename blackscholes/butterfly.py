@@ -1,10 +1,7 @@
-from typing import Callable
-
-from blackscholes.base import BlackScholesBaseCompound
-from blackscholes import BlackScholesCall, BlackScholesPut
+from blackscholes.base import BlackScholesCompoundBase
 
 
-class BlackScholesButterfly(BlackScholesBaseCompound):
+class BlackScholesButterfly(BlackScholesCompoundBase):
     """
     Create butterfly option structure.
 
@@ -33,7 +30,6 @@ class BlackScholesButterfly(BlackScholesBaseCompound):
         r: float,
         sigma: float,
         q: float = 0.0,
-        type: str = "long",
     ):
         assert (
             K1 < K2 < K3
@@ -45,28 +41,4 @@ class BlackScholesButterfly(BlackScholesBaseCompound):
         ), f"""Strike price must be symmetric, so K2 - K1 = K3 - K2.
         Got {K2}-{K1} != {K3}-{K2}.
         """
-        # Initialize options
-        for i, K in enumerate([K1, K2, K3]):
-            # Long (call) butterfly or Short (put) butterfly
-            func = BlackScholesCall if type == "long" else BlackScholesPut
-            setattr(self, f"option{i}", func(S=S, K=K, T=T, r=r, sigma=sigma, q=q))
-
-        super().__init__(option=self.option1, type=type)
-
-    def _compound_func(self, str_method: str) -> Callable:
-        """
-        Create compound callable given string method. \n
-        :param str_method: String pointing to method. \n
-        Method should be available in the call and put. \n
-        :return lambda function that executes compound function.
-        """
-        opt_attr1 = getattr(self.option1, str_method)()
-        opt_attr2 = getattr(self.option2, str_method)()
-        opt_attr3 = getattr(self.option3, str_method)()
-        # Long butterfly
-        if self.type == "long":
-            func = lambda: opt_attr1 - 2 * opt_attr2 + opt_attr3  # noqa
-        # Short butterfly
-        else:
-            func = lambda: -opt_attr1 + 2 * opt_attr2 - opt_attr3  # noqa
-        return func
+        super().__init__()

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from math import erf, exp, log, pi, sqrt
-from typing import Dict, Callable
+from typing import Dict
 
 
 class StandardNormalMixin:
@@ -374,64 +374,112 @@ class Black76Base(ABC, StandardNormalMixin):
         return self._d1 - self.sigma * sqrt(self.T)
 
 
-class BlackScholesBaseCompound(ABC):
+class BlackScholesCompoundBase(ABC):
     """
-    Create compound option structures.
-
-    :param option: Call or put option to extract keys from for dictionary compounds. \n
-    :param type: 'long' or 'short'
+    Create compound option structure.
     """
 
-    def __init__(self, option: BlackScholesBase, type: str):
-        self.option = option
-        self.type = type
-
-        assert self.type in [
-            "long",
-            "short",
-        ], f"Type can only be 'long' or 'short'. Got {self.type}"
-        # Initialize compound methods
-        self.methods = list(self.option.get_all_greeks().keys()) + [
-            "price",
-        ]
-        for str_method in self.methods:
-            setattr(self, str_method, self._compound_func(str_method))
+    def __init__(self):
+        ...
 
     @abstractmethod
-    def _compound_func(self, str_method: str) -> Callable:
-        """
-        Create compound callable given string method. \n
-        :param str_method: String pointing to method. \n
-        Method should be available in the call and put. \n
-        :return lambda function that executes compound function.
-        """
+    def _calc_attr(self, attribute_name: str) -> float:
         ...
+
+    def price(self):
+        return self._calc_attr(attribute_name="price")
+
+    def delta(self):
+        return self._calc_attr(attribute_name="delta")
+
+    def dual_delta(self):
+        return self._calc_attr(attribute_name="dual_delta")
+
+    def gamma(self):
+        return self._calc_attr(attribute_name="gamma")
+
+    def dual_gamma(self):
+        return self._calc_attr(attribute_name="dual_gamma")
+
+    def vega(self):
+        return self._calc_attr(attribute_name="vega")
+
+    def theta(self):
+        return self._calc_attr(attribute_name="theta")
+
+    def rho(self):
+        return self._calc_attr(attribute_name="rho")
+
+    def epsilon(self):
+        return self._calc_attr(attribute_name="epsilon")
+
+    def lambda_greek(self):
+        return self._calc_attr(attribute_name="lambda_greek")
+
+    def vanna(self):
+        return self._calc_attr(attribute_name="vanna")
+
+    def charm(self):
+        return self._calc_attr(attribute_name="charm")
+
+    def vomma(self):
+        return self._calc_attr(attribute_name="vomma")
+
+    def veta(self):
+        return self._calc_attr(attribute_name="veta")
+
+    def phi(self):
+        return self._calc_attr(attribute_name="phi")
+
+    def speed(self):
+        return self._calc_attr(attribute_name="speed")
+
+    def zomma(self):
+        return self._calc_attr(attribute_name="zomma")
+
+    def color(self):
+        return self._calc_attr(attribute_name="color")
+
+    def ultima(self):
+        return self._calc_attr(attribute_name="ultima")
 
     def get_core_greeks(self) -> Dict[str, float]:
         """
-        Get the top 5 most well known Greeks for the straddle.
+        Get the top 5 most well known Greeks for the compound.
         1. Delta
         2. Gamma
         3. Vega
         4. Theta
         5. Rho
         """
-        return self.__compound_dict("get_core_greeks")
+        return {
+            "delta": self.delta(),
+            "gamma": self.gamma(),
+            "vega": self.vega(),
+            "theta": self.theta(),
+            "rho": self.rho(),
+        }
 
     def get_all_greeks(self) -> Dict[str, float]:
-        """Retrieve all Greeks for the straddle
+        """Retrieve all Greeks for the compound
         implemented as a dictionary."""
-        return self.__compound_dict("get_all_greeks")
-
-    def __compound_dict(self, str_method: str) -> Dict[str, float]:
-        """
-        Merge two dictionaries to create compounds for the straddle.
-
-        :param str_method: String pointing to method. \n
-        Method should be available in the call and put. \n
-        :return: Dictionary compounding values from call and put.
-        """
         return {
-            func: self._compound_func(func)()
-            for func in getattr(self.option, str_method)().keys()
+            "delta": self.delta(),
+            "gamma": self.gamma(),
+            "vega": self.vega(),
+            "theta": self.theta(),
+            "epsilon": self.epsilon(),
+            "rho": self.rho(),
+            "lambda_greek": self.lambda_greek(),
+            "vanna": self.vanna(),
+            "charm": self.charm(),
+            "vomma": self.vomma(),
+            "veta": self.veta(),
+            "phi": self.phi(),
+            "speed": self.speed(),
+            "zomma": self.zomma(),
+            "color": self.color(),
+            "ultima": self.ultima(),
+            "dual_delta": self.dual_delta(),
+            "dual_gamma": self.dual_gamma(),
         }

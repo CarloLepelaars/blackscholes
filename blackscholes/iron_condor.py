@@ -1,10 +1,10 @@
 from typing import Callable
 
-from blackscholes.base import BlackScholesBaseCompound
+from blackscholes.base import BlackScholesCompoundBase
 from blackscholes import BlackScholesCall, BlackScholesPut
 
 
-class BlackScholesIronCondor(BlackScholesBaseCompound):
+class BlackScholesIronCondor(BlackScholesCompoundBase):
     """
     Create iron condor option structure.
 

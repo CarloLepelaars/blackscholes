@@ -1,6 +1,4 @@
-import pytest
-
-from ..straddle import BlackScholesStraddle
+from ..straddle import BlackScholesStraddleLong, BlackScholesStraddleShort
 
 # Test parameters
 test_S = 55.0  # Asset price of 55
@@ -11,17 +9,8 @@ test_sigma = 0.15  # 15% vol
 
 
 class TestBlackScholesStraddle:
-    def test_init(self):
-        # Type should be either 'long' or 'short'.
-        with pytest.raises(AssertionError):
-            BlackScholesStraddle(
-                test_S, test_K, test_T, test_r, test_sigma, type="invalid!"
-            )
-
     def test_individual_methods_long(self):
-        straddle = BlackScholesStraddle(
-            test_S, test_K, test_T, test_r, test_sigma, type="long"
-        )
+        straddle = BlackScholesStraddleLong(test_S, test_K, test_T, test_r, test_sigma)
         test_methods = list(straddle.call1.get_all_greeks().keys()) + [
             "price",
         ]
@@ -32,9 +21,7 @@ class TestBlackScholesStraddle:
             )
 
     def test_individual_methods_short(self):
-        straddle = BlackScholesStraddle(
-            test_S, test_K, test_T, test_r, test_sigma, type="short"
-        )
+        straddle = BlackScholesStraddleShort(test_S, test_K, test_T, test_r, test_sigma)
         test_methods = list(straddle.call1.get_all_greeks().keys()) + [
             "price",
         ]
