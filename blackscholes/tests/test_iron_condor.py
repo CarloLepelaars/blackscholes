@@ -72,10 +72,10 @@ class TestBlackScholesIronCondorLong:
         for attr in test_methods:
             assert (
                 getattr(iron_condor, attr)()
-                == getattr(iron_condor.put1, attr)()
-                - getattr(iron_condor.put2, attr)()
-                - getattr(iron_condor.call1, attr)()
-                + getattr(iron_condor.call2, attr)()
+                == -getattr(iron_condor.put1, attr)()
+                + getattr(iron_condor.put2, attr)()
+                + getattr(iron_condor.call1, attr)()
+                - getattr(iron_condor.call2, attr)()
             )
 
 
@@ -136,10 +136,10 @@ class TestBlackScholesIronCondorShort:
         ]
         # Short iron condor = -Put1 + Put2 + Call1 - Call2
         for attr in test_methods:
-            assert (
+            (
                 getattr(iron_condor, attr)()
-                == -getattr(iron_condor.put1, attr)()
-                + getattr(iron_condor.put2, attr)()
-                + getattr(iron_condor.call1, attr)()
-                - getattr(iron_condor.call2, attr)()
+                == getattr(iron_condor.put1, attr)()
+                - getattr(iron_condor.put2, attr)()
+                - getattr(iron_condor.call1, attr)()
+                + getattr(iron_condor.call2, attr)()
             )

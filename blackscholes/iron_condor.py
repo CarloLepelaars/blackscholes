@@ -53,7 +53,7 @@ class BlackScholesIronCondorLong(BlackScholesStructureBase):
         put_attr2 = getattr(self.put2, attribute_name)
         call_attr1 = getattr(self.call1, attribute_name)
         call_attr2 = getattr(self.call2, attribute_name)
-        return put_attr1() - put_attr2() - call_attr1() + call_attr2()
+        return -put_attr1() + put_attr2() + call_attr1() - call_attr2()
 
 
 class BlackScholesIronCondorShort(BlackScholesStructureBase):
@@ -107,4 +107,4 @@ class BlackScholesIronCondorShort(BlackScholesStructureBase):
         put_attr2 = getattr(self.put2, attribute_name)
         call_attr1 = getattr(self.call1, attribute_name)
         call_attr2 = getattr(self.call2, attribute_name)
-        return -put_attr1() + put_attr2() + call_attr1() - call_attr2()
+        return put_attr1() - put_attr2() - call_attr1() + call_attr2()

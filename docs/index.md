@@ -134,6 +134,6 @@ from blackscholes import BlackScholesIronCondorLong
 
 iron_condor = BlackScholesIronCondorLong(S=55, K1=20, K2=25, K3=45, K4=50, 
                                          T=1.0, r=0.0025, sigma=0.15)
-iron_condor.price()  ## -4.0742
-iron_condor.delta()  ## -0.1572
+iron_condor.price()  ## 4.0742
+iron_condor.delta()  ## 0.1572
 ```
