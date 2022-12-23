@@ -767,7 +767,7 @@ see what greeks can be computed check section
 <p><code>$sigma$</code> = Volatility</p>
 <h2 id="1-straddle">1. Straddle <a name="straddle"></a></h2>
 <p>Straddles are built a call and put option with the same strike price <code>$K$</code>
-and the same expiration date. If applied correctly this allows you to profit 
+and the same expiration date. If applied correctly this allows one to profit 
 from volatility regardless of the direction of the underlying asset.</p>
 <h3 id="long-straddle-blackscholesstraddlelong">Long straddle (<code>BlackScholesStraddleLong</code>):</h3>
 <p>$$P(K) + C(K)$$</p>
@@ -792,9 +792,8 @@ from volatility regardless of the direction of the underlying asset.</p>
 <h2 id="2-strangle">2. Strangle <a name="strangle"></a></h2>
 <p>Strangles are similar to straddles, but now the call and put
 option have different strike prices. This structure can be 
-profitable if you have a strong conviction that the 
-underlying asset will have a large movement, 
-but don't want to bet on a particular direction.</p>
+profitable if the underlying asset will have a large movement, 
+regardless of which direction the movement is.</p>
 <p><code>$K_1$</code> = Strike price for the put.</p>
 <p><code>$K_2$</code> = Strike price for the call.</p>
 <p>It must hold that <code>$K_1 &lt; K_2$</code>.</p>
@@ -819,8 +818,8 @@ but don't want to bet on a particular direction.</p>
 </code></pre></div>
 
 <h2 id="3-butterfly">3. Butterfly <a name="butterfly"></a></h2>
-<p>The butterfly is a combination of four options. We implement this 
-when we believe the future volatility of the underlying asset is 
+<p>The butterfly is a combination of three options. One implements this 
+when one believes the future volatility of the underlying asset is 
 going to be lower or higher than the implied volatility 
 when long or short, respectively.</p>
 <p>Choose three strike prices <code>$K_1$</code>, <code>$K_2$</code> and <code>$K_3$</code>.</p>
@@ -855,7 +854,8 @@ when long or short, respectively.</p>
 
 <h2 id="4-iron-condor">4. Iron Condor <a name="condor"></a></h2>
 <p>The iron condor makes use of four different strike prices and
-is a variant of the butterfly.</p>
+is a variant of the butterfly. The structure involves
+2 call options and 2 put options.</p>
 <p>Choose four strike prices <code>$K_1$</code>, <code>$K_2$</code>, <code>$K_3$</code> and <code>$K_4$</code>.</p>
 <p>Two conditions must hold when choosing strike prices:</p>
 <ul>

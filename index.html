@@ -366,6 +366,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#black76" class="md-nav__link">
+    Black76
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#structures" class="md-nav__link">
     Structures
   </a>
@@ -590,6 +597,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#black76" class="md-nav__link">
+    Black76
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#structures" class="md-nav__link">
     Structures
   </a>
@@ -628,7 +642,10 @@
 <p><a href="https://carlolepelaars.github.io/blackscholes/8.disclaimer">8. Disclaimer</a></p>
 <p><a href="https://carlolepelaars.github.io/blackscholes/contributing">Contribution guide</a></p>
 <p>Black Scholes calculator for Python including all Greeks.</p>
-<p>Currently only supports European options.</p>
+<p>Supports the Black-Scholes-Merton model, 
+Black-76 model and option structures.</p>
+<p>Currently only supports 
+<a href="https://www.investopedia.com/articles/optioninvestor/08/american-european-options.asp">European options</a>.</p>
 <h2 id="installation">Installation</h2>
 <p><code>pip install blackscholes</code></p>
 <h2 id="examples">Examples</h2>
@@ -655,6 +672,26 @@
 <span class="n">put</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## 1.214564</span>
 <span class="n">put</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## -0.23359</span>
 <span class="n">put</span><span class="o">.</span><span class="n">charm</span><span class="p">()</span>  <span class="c1">## 0.083267</span>
+</code></pre></div>
+
+<h3 id="black76">Black76</h3>
+<p>The Black-76 model is often specifically used for options and futures and bonds.
+<code>blackscholes</code> also supports this model. To see all available greeks
+check out section <a href="https://carlolepelaars.github.io/blackscholes/4.the_greeks_black76">4. The Greeks (Black-76)</a>.</p>
+<p><strong>Call</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">Black76Call</span>
+<span class="n">call</span> <span class="o">=</span> <span class="n">Black76Call</span><span class="p">(</span><span class="n">F</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">call</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## 6.2345</span>
+<span class="n">call</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## 0.7594</span>
+<span class="n">call</span><span class="o">.</span><span class="n">vomma</span><span class="p">()</span>  <span class="c1">## 45.1347</span>
+</code></pre></div>
+
+<p><strong>Put</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">Black76Put</span>
+<span class="n">put</span> <span class="o">=</span> <span class="n">Black76Put</span><span class="p">(</span><span class="n">F</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">put</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## 1.2470</span>
+<span class="n">put</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## -0.2381</span>
+<span class="n">put</span><span class="o">.</span><span class="n">vomma</span><span class="p">()</span>  <span class="c1">## 45.1347</span>
 </code></pre></div>
 
 <h3 id="structures">Structures</h3>
@@ -691,10 +728,10 @@ check out section <a href="https://carlolepelaars.github.io/blackscholes/6.optio
 <p><strong>Long Iron Condor</strong></p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesIronCondorLong</span>
 
-<span class="n">butterfly</span> <span class="o">=</span> <span class="n">BlackScholesIronCondorLong</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K1</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">K2</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">K3</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">K4</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> 
-                                       <span class="n">T</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
-<span class="n">butterfly</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## -4.0742</span>
-<span class="n">butterfly</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## -0.1572</span>
+<span class="n">iron_condor</span> <span class="o">=</span> <span class="n">BlackScholesIronCondorLong</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K1</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">K2</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">K3</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">K4</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> 
+                                         <span class="n">T</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">iron_condor</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## -4.0742</span>
+<span class="n">iron_condor</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## -0.1572</span>
 </code></pre></div>
 
 
