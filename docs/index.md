@@ -12,13 +12,14 @@
 
 [5. In-the-money proxies](https://carlolepelaars.github.io/blackscholes/5.itm)
 
-[6. Contribution guide](https://carlolepelaars.github.io/blackscholes/6.contributing)
+[6. Option Structures](https://carlolepelaars.github.io/blackscholes/6.option_structures)
 
-[7. Option Structures](https://carlolepelaars.github.io/blackscholes/7.option_structures)
+[7. Source Code References](https://carlolepelaars.github.io/blackscholes/7.references)
 
-[8. Source Code References](https://carlolepelaars.github.io/blackscholes/8.references)
+[8. Disclaimer](https://carlolepelaars.github.io/blackscholes/8.disclaimer)
 
-[9. Disclaimer](https://carlolepelaars.github.io/blackscholes/9.disclaimer)
+[Contribution guide](https://carlolepelaars.github.io/blackscholes/contributing)
+
 
 Black Scholes calculator for Python including all Greeks.
 
@@ -58,4 +59,50 @@ put = BlackScholesPut(S=S, K=K, T=T, r=r, sigma=sigma, q=q)
 put.price()  ## 1.214564
 put.delta()  ## -0.23359
 put.charm()  ## 0.083267
+```
+
+### Structures
+
+Structures are combination of call and put options. Every option structure
+has a `Long` and `Short` version. To learn more
+check out section [6. Option Structures](https://carlolepelaars.github.io/blackscholes/6.option_structures).
+
+**Long Straddle**
+```python3
+from blackscholes import BlackScholesStraddleLong
+
+straddle = BlackScholesStraddleLong(S=55, K=50, T=1.0,
+                                    r=0.0025, sigma=0.15)
+straddle.price()  ## 7.5539
+straddle.delta()  ## 0.5328
+```
+
+**Long Strangle**
+```python
+from blackscholes import BlackScholesStrangleLong
+
+strangle = BlackScholesStrangleLong(S=55, K1=40, K2=50, T=1.0,
+                                    r=0.0025, sigma=0.15)
+strangle.price()  ## 6.3800
+strangle.delta()  ## 0.7530
+```
+
+**Long (Call) Butterfly**
+```python
+from blackscholes import BlackScholesButterflyLong
+
+butterfly = BlackScholesButterflyLong(S=55, K1=40, K2=50, K3=60, 
+                                      T=1.0, r=0.0025, sigma=0.15)
+butterfly.price()  ## 3.9993
+butterfly.delta()  ## -0.2336
+```
+
+**Long Iron Condor**
+```python3
+from blackscholes import BlackScholesIronCondorLong
+
+butterfly = BlackScholesIronCondorLong(S=55, K1=20, K2=25, K3=45, K4=50, 
+                                       T=1.0, r=0.0025, sigma=0.15)
+butterfly.price()  ## -4.0742
+butterfly.delta()  ## -0.1572
 ```

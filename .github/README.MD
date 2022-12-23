@@ -41,6 +41,27 @@ put.delta()  ## -0.23359
 put.charm()  ## 0.083267
 ```
 
+### Structures
+
+`blackscholes` offers the following four option structures:
+- Straddle
+- Strangle
+- Butterfly
+- Iron Condor
+
+All structure have a long and short version. To learn more
+check out section [6. Option Structures](https://carlolepelaars.github.io/blackscholes/6.option_structures).
+
+**Long Straddle Example**
+```python3
+from blackscholes import BlackScholesStraddleLong
+
+straddle = BlackScholesStraddleLong(S=55, K=50, T=1.0,
+                                    r=0.0025, sigma=0.15)
+straddle.price()  ## 7.5539
+straddle.delta()  ## 0.5328
+```
+
 ## Contributing
 
 We very much welcome new contributions! Check out the [Github Issues](https://github.com/CarloLepelaars/blackscholes/issues)

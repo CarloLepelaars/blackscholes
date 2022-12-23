@@ -1,8 +1,8 @@
 from . import BlackScholesCall, BlackScholesPut
-from .base import BlackScholesCompoundBase
+from .base import BlackScholesStructureBase
 
 
-class BlackScholesStraddleLong(BlackScholesCompoundBase):
+class BlackScholesStraddleLong(BlackScholesStructureBase):
     """
     Create long straddle option structure. \n
     - Long Straddle -> Put(K) + Call(K)
@@ -34,7 +34,7 @@ class BlackScholesStraddleLong(BlackScholesCompoundBase):
         return put_attr() + call_attr()
 
 
-class BlackScholesStraddleShort(BlackScholesCompoundBase):
+class BlackScholesStraddleShort(BlackScholesStructureBase):
     """
     Create straddle option structure. \n
     - Short Straddle -> -Put(K) - Call(K)

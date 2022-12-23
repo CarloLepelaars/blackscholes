@@ -1,8 +1,8 @@
-from blackscholes.base import BlackScholesCompoundBase
+from blackscholes.base import BlackScholesStructureBase
 from blackscholes import BlackScholesCall, BlackScholesPut
 
 
-class BlackScholesIronCondorLong(BlackScholesCompoundBase):
+class BlackScholesIronCondorLong(BlackScholesStructureBase):
     """
     Create long iron condor option structure. \n
     - Long iron condor -> Put(K1) - Put(K2) - Call(K3) + Call(K4)
@@ -56,7 +56,7 @@ class BlackScholesIronCondorLong(BlackScholesCompoundBase):
         return put_attr1() - put_attr2() - call_attr1() + call_attr2()
 
 
-class BlackScholesIronCondorShort(BlackScholesCompoundBase):
+class BlackScholesIronCondorShort(BlackScholesStructureBase):
     """
     Create short iron condor option structure. \n
     - Short iron condor -> -Put(K1) + Put(K2) + Call(K3) - Call(K4)

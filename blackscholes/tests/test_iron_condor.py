@@ -134,6 +134,8 @@ class TestBlackScholesIronCondorShort:
         test_methods = list(iron_condor.call1.get_all_greeks().keys()) + [
             "price",
         ]
+        print(iron_condor.price(), iron_condor.delta())
+
         # Short iron condor = -Put1 + Put2 + Call1 - Call2
         for attr in test_methods:
             assert (

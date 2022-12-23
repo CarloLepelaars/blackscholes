@@ -45,7 +45,7 @@ class BlackScholesBase(ABC, StandardNormalMixin):
 
     @abstractmethod
     def price(self) -> float:
-        """Fair str_method for option."""
+        """Fair value for option."""
         ...
 
     @abstractmethod
@@ -66,7 +66,7 @@ class BlackScholesBase(ABC, StandardNormalMixin):
 
     def gamma(self) -> float:
         """
-        Rate of change in delta with respect to the underlying stock price (2nd derivative).
+        Rate of change in delta with respect to the underlying asset price (2nd derivative).
         """
         return (
             exp(-self.q * self.T)
@@ -112,7 +112,7 @@ class BlackScholesBase(ABC, StandardNormalMixin):
         ...
 
     def lambda_greek(self) -> float:
-        """Percentage change in option str_method per %
+        """Percentage change in option value per %
         change in asset price. Also called gearing.
         """
         return self.delta() * self.S / self.price()
@@ -284,7 +284,7 @@ class Black76Base(ABC, StandardNormalMixin):
 
     @abstractmethod
     def price(self):
-        """Fair str_method for option."""
+        """Fair value for option."""
         ...
 
     @abstractmethod
@@ -374,73 +374,132 @@ class Black76Base(ABC, StandardNormalMixin):
         return self._d1 - self.sigma * sqrt(self.T)
 
 
-class BlackScholesCompoundBase(ABC):
+class BlackScholesStructureBase(ABC):
     """
-    Create compound option structure.
+    Option structure base class. \n
+    `_calc_attr` should be implemented for every option structure.
     """
-
-    def __init__(self):
-        ...
 
     @abstractmethod
     def _calc_attr(self, attribute_name: str) -> float:
+        """
+        Combines attributes from several put and call options.
+
+        Ex. Long Straddle \n
+        ```python
+        def _calc_attr(self, attribute_name: str) -> float:
+            put_attr = getattr(self.put1, attribute_name)
+            call_attr = getattr(self.call1, attribute_name)
+            return put_attr() + call_attr()
+        ```
+        In this way all greeks and price are combined in the same way. \n
+        In this case only simple addition is performed.
+
+        :param attribute_name: String name of option attribute
+        pointing to a method that can be called on
+        BlackScholesCall and BlackScholesPut.
+
+        :return: Combined value (float)
+        """
         ...
 
     def price(self):
+        """Fair value of Black-Scholes option structure."""
         return self._calc_attr(attribute_name="price")
 
     def delta(self):
+        """Rate of change in structure price
+        with respect to the asset price (1st derivative).
+        """
         return self._calc_attr(attribute_name="delta")
 
     def dual_delta(self):
+        """1st derivative in structure price
+        with respect to strike price.
+        """
         return self._calc_attr(attribute_name="dual_delta")
 
+    def theta(self):
+        """Rate of change in structure price
+        with respect to time (i.e. time decay).
+        """
+        return self._calc_attr(attribute_name="theta")
+
+    def epsilon(self):
+        """Change in structure price with respect to underlying dividend yield. \n
+        Also known as psi."""
+        return self._calc_attr(attribute_name="epsilon")
+
+    def rho(self):
+        """Rate of change in structure price
+        with respect to the risk-free rate.
+        """
+        return self._calc_attr(attribute_name="rho")
+
     def gamma(self):
+        """
+        Rate of change in delta with respect to the underlying asset price (2nd derivative).
+        """
         return self._calc_attr(attribute_name="gamma")
 
     def dual_gamma(self):
+        """
+        Rate of change in delta with respect to the strike price (2nd derivative).
+        """
         return self._calc_attr(attribute_name="dual_gamma")
 
     def vega(self):
+        """
+        Rate of change in structure price with respect to the volatility of the asset.
+        """
         return self._calc_attr(attribute_name="vega")
 
-    def theta(self):
-        return self._calc_attr(attribute_name="theta")
-
-    def rho(self):
-        return self._calc_attr(attribute_name="rho")
-
-    def epsilon(self):
-        return self._calc_attr(attribute_name="epsilon")
-
     def lambda_greek(self):
+        """Percentage change in structure price per %
+        change in asset price. Also called gearing.
+        """
         return self._calc_attr(attribute_name="lambda_greek")
 
     def vanna(self):
+        """Sensitivity of delta with respect to change in volatility."""
         return self._calc_attr(attribute_name="vanna")
 
     def charm(self):
+        """Rate of change of delta over time (also known as delta decay)."""
         return self._calc_attr(attribute_name="charm")
 
     def vomma(self):
+        """2nd order sensitivity to volatility."""
         return self._calc_attr(attribute_name="vomma")
 
     def veta(self):
+        """Rate of change in `vega` with respect to time."""
         return self._calc_attr(attribute_name="veta")
 
     def phi(self):
+        """2nd order partial derivative with respect to strike price. \n
+        Phi is used in the Breeden-Litzenberger formula. \n
+        Breeden-Litzenberger uses quoted option prices
+        to estimate risk-neutral probabilities.
+        """
         return self._calc_attr(attribute_name="phi")
 
     def speed(self):
+        """Rate of change in Gamma with respect to change in the underlying asset price."""
         return self._calc_attr(attribute_name="speed")
 
     def zomma(self):
+        """Rate of change of gamma with respect to changes in volatility."""
         return self._calc_attr(attribute_name="zomma")
 
     def color(self):
+        """Rate of change of gamma over time."""
         return self._calc_attr(attribute_name="color")
 
     def ultima(self):
+        """Sensitivity of vomma with respect to change in volatility.
+        3rd order derivative of structure price to volatility.
+        """
         return self._calc_attr(attribute_name="ultima")
 
     def get_core_greeks(self) -> Dict[str, float]:

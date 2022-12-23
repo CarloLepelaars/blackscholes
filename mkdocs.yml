@@ -16,6 +16,7 @@ theme:
     - navigation.expand
 markdown_extensions:
   - footnotes
+  - fenced_code
   - codehilite:
       linennums: true
 

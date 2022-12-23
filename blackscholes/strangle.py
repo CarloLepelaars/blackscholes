@@ -1,8 +1,8 @@
 from . import BlackScholesCall, BlackScholesPut
-from .base import BlackScholesCompoundBase
+from .base import BlackScholesStructureBase
 
 
-class BlackScholesStrangleLong(BlackScholesCompoundBase):
+class BlackScholesStrangleLong(BlackScholesStructureBase):
     """
     Create long strangle option structure. \n
     - Long strangle -> Put(K1) + Call(K2)
@@ -42,7 +42,7 @@ class BlackScholesStrangleLong(BlackScholesCompoundBase):
         return put_attr() + call_attr()
 
 
-class BlackScholesStrangleShort(BlackScholesCompoundBase):
+class BlackScholesStrangleShort(BlackScholesStructureBase):
     """
     Create short strangle option structure. \n
     - Short strangle -> -Put(K1) - Call(K2)

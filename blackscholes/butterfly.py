@@ -1,8 +1,8 @@
 from . import BlackScholesCall, BlackScholesPut
-from .base import BlackScholesCompoundBase
+from .base import BlackScholesStructureBase
 
 
-class BlackScholesButterflyLong(BlackScholesCompoundBase):
+class BlackScholesButterflyLong(BlackScholesStructureBase):
     """
     Create long butterfly option structure.
     - Long butterfly -> Call(K1) - 2 * Call(K2) + Call(K3)
@@ -52,7 +52,7 @@ class BlackScholesButterflyLong(BlackScholesCompoundBase):
         return call_attr1() - 2 * call_attr2() + call_attr3()
 
 
-class BlackScholesButterflyShort(BlackScholesCompoundBase):
+class BlackScholesButterflyShort(BlackScholesStructureBase):
     """
     Create short butterfly option structure. \n
     - Short butterfly -> -Put(K1) + 2 * Put(K2) - Put(K3)
