@@ -4,7 +4,8 @@ from .base import BlackScholesCompoundBase
 
 class BlackScholesStraddleLong(BlackScholesCompoundBase):
     """
-    Create long straddle option structure.
+    Create long straddle option structure. \n
+    - Long Straddle -> Put(K) + Call(K)
 
     :param S: Price of underlying asset \n
     :param K: Strike price \n
@@ -12,7 +13,6 @@ class BlackScholesStraddleLong(BlackScholesCompoundBase):
     :param r: Risk-free interest rate (0.05 indicates 5%) \n
     :param sigma: Volatility (standard deviation) of stock (0.15 indicates 15%) \n
     :param q: Annual dividend yield (0.05 indicates 5% yield) \n
-    - Long Straddle -> Put(K) + Call(K)
     """
 
     def __init__(
@@ -36,15 +36,15 @@ class BlackScholesStraddleLong(BlackScholesCompoundBase):
 
 class BlackScholesStraddleShort(BlackScholesCompoundBase):
     """
-    Create straddle option structure.
+    Create straddle option structure. \n
+    - Short Straddle -> -Put(K) - Call(K)
 
     :param S: Price of underlying asset \n
     :param K: Strike price \n
     :param T: Time till expiration in years (1/12 indicates 1 month) \n
     :param r: Risk-free interest rate (0.05 indicates 5%) \n
     :param sigma: Volatility (standard deviation) of stock (0.15 indicates 15%) \n
-    :param q: Annual dividend yield (0.05 indicates 5% yield) \n
-    - Short Straddle -> -Put(K) - Call(K)
+    :param q: Annual dividend yield (0.05 indicates 5% yield)
     """
 
     def __init__(

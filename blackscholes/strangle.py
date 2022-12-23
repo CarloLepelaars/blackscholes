@@ -4,7 +4,8 @@ from .base import BlackScholesCompoundBase
 
 class BlackScholesStrangleLong(BlackScholesCompoundBase):
     """
-    Create long strangle option structure.
+    Create long strangle option structure. \n
+    - Long strangle -> Put(K1) + Call(K2)
 
     :param S: Price of underlying asset \n
     :param K1: Strike price for put \n
@@ -14,7 +15,6 @@ class BlackScholesStrangleLong(BlackScholesCompoundBase):
     :param r: Risk-free interest rate (0.05 indicates 5%) \n
     :param sigma: Volatility (standard deviation) of stock (0.15 indicates 15%) \n
     :param q: Annual dividend yield (0.05 indicates 5% yield) \n
-    - Long strangle -> Put(K1) + Call(K2)
     """
 
     def __init__(
@@ -44,7 +44,8 @@ class BlackScholesStrangleLong(BlackScholesCompoundBase):
 
 class BlackScholesStrangleShort(BlackScholesCompoundBase):
     """
-    Create short strangle option structure.
+    Create short strangle option structure. \n
+    - Short strangle -> -Put(K1) - Call(K2)
 
     :param S: Price of underlying asset \n
     :param K1: Strike price for put \n
@@ -53,8 +54,7 @@ class BlackScholesStrangleShort(BlackScholesCompoundBase):
     :param T: Time till expiration in years (1/12 indicates 1 month) \n
     :param r: Risk-free interest rate (0.05 indicates 5%) \n
     :param sigma: Volatility (standard deviation) of stock (0.15 indicates 15%) \n
-    :param q: Annual dividend yield (0.05 indicates 5% yield) \n
-    - Short strangle -> -Put(K1) - Call(K2)
+    :param q: Annual dividend yield (0.05 indicates 5% yield)
     """
 
     def __init__(

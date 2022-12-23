@@ -1,4 +1,4 @@
-from ..straddle import BlackScholesStraddleLong, BlackScholesStraddleShort
+from .. import BlackScholesStraddleLong, BlackScholesStraddleShort
 
 # Test parameters
 test_S = 55.0  # Asset price of 55
@@ -8,8 +8,8 @@ test_r = 0.0025  # 0.25% risk-free rate
 test_sigma = 0.15  # 15% vol
 
 
-class TestBlackScholesStraddle:
-    def test_individual_methods_long(self):
+class TestBlackScholesStraddleLong:
+    def test_individual_methods(self):
         straddle = BlackScholesStraddleLong(test_S, test_K, test_T, test_r, test_sigma)
         test_methods = list(straddle.call1.get_all_greeks().keys()) + [
             "price",
@@ -20,7 +20,9 @@ class TestBlackScholesStraddle:
                 == getattr(straddle.put1, attr)() + getattr(straddle.call1, attr)()
             )
 
-    def test_individual_methods_short(self):
+
+class TestBlackScholesStraddleShort:
+    def test_individual_methods(self):
         straddle = BlackScholesStraddleShort(test_S, test_K, test_T, test_r, test_sigma)
         test_methods = list(straddle.call1.get_all_greeks().keys()) + [
             "price",
