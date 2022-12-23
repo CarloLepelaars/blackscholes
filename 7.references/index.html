@@ -6544,7 +6544,7 @@ of underlying futures contract.</p>
         <span class="n">put_attr2</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">put2</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">)</span>
         <span class="n">call_attr1</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">call1</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">)</span>
         <span class="n">call_attr2</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">call2</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">put_attr1</span><span class="p">()</span> <span class="o">-</span> <span class="n">put_attr2</span><span class="p">()</span> <span class="o">-</span> <span class="n">call_attr1</span><span class="p">()</span> <span class="o">+</span> <span class="n">call_attr2</span><span class="p">()</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">put_attr1</span><span class="p">()</span> <span class="o">+</span> <span class="n">put_attr2</span><span class="p">()</span> <span class="o">+</span> <span class="n">call_attr1</span><span class="p">()</span> <span class="o">-</span> <span class="n">call_attr2</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
         </details>
 
@@ -6699,7 +6699,7 @@ of underlying futures contract.</p>
         <span class="n">put_attr2</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">put2</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">)</span>
         <span class="n">call_attr1</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">call1</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">)</span>
         <span class="n">call_attr2</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">call2</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">)</span>
-        <span class="k">return</span> <span class="o">-</span><span class="n">put_attr1</span><span class="p">()</span> <span class="o">+</span> <span class="n">put_attr2</span><span class="p">()</span> <span class="o">+</span> <span class="n">call_attr1</span><span class="p">()</span> <span class="o">-</span> <span class="n">call_attr2</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">put_attr1</span><span class="p">()</span> <span class="o">-</span> <span class="n">put_attr2</span><span class="p">()</span> <span class="o">-</span> <span class="n">call_attr1</span><span class="p">()</span> <span class="o">+</span> <span class="n">call_attr2</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
         </details>
 
