@@ -5,6 +5,9 @@
 
 Black Scholes calculator for Python including all Greeks.
 
+Supports the Black-Scholes-Merton model, 
+Black-76 model and option structures.
+
 ## Installation
 
 `pip install blackscholes`
@@ -41,6 +44,32 @@ put.delta()  ## -0.23359
 put.charm()  ## 0.083267
 ```
 
+### Black-76
+
+The Black-76 model is often used specifically for options and futures and bonds.
+`blackscholes` also supports this model. To see all available greeks
+check out section [4. The Greeks (Black-76)](https://carlolepelaars.github.io/blackscholes/4.the_greeks_black76).
+
+**Call Example**
+```python
+from blackscholes import Black76Call
+F = 55. # Discounted futures price
+call = Black76Call(F=F, K=K, T=T, r=r, sigma=sigma)
+call.price()  ## 6.2345
+call.delta()  ## 0.7594
+call.vomma()  ## 45.1347
+```
+
+**Put Example**
+```python
+from blackscholes import Black76Put
+F = 55. # Discounted futures price
+call = Black76Put(F=F, K=K, T=T, r=r, sigma=sigma)
+call.price()  ## 1.2470
+call.delta()  ## -0.2381
+call.vomma()  ## 45.1347
+```
+
 ### Structures
 
 `blackscholes` offers the following four option structures:
@@ -49,7 +78,7 @@ put.charm()  ## 0.083267
 - Butterfly
 - Iron Condor
 
-All structure have a long and short version. To learn more
+All structures have a long and short version. To learn more
 check out section [6. Option Structures](https://carlolepelaars.github.io/blackscholes/6.option_structures).
 
 **Long Straddle Example**
