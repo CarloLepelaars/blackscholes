@@ -53,8 +53,7 @@ check out section [4. The Greeks (Black-76)](https://carlolepelaars.github.io/bl
 **Call Example**
 ```python
 from blackscholes import Black76Call
-F = 55. # Discounted futures price
-call = Black76Call(F=F, K=K, T=T, r=r, sigma=sigma)
+call = Black76Call(F=55, K=50, T=1, r=0.0025, sigma=0.15)
 call.price()  ## 6.2345
 call.delta()  ## 0.7594
 call.vomma()  ## 45.1347
@@ -63,11 +62,10 @@ call.vomma()  ## 45.1347
 **Put Example**
 ```python
 from blackscholes import Black76Put
-F = 55. # Discounted futures price
-call = Black76Put(F=F, K=K, T=T, r=r, sigma=sigma)
-call.price()  ## 1.2470
-call.delta()  ## -0.2381
-call.vomma()  ## 45.1347
+put = Black76Put(F=55, K=50, T=1, r=0.0025, sigma=0.15)
+put.price()  ## 1.2470
+put.delta()  ## -0.2381
+put.vomma()  ## 45.1347
 ```
 
 ### Structures

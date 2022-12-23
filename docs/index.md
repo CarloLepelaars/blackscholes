@@ -75,8 +75,7 @@ check out section [4. The Greeks (Black-76)](https://carlolepelaars.github.io/bl
 
 ```python
 from blackscholes import Black76Call
-F = 55. # Discounted futures price
-call = Black76Call(F=F, K=K, T=T, r=r, sigma=sigma)
+call = Black76Call(F=55, K=50, T=1, r=0.0025, sigma=0.15)
 call.price()  ## 6.2345
 call.delta()  ## 0.7594
 call.vomma()  ## 45.1347
@@ -86,11 +85,10 @@ call.vomma()  ## 45.1347
 
 ```python
 from blackscholes import Black76Put
-F = 55. # Discounted futures price
-call = Black76Put(F=F, K=K, T=T, r=r, sigma=sigma)
-call.price()  ## 1.2470
-call.delta()  ## -0.2381
-call.vomma()  ## 45.1347
+put = Black76Put(F=55, K=50, T=1, r=0.0025, sigma=0.15)
+put.price()  ## 1.2470
+put.delta()  ## -0.2381
+put.vomma()  ## 45.1347
 ```
 
 
@@ -134,8 +132,8 @@ butterfly.delta()  ## -0.2336
 ```python3
 from blackscholes import BlackScholesIronCondorLong
 
-butterfly = BlackScholesIronCondorLong(S=55, K1=20, K2=25, K3=45, K4=50, 
-                                       T=1.0, r=0.0025, sigma=0.15)
-butterfly.price()  ## -4.0742
-butterfly.delta()  ## -0.1572
+iron_condor = BlackScholesIronCondorLong(S=55, K1=20, K2=25, K3=45, K4=50, 
+                                         T=1.0, r=0.0025, sigma=0.15)
+iron_condor.price()  ## -4.0742
+iron_condor.delta()  ## -0.1572
 ```
