@@ -3464,8 +3464,8 @@ and Greeks with the Black-Scholes-Merton formula.</p>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">ultima</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Sensitivity of vomma with respect to change in vol.</span>
-<span class="sd">        3rd order derivative of option str_method to vol.</span>
+        <span class="sd">&quot;&quot;&quot;Sensitivity of vomma with respect to change in volatility. \n</span>
+<span class="sd">        3rd order derivative of option value to volatility.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">d1d2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d2</span>
         <span class="k">return</span> <span class="p">(</span>
@@ -4251,8 +4251,8 @@ with respect to time (i.e. time decay).</p>
 
   <div class="doc doc-contents ">
   
-      <p>Sensitivity of vomma with respect to change in vol.
-3rd order derivative of option str_method to vol.</p>
+      <p>Sensitivity of vomma with respect to change in volatility. </p>
+<p>3rd order derivative of option value to volatility.</p>
 
       <details class="quote">
         <summary>Source code in <code>blackscholes/base.py</code></summary>
@@ -4266,8 +4266,8 @@ with respect to time (i.e. time decay).</p>
 <span class="normal">199</span>
 <span class="normal">200</span>
 <span class="normal">201</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">ultima</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Sensitivity of vomma with respect to change in vol.</span>
-<span class="sd">    3rd order derivative of option str_method to vol.</span>
+    <span class="sd">&quot;&quot;&quot;Sensitivity of vomma with respect to change in volatility. \n</span>
+<span class="sd">    3rd order derivative of option value to volatility.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">d1d2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d2</span>
     <span class="k">return</span> <span class="p">(</span>
