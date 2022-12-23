@@ -26,6 +26,7 @@ class TestBlackScholesStrangleLong:
         test_methods = list(strangle.call1.get_all_greeks().keys()) + [
             "price",
         ]
+        # Long strangle = Put1 + Call1
         for attr in test_methods:
             assert (
                 getattr(strangle, attr)()
@@ -48,6 +49,7 @@ class TestBlackScholesStrangleShort:
         test_methods = list(strangle.call1.get_all_greeks().keys()) + [
             "price",
         ]
+        # Short strangle = -Put1 - Call1
         for attr in test_methods:
             assert (
                 getattr(strangle, attr)()

@@ -36,6 +36,7 @@ class TestBlackScholesButterflyLong:
         test_methods = list(butterfly.call1.get_all_greeks().keys()) + [
             "price",
         ]
+        # Long (call) butterfly = Call1 - 2 * Call2 + Call3
         for attr in test_methods:
             assert (
                 getattr(butterfly, attr)()
@@ -69,6 +70,7 @@ class TestBlackScholesButterflyShort:
         test_methods = list(butterfly.put1.get_all_greeks().keys()) + [
             "price",
         ]
+        # Short (put) butterfly = -Put1 + 2 * Put2 - Put3
         for attr in test_methods:
             assert (
                 getattr(butterfly, attr)()

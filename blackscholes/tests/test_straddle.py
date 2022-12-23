@@ -14,6 +14,7 @@ class TestBlackScholesStraddleLong:
         test_methods = list(straddle.call1.get_all_greeks().keys()) + [
             "price",
         ]
+        # Long straddle = Put1 + Call1
         for attr in test_methods:
             assert (
                 getattr(straddle, attr)()
@@ -27,6 +28,7 @@ class TestBlackScholesStraddleShort:
         test_methods = list(straddle.call1.get_all_greeks().keys()) + [
             "price",
         ]
+        # Short straddle = - Put1 - Call1
         for attr in test_methods:
             assert (
                 getattr(straddle, attr)()

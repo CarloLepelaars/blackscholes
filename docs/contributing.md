@@ -1,4 +1,4 @@
-# 6. Contributing
+# Contributing
 
 The goal of this library is to be the go-to library
 for calculating everything related to the Black-Scholes-Merton model.
