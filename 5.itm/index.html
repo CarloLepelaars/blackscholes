@@ -795,7 +795,7 @@ that an option will expire in-the-money. </p>
 <p>There is a parity between the dual delta for calls and puts. 
 In other words, the dual delta of call plus dual delta of put with same input parameters always equals <code>$1$</code>.</p>
 <h3 id="call_1">Call</h3>
-<p>$$-e^{-rT}\Phi(d_2)$$</p>
+<p>$$e^{-rT}\Phi(d_2)$$</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesCall</span>
 <span class="n">call</span> <span class="o">=</span> <span class="n">BlackScholesCall</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
 <span class="n">call</span><span class="o">.</span><span class="n">dual_delta</span><span class="p">()</span>  <span class="c1">## 0.71626</span>
