@@ -190,8 +190,8 @@ class BlackScholesBase(ABC, StandardNormalMixin):
         )
 
     def ultima(self) -> float:
-        """Sensitivity of vomma with respect to change in vol.
-        3rd order derivative of option str_method to vol.
+        """Sensitivity of vomma with respect to change in volatility. \n
+        3rd order derivative of option value to volatility.
         """
         d1d2 = self._d1 * self._d2
         return (
