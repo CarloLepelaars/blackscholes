@@ -201,8 +201,8 @@
 
 
   <li class="md-tabs__item">
-    <a href="6.contributing/" class="md-tabs__link">
-      6. Contributing
+    <a href="6.option_structures/" class="md-tabs__link">
+      6. Option Structures
     </a>
   </li>
 
@@ -227,6 +227,18 @@
   <li class="md-tabs__item">
     <a href="8.disclaimer/" class="md-tabs__link">
       8. Disclaimer
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="contributing/" class="md-tabs__link">
+      Contributing
     </a>
   </li>
 
@@ -353,6 +365,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#structures" class="md-nav__link">
+    Structures
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -449,8 +468,8 @@
   
   
     <li class="md-nav__item">
-      <a href="6.contributing/" class="md-nav__link">
-        6. Contributing
+      <a href="6.option_structures/" class="md-nav__link">
+        6. Option Structures
       </a>
     </li>
   
@@ -481,6 +500,21 @@
     <li class="md-nav__item">
       <a href="8.disclaimer/" class="md-nav__link">
         8. Disclaimer
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="contributing/" class="md-nav__link">
+        Contributing
       </a>
     </li>
   
@@ -555,6 +589,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#structures" class="md-nav__link">
+    Structures
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -582,9 +623,10 @@
 <p><a href="https://carlolepelaars.github.io/blackscholes/3.the_greeks_blackscholes">3. The Greeks (Black-Scholes)</a></p>
 <p><a href="https://carlolepelaars.github.io/blackscholes/4.the_greeks_black76">4. The Greeks (Black-76)</a></p>
 <p><a href="https://carlolepelaars.github.io/blackscholes/5.itm">5. In-the-money proxies</a></p>
-<p><a href="https://carlolepelaars.github.io/blackscholes/6.contributing">6. Contribution guide</a></p>
+<p><a href="https://carlolepelaars.github.io/blackscholes/6.option_structures">6. Option Structures</a></p>
 <p><a href="https://carlolepelaars.github.io/blackscholes/7.references">7. Source Code References</a></p>
 <p><a href="https://carlolepelaars.github.io/blackscholes/8.disclaimer">8. Disclaimer</a></p>
+<p><a href="https://carlolepelaars.github.io/blackscholes/contributing">Contribution guide</a></p>
 <p>Black Scholes calculator for Python including all Greeks.</p>
 <p>Currently only supports European options.</p>
 <h2 id="installation">Installation</h2>
@@ -613,6 +655,46 @@
 <span class="n">put</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## 1.214564</span>
 <span class="n">put</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## -0.23359</span>
 <span class="n">put</span><span class="o">.</span><span class="n">charm</span><span class="p">()</span>  <span class="c1">## 0.083267</span>
+</code></pre></div>
+
+<h3 id="structures">Structures</h3>
+<p>Structures are combination of call and put options. Every option structure
+has a <code>Long</code> and <code>Short</code> version. To learn more
+check out section <a href="https://carlolepelaars.github.io/blackscholes/6.option_structures">6. Option Structures</a>.</p>
+<p><strong>Long Straddle</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesStraddleLong</span>
+
+<span class="n">straddle</span> <span class="o">=</span> <span class="n">BlackScholesStraddleLong</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                                    <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">straddle</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## 7.5539</span>
+<span class="n">straddle</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## 0.5328</span>
+</code></pre></div>
+
+<p><strong>Long Strangle</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesStrangleLong</span>
+
+<span class="n">strangle</span> <span class="o">=</span> <span class="n">BlackScholesStrangleLong</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K1</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">K2</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                                    <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">strangle</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## 6.3800</span>
+<span class="n">strangle</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## 0.7530</span>
+</code></pre></div>
+
+<p><strong>Long (Call) Butterfly</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesButterflyLong</span>
+
+<span class="n">butterfly</span> <span class="o">=</span> <span class="n">BlackScholesButterflyLong</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K1</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">K2</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">K3</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> 
+                                      <span class="n">T</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">butterfly</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## 3.9993</span>
+<span class="n">butterfly</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## -0.2336</span>
+</code></pre></div>
+
+<p><strong>Long Iron Condor</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesIronCondorLong</span>
+
+<span class="n">butterfly</span> <span class="o">=</span> <span class="n">BlackScholesIronCondorLong</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K1</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">K2</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">K3</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">K4</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> 
+                                       <span class="n">T</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">butterfly</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## -4.0742</span>
+<span class="n">butterfly</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## -0.1572</span>
 </code></pre></div>
 
 
