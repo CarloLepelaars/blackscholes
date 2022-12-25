@@ -50,6 +50,7 @@ class TestBlackScholesIronCondorLong:
                 r=test_r,
                 sigma=test_sigma,
             )
+        with pytest.raises(AssertionError):
             BlackScholesIronCondorLong(
                 S=test_S,
                 K1=20,
@@ -68,7 +69,7 @@ class TestBlackScholesIronCondorLong:
         test_methods = list(iron_condor.call1.get_all_greeks().keys()) + [
             "price",
         ]
-        # Long iron condor = Put1 - Put2 - Call1 + Call2
+        # Long iron condor = -Put1 + Put2 + Call1 - Call2
         for attr in test_methods:
             assert (
                 getattr(iron_condor, attr)()
@@ -116,6 +117,7 @@ class TestBlackScholesIronCondorShort:
                 r=test_r,
                 sigma=test_sigma,
             )
+        with pytest.raises(AssertionError):
             BlackScholesIronCondorShort(
                 S=test_S,
                 K1=20,
@@ -134,9 +136,9 @@ class TestBlackScholesIronCondorShort:
         test_methods = list(iron_condor.call1.get_all_greeks().keys()) + [
             "price",
         ]
-        # Short iron condor = -Put1 + Put2 + Call1 - Call2
+        # Short iron condor = Put1 - Put2 - Call1 + Call2
         for attr in test_methods:
-            (
+            assert (
                 getattr(iron_condor, attr)()
                 == getattr(iron_condor.put1, attr)()
                 - getattr(iron_condor.put2, attr)()
