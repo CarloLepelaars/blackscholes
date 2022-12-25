@@ -49,6 +49,16 @@ class BlackScholesIronCondorLong(BlackScholesStructureBase):
         self.call2 = BlackScholesCall(S=S, K=K4, T=T, r=r, sigma=sigma, q=q)
 
     def _calc_attr(self, attribute_name: str) -> float:
+        """
+        Combines attributes from two put and two call options into a long iron condor. \n
+        All greeks and price are combined in the same way.
+
+        :param attribute_name: String name of option attribute
+        pointing to a method that can be called on
+        BlackScholesCall and BlackScholesPut.
+
+        :return: Combined value according to long iron condor.
+        """
         put_attr1 = getattr(self.put1, attribute_name)
         put_attr2 = getattr(self.put2, attribute_name)
         call_attr1 = getattr(self.call1, attribute_name)
@@ -103,6 +113,16 @@ class BlackScholesIronCondorShort(BlackScholesStructureBase):
         self.call2 = BlackScholesCall(S=S, K=K4, T=T, r=r, sigma=sigma, q=q)
 
     def _calc_attr(self, attribute_name: str) -> float:
+        """
+        Combines attributes from two put and two call options into a short iron condor. \n
+        All greeks and price are combined in the same way.
+
+        :param attribute_name: String name of option attribute
+        pointing to a method that can be called on
+        BlackScholesCall and BlackScholesPut.
+
+        :return: Combined value according to short iron condor.
+        """
         put_attr1 = getattr(self.put1, attribute_name)
         put_attr2 = getattr(self.put2, attribute_name)
         call_attr1 = getattr(self.call1, attribute_name)

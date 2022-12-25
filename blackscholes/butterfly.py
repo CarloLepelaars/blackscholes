@@ -45,7 +45,17 @@ class BlackScholesButterflyLong(BlackScholesStructureBase):
         self.call2 = BlackScholesCall(S=S, K=K2, T=T, r=r, sigma=sigma, q=q)
         self.call3 = BlackScholesCall(S=S, K=K3, T=T, r=r, sigma=sigma, q=q)
 
-    def _calc_attr(self, attribute_name: str):
+    def _calc_attr(self, attribute_name: str) -> float:
+        """
+        Combines attributes from three call options into a long call butterfly. \n
+        All greeks and price are combined in the same way.
+
+        :param attribute_name: String name of option attribute
+        pointing to a method that can be called on
+        BlackScholesCall and BlackScholesPut.
+
+        :return: Combined value according to long call butterfly.
+        """
         call_attr1 = getattr(self.call1, attribute_name)
         call_attr2 = getattr(self.call2, attribute_name)
         call_attr3 = getattr(self.call3, attribute_name)
@@ -95,7 +105,17 @@ class BlackScholesButterflyShort(BlackScholesStructureBase):
         self.put2 = BlackScholesPut(S=S, K=K2, T=T, r=r, sigma=sigma, q=q)
         self.put3 = BlackScholesPut(S=S, K=K3, T=T, r=r, sigma=sigma, q=q)
 
-    def _calc_attr(self, attribute_name: str):
+    def _calc_attr(self, attribute_name: str) -> float:
+        """
+        Combines attributes from three put options into a short put butterfly. \n
+        All greeks and price are combined in the same way.
+
+        :param attribute_name: String name of option attribute
+        pointing to a method that can be called on
+        BlackScholesCall and BlackScholesPut.
+
+        :return: Combined value according to short put butterfly.
+        """
         put_attr1 = getattr(self.put1, attribute_name)
         put_attr2 = getattr(self.put2, attribute_name)
         put_attr3 = getattr(self.put3, attribute_name)

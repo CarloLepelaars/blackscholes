@@ -134,3 +134,8 @@ dmypy.json
 # Poetry
 # Lock file can be useful when the machine it runs on is similar (docker)
 poetry.lock
+
+# Don't push experimental notebooks
+*.ipynb
+notebooks/
+nbs/

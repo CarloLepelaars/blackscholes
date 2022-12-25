@@ -403,80 +403,80 @@ class BlackScholesStructureBase(ABC):
         """
         ...
 
-    def price(self):
+    def price(self) -> float:
         """Fair value of Black-Scholes option structure."""
         return self._calc_attr(attribute_name="price")
 
-    def delta(self):
+    def delta(self) -> float:
         """Rate of change in structure price
         with respect to the asset price (1st derivative).
         """
         return self._calc_attr(attribute_name="delta")
 
-    def dual_delta(self):
+    def dual_delta(self) -> float:
         """1st derivative in structure price
         with respect to strike price.
         """
         return self._calc_attr(attribute_name="dual_delta")
 
-    def theta(self):
+    def theta(self) -> float:
         """Rate of change in structure price
         with respect to time (i.e. time decay).
         """
         return self._calc_attr(attribute_name="theta")
 
-    def epsilon(self):
+    def epsilon(self) -> float:
         """Change in structure price with respect to underlying dividend yield. \n
         Also known as psi."""
         return self._calc_attr(attribute_name="epsilon")
 
-    def rho(self):
+    def rho(self) -> float:
         """Rate of change in structure price
         with respect to the risk-free rate.
         """
         return self._calc_attr(attribute_name="rho")
 
-    def gamma(self):
+    def gamma(self) -> float:
         """
         Rate of change in delta with respect to the underlying asset price (2nd derivative).
         """
         return self._calc_attr(attribute_name="gamma")
 
-    def dual_gamma(self):
+    def dual_gamma(self) -> float:
         """
         Rate of change in delta with respect to the strike price (2nd derivative).
         """
         return self._calc_attr(attribute_name="dual_gamma")
 
-    def vega(self):
+    def vega(self) -> float:
         """
         Rate of change in structure price with respect to the volatility of the asset.
         """
         return self._calc_attr(attribute_name="vega")
 
-    def lambda_greek(self):
+    def lambda_greek(self) -> float:
         """Percentage change in structure price per %
         change in asset price. Also called gearing.
         """
         return self._calc_attr(attribute_name="lambda_greek")
 
-    def vanna(self):
+    def vanna(self) -> float:
         """Sensitivity of delta with respect to change in volatility."""
         return self._calc_attr(attribute_name="vanna")
 
-    def charm(self):
+    def charm(self) -> float:
         """Rate of change of delta over time (also known as delta decay)."""
         return self._calc_attr(attribute_name="charm")
 
-    def vomma(self):
+    def vomma(self) -> float:
         """2nd order sensitivity to volatility."""
         return self._calc_attr(attribute_name="vomma")
 
-    def veta(self):
+    def veta(self) -> float:
         """Rate of change in `vega` with respect to time."""
         return self._calc_attr(attribute_name="veta")
 
-    def phi(self):
+    def phi(self) -> float:
         """2nd order partial derivative with respect to strike price. \n
         Phi is used in the Breeden-Litzenberger formula. \n
         Breeden-Litzenberger uses quoted option prices
@@ -484,19 +484,19 @@ class BlackScholesStructureBase(ABC):
         """
         return self._calc_attr(attribute_name="phi")
 
-    def speed(self):
+    def speed(self) -> float:
         """Rate of change in Gamma with respect to change in the underlying asset price."""
         return self._calc_attr(attribute_name="speed")
 
-    def zomma(self):
+    def zomma(self) -> float:
         """Rate of change of gamma with respect to changes in volatility."""
         return self._calc_attr(attribute_name="zomma")
 
-    def color(self):
+    def color(self) -> float:
         """Rate of change of gamma over time."""
         return self._calc_attr(attribute_name="color")
 
-    def ultima(self):
+    def ultima(self) -> float:
         """Sensitivity of vomma with respect to change in volatility.
         3rd order derivative of structure price to volatility.
         """

@@ -28,7 +28,17 @@ class BlackScholesStraddleLong(BlackScholesStructureBase):
         self.put1 = BlackScholesPut(S=S, K=K, T=T, r=r, sigma=sigma, q=q)
         super().__init__()
 
-    def _calc_attr(self, attribute_name: str):
+    def _calc_attr(self, attribute_name: str) -> float:
+        """
+        Combines attributes from a put and call option into a long straddle. \n
+        All greeks and price are combined in the same way. \n
+
+        :param attribute_name: String name of option attribute
+        pointing to a method that can be called on
+        BlackScholesCall and BlackScholesPut.
+
+        :return: Combined value according to long straddle.
+        """
         put_attr = getattr(self.put1, attribute_name)
         call_attr = getattr(self.call1, attribute_name)
         return put_attr() + call_attr()
@@ -60,7 +70,17 @@ class BlackScholesStraddleShort(BlackScholesStructureBase):
         self.put1 = BlackScholesPut(S=S, K=K, T=T, r=r, sigma=sigma, q=q)
         super().__init__()
 
-    def _calc_attr(self, attribute_name: str):
+    def _calc_attr(self, attribute_name: str) -> float:
+        """
+        Combines attributes from a put and call option into a short straddle. \n
+        All greeks and price are combined in the same way. \n
+
+        :param attribute_name: String name of option attribute
+        pointing to a method that can be called on
+        BlackScholesCall and BlackScholesPut.
+
+        :return: Combined value according to short straddle.
+        """
         put_attr = getattr(self.put1, attribute_name)
         call_attr = getattr(self.call1, attribute_name)
         return -put_attr() - call_attr()

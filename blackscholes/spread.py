@@ -2,14 +2,14 @@ from . import BlackScholesCall, BlackScholesPut
 from .base import BlackScholesStructureBase
 
 
-class BlackScholesStrangleLong(BlackScholesStructureBase):
+class BlackScholesBullSpread(BlackScholesStructureBase):
     """
-    Create long strangle option structure. \n
-    - Long strangle -> Put(K1) + Call(K2)
+    Create bull spread option structure. \n
+    - Bull Spread -> Call(K1) - Call(K2)
 
     :param S: Price of underlying asset \n
-    :param K1: Strike price for put \n
-    :param K2: Strike price for call \n
+    :param K1: Strike price for 1st call \n
+    :param K2: Strike price for 2nd call \n
     It must hold that K1 < K2. \n
     :param T: Time till expiration in years (1/12 indicates 1 month) \n
     :param r: Risk-free interest rate (0.05 indicates 5%) \n
@@ -32,39 +32,39 @@ class BlackScholesStrangleLong(BlackScholesStructureBase):
         ), f"""1st strike price should be smaller than 2nd.
         Got K1={K1}, which is not smaller than K2={K2}.
         """
-        self.put1 = BlackScholesPut(S=S, K=K1, T=T, r=r, sigma=sigma, q=q)
-        self.call1 = BlackScholesCall(S=S, K=K2, T=T, r=r, sigma=sigma, q=q)
+        self.call1 = BlackScholesCall(S=S, K=K1, T=T, r=r, sigma=sigma, q=q)
+        self.call2 = BlackScholesCall(S=S, K=K2, T=T, r=r, sigma=sigma, q=q)
         super().__init__()
 
     def _calc_attr(self, attribute_name: str) -> float:
         """
-        Combines attributes from a put and call option into a long strangle. \n
+        Combines attributes from two call options into a bull spread. \n
         All greeks and price are combined in the same way.
 
         :param attribute_name: String name of option attribute
         pointing to a method that can be called on
         BlackScholesCall and BlackScholesPut.
 
-        :return: Combined value according to long strangle.
+        :return: Combined value according to bull spread.
         """
-        put_attr = getattr(self.put1, attribute_name)
-        call_attr = getattr(self.call1, attribute_name)
-        return put_attr() + call_attr()
+        call1_attr = getattr(self.call1, attribute_name)
+        call2_attr = getattr(self.call2, attribute_name)
+        return call1_attr() - call2_attr()
 
 
-class BlackScholesStrangleShort(BlackScholesStructureBase):
+class BlackScholesBearSpread(BlackScholesStructureBase):
     """
-    Create short strangle option structure. \n
-    - Short strangle -> -Put(K1) - Call(K2)
+    Create bear spread option structure. \n
+    - Bear Spread -> Put(K1) - Put(K2)
 
     :param S: Price of underlying asset \n
-    :param K1: Strike price for put \n
-    :param K2: Strike price for call \n
-    It must hold that K1 < K2. \n
+    :param K1: Strike price for 1st put \n
+    :param K2: Strike price for 2nd put \n
+    It must hold that K1 > K2. \n
     :param T: Time till expiration in years (1/12 indicates 1 month) \n
     :param r: Risk-free interest rate (0.05 indicates 5%) \n
     :param sigma: Volatility (standard deviation) of stock (0.15 indicates 15%) \n
-    :param q: Annual dividend yield (0.05 indicates 5% yield)
+    :param q: Annual dividend yield (0.05 indicates 5% yield) \n
     """
 
     def __init__(
@@ -78,25 +78,25 @@ class BlackScholesStrangleShort(BlackScholesStructureBase):
         q: float = 0.0,
     ):
         assert (
-            K1 < K2
-        ), f"""1st strike price should be smaller than 2nd.
-        Got K1={K1}, which is not smaller than K2={K2}.
+            K1 > K2
+        ), f"""1st strike price should be larger than 2nd.
+        Got K1={K1}, which is not larger than K2={K2}.
         """
         self.put1 = BlackScholesPut(S=S, K=K1, T=T, r=r, sigma=sigma, q=q)
-        self.call1 = BlackScholesCall(S=S, K=K2, T=T, r=r, sigma=sigma, q=q)
+        self.put2 = BlackScholesPut(S=S, K=K2, T=T, r=r, sigma=sigma, q=q)
         super().__init__()
 
     def _calc_attr(self, attribute_name: str) -> float:
         """
-        Combines attributes from a put and call option into a short strangle. \n
+        Combines attributes from two put options into a bear spread. \n
         All greeks and price are combined in the same way.
 
         :param attribute_name: String name of option attribute
         pointing to a method that can be called on
         BlackScholesCall and BlackScholesPut.
 
-        :return: Combined value according to short strangle.
+        :return: Combined value according to bear spread.
         """
-        put_attr = getattr(self.put1, attribute_name)
-        call_attr = getattr(self.call1, attribute_name)
-        return -put_attr() - call_attr()
+        put1_attr = getattr(self.put1, attribute_name)
+        put2_attr = getattr(self.put2, attribute_name)
+        return put1_attr() - put2_attr()
