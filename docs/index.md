@@ -137,3 +137,43 @@ iron_condor = BlackScholesIronCondorLong(S=55, K1=20, K2=25, K3=45, K4=50,
 iron_condor.price()  ## 4.0742
 iron_condor.delta()  ## 0.1572
 ```
+
+**Bull Spread**
+
+```python3
+from blackscholes import BlackScholesBullSpread
+bull_spread = BlackScholesBullSpread(S=55, K1=40, K2=50, T=1.0,
+                                     r=0.0025, sigma=0.15)
+bull_spread.price()  ## 8.8011
+bull_spread.delta()  ## 0.2202
+```
+
+**Bear Spread**
+
+```python
+from blackscholes import BlackScholesBearSpread
+bear_spread = BlackScholesBearSpread(S=55, K1=50, K2=40, T=1.0,
+                                     r=0.0025, sigma=0.15)
+bear_spread.price()  ## 1.1740
+bear_spread.delta()  ## -0.2202
+```
+
+**Long Iron Butterfly**
+
+```python
+from blackscholes import BlackScholesIronButterflyLong
+iron_butterfly = BlackScholesIronButterflyLong(S=55, K1=95, K2=100, K3=105, 
+                                               T=1.0, r=0.0025, sigma=0.15)
+iron_butterfly.price()  ## 4.9873
+iron_butterfly.delta()  ## -0.0001
+```
+
+**Short Iron Butterfly**
+
+```python
+from blackscholes import BlackScholesIronButterflyShort
+iron_butterfly = BlackScholesIronButterflyShort(S=55, K1=95, K2=100, K3=105, 
+                                                T=1.0, r=0.0025, sigma=0.15)
+iron_butterfly.price()  ## -4.9873
+iron_butterfly.delta()  ## 0.0001
+```

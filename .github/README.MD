@@ -75,6 +75,8 @@ put.vomma()  ## 45.1347
 - Strangle
 - Butterfly
 - Iron Condor
+- Spreads
+- Iron Butterfly
 
 All structures have a long and short version. To learn more
 check out section [6. Option Structures](https://carlolepelaars.github.io/blackscholes/6.option_structures).
