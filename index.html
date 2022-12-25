@@ -734,6 +734,38 @@ check out section <a href="https://carlolepelaars.github.io/blackscholes/6.optio
 <span class="n">iron_condor</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## 0.1572</span>
 </code></pre></div>
 
+<p><strong>Bull Spread</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesBullSpread</span>
+<span class="n">bull_spread</span> <span class="o">=</span> <span class="n">BlackScholesBullSpread</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K1</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">K2</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                                     <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">bull_spread</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## 8.8011</span>
+<span class="n">bull_spread</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## 0.2202</span>
+</code></pre></div>
+
+<p><strong>Bear Spread</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesBearSpread</span>
+<span class="n">bear_spread</span> <span class="o">=</span> <span class="n">BlackScholesBearSpread</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K1</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">K2</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                                     <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">bear_spread</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## 1.1740</span>
+<span class="n">bear_spread</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## -0.2202</span>
+</code></pre></div>
+
+<p><strong>Long Iron Butterfly</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesIronButterflyLong</span>
+<span class="n">iron_butterfly</span> <span class="o">=</span> <span class="n">BlackScholesIronButterflyLong</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K1</span><span class="o">=</span><span class="mi">95</span><span class="p">,</span> <span class="n">K2</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">K3</span><span class="o">=</span><span class="mi">105</span><span class="p">,</span> 
+                                               <span class="n">T</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">iron_butterfly</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## 4.9873</span>
+<span class="n">iron_butterfly</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## -0.0001</span>
+</code></pre></div>
+
+<p><strong>Short Iron Butterfly</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesIronButterflyShort</span>
+<span class="n">iron_butterfly</span> <span class="o">=</span> <span class="n">BlackScholesIronButterflyShort</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K1</span><span class="o">=</span><span class="mi">95</span><span class="p">,</span> <span class="n">K2</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">K3</span><span class="o">=</span><span class="mi">105</span><span class="p">,</span> 
+                                                <span class="n">T</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">iron_butterfly</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## -4.9873</span>
+<span class="n">iron_butterfly</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## 0.0001</span>
+</code></pre></div>
+
 
 
 

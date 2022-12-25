@@ -527,6 +527,60 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#5-spreads" class="md-nav__link">
+    5. Spreads 
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Spreads ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bull-spread" class="md-nav__link">
+    Bull spread
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bear-spread" class="md-nav__link">
+    Bear spread
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-iron-butterfly" class="md-nav__link">
+    6. Iron Butterfly 
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Iron Butterfly ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#long-iron-butterfly" class="md-nav__link">
+    Long iron butterfly
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#short-iron-butterfly" class="md-nav__link">
+    Short iron butterfly
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -721,6 +775,60 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#5-spreads" class="md-nav__link">
+    5. Spreads 
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Spreads ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bull-spread" class="md-nav__link">
+    Bull spread
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bear-spread" class="md-nav__link">
+    Bear spread
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-iron-butterfly" class="md-nav__link">
+    6. Iron Butterfly 
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Iron Butterfly ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#long-iron-butterfly" class="md-nav__link">
+    Long iron butterfly
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#short-iron-butterfly" class="md-nav__link">
+    Short iron butterfly
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -751,6 +859,8 @@ This allows us to hedge out directional bets and bet purely on volatility.</p>
 <li><a href="#strangle">Strangle</a></li>
 <li><a href="#butterfly">Butterfly</a></li>
 <li><a href="#condor">Iron Condor</a></li>
+<li><a href="#spreads">Spreads</a></li>
+<li><a href="#ironbutterfly">Iron Butterfly</a></li>
 </ol>
 <p>All structures have a long and short version. 
 <code>price</code>, <code>get_core_greeks</code>, <code>get_all_greeks</code> and all greeks can individually be retrieved from the compound structures. To
@@ -784,7 +894,7 @@ from volatility regardless of the direction of the underlying asset.</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesStraddleShort</span>
 
 <span class="n">straddle</span> <span class="o">=</span> <span class="n">BlackScholesStraddleShort</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
-                                    <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+                                     <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
 <span class="n">straddle</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## -7.5539</span>
 <span class="n">straddle</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## -0.5328</span>
 </code></pre></div>
@@ -881,9 +991,84 @@ is a variant of the butterfly. The structure involves
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesIronCondorShort</span>
 
 <span class="n">iron_condor</span> <span class="o">=</span> <span class="n">BlackScholesIronCondorShort</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K1</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">K2</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">K3</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">K4</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> 
-                                        <span class="n">T</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+                                          <span class="n">T</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
 <span class="n">iron_condor</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## -4.0742</span>
 <span class="n">iron_condor</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## -0.1572</span>
+</code></pre></div>
+
+<h2 id="5-spreads">5. Spreads <a name="spreads"></a></h2>
+<p>A spread consists of buying and selling one option of the same type with different strike prices.
+The potential payoff and losses are hereby bounded on both sides.</p>
+<p>Choose two strike prices <code>$K_1$</code> and <code>$K_2$</code>.</p>
+<h3 id="bull-spread">Bull spread</h3>
+<p>For a bull spread:</p>
+<ol>
+<li>
+<p>Buy one call option with a lower strike price.</p>
+</li>
+<li>
+<p>Sell one call option with a higher strike price.</p>
+</li>
+</ol>
+<p>It must hold that <code>$K_1 &lt; K_2$</code>.</p>
+<p>$$C(K_1) - C(K_2)$$</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesBullSpread</span>
+<span class="n">bull_spread</span> <span class="o">=</span> <span class="n">BlackScholesBullSpread</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K1</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">K2</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                                     <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">bull_spread</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## 8.8011</span>
+<span class="n">bull_spread</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## 0.2202</span>
+</code></pre></div>
+
+<h3 id="bear-spread">Bear spread</h3>
+<p>For a bear spread:</p>
+<ol>
+<li>
+<p>Buy one put option with a higher strike price.</p>
+</li>
+<li>
+<p>Sell one put option with a lower strike price.</p>
+</li>
+</ol>
+<p>It must hold that <code>$K_1 &gt; K_2$</code>.</p>
+<p>$$P(K_1) - P(K_2)$$</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesBearSpread</span>
+<span class="n">bear_spread</span> <span class="o">=</span> <span class="n">BlackScholesBearSpread</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K1</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">K2</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                                     <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">bear_spread</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## 1.1740</span>
+<span class="n">bear_spread</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## -0.2202</span>
+</code></pre></div>
+
+<h2 id="6-iron-butterfly">6. Iron Butterfly <a name="ironbutterfly"></a></h2>
+<p>An iron butterfly combines concepts from the iron condor and butterfly.
+In principle it is very similar to an iron condor, but all strike prices
+must be equidistant. Like with the iron condor we combine two put options
+and two call options. Two options will have the same strike price.</p>
+<p>Choose three strike prices <code>$K_1$</code>, <code>$K_2$</code>, <code>$K_3$</code>.</p>
+<p>Two conditions must hold when choosing strike prices:</p>
+<ul>
+<li>
+<p><code>$K_1&lt;K_2&lt;K_3$</code></p>
+</li>
+<li>
+<p><code>$K_3-K_2=K_2-K_1$</code> (i.e. equidistant strike prices).</p>
+</li>
+</ul>
+<h3 id="long-iron-butterfly">Long iron butterfly</h3>
+<p>$$-P(K_1) + P(K_2) + C(K_2) - C(K_3)$$</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesIronButterflyLong</span>
+<span class="n">iron_butterfly</span> <span class="o">=</span> <span class="n">BlackScholesIronButterflyLong</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K1</span><span class="o">=</span><span class="mi">95</span><span class="p">,</span> <span class="n">K2</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">K3</span><span class="o">=</span><span class="mi">105</span><span class="p">,</span> 
+                                               <span class="n">T</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">iron_butterfly</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## 4.9873</span>
+<span class="n">iron_butterfly</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## -0.0001</span>
+</code></pre></div>
+
+<h3 id="short-iron-butterfly">Short iron butterfly</h3>
+<p>$$P(K_1) + - P(K_2) - C(K_2) + C(K_3)$$</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesIronButterflyShort</span>
+<span class="n">iron_butterfly</span> <span class="o">=</span> <span class="n">BlackScholesIronButterflyShort</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K1</span><span class="o">=</span><span class="mi">95</span><span class="p">,</span> <span class="n">K2</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">K3</span><span class="o">=</span><span class="mi">105</span><span class="p">,</span> 
+                                                <span class="n">T</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">iron_butterfly</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## -4.9873</span>
+<span class="n">iron_butterfly</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## 0.0001</span>
 </code></pre></div>
 
 
