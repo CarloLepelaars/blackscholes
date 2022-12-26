@@ -70,7 +70,7 @@ put.vomma()  ## 45.1347
 
 ### Structures
 
-`blackscholes` offers the following four option structures:
+`blackscholes` offers the following six option structures:
 - Straddle
 - Strangle
 - Butterfly
