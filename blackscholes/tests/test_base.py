@@ -37,6 +37,9 @@ class BlackScholesMeta(BlackScholesBase):
     def delta(self):
         ...
 
+    def forward_delta(self):
+        ...
+
     def dual_delta(self):
         ...
 

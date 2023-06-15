@@ -56,7 +56,16 @@ class BlackScholesBase(ABC, StandardNormalMixin):
     @abstractmethod
     def delta(self) -> float:
         """Rate of change in option price
-        with respect to the asset price (1st derivative)."""
+        with respect to the forward price (1st derivative).
+        """
+        ...
+
+    @abstractmethod
+    def forward_delta(self) -> float:
+        """
+        Delta discounted for interest rates.
+        For the cash/spot delta, use `delta`.
+        """
         ...
 
     @abstractmethod
@@ -228,6 +237,7 @@ class BlackScholesBase(ABC, StandardNormalMixin):
         implemented as a dictionary."""
         return {
             "delta": self.delta(),
+            "forward_delta": self.forward_delta(),
             "gamma": self.gamma(),
             "vega": self.vega(),
             "theta": self.theta(),
@@ -413,6 +423,13 @@ class BlackScholesStructureBase(ABC):
         """
         return self._calc_attr(attribute_name="delta")
 
+    def forward_delta(self) -> float:
+        """
+        Delta discounted for interest rates.
+        For the cash/spot delta, use `delta`.
+        """
+        return self._calc_attr(attribute_name="forward_delta")
+
     def dual_delta(self) -> float:
         """1st derivative in structure price
         with respect to strike price.
@@ -524,6 +541,7 @@ class BlackScholesStructureBase(ABC):
         implemented as a dictionary."""
         return {
             "delta": self.delta(),
+            "forward_delta": self.forward_delta(),
             "gamma": self.gamma(),
             "vega": self.vega(),
             "theta": self.theta(),

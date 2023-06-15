@@ -30,9 +30,19 @@ class BlackScholesPut(BlackScholesBase):
     def delta(self) -> float:
         """
         Rate of change in option price
-        with respect to the asset price (1st derivative).
+        with respect to the forward price (1st derivative).
+        In other words, delta discounted for interest rates.
+        Note that this is the forward delta.
+        For the cash/spot delta, use `spot_delta`.
         """
-        return -exp(-self.q * self.T) * self._cdf(-self._d1)
+        return exp(-self.q * self.T) * (self._cdf(self._d1) - 1)
+
+    def forward_delta(self) -> float:
+        """
+        Delta discounted for interest rates.
+        For the cash/spot delta, use `delta`.
+        """
+        return exp((self.r - self.q) * self.T) * (self._cdf(self._d1) - 1)
 
     def dual_delta(self) -> float:
         """1st derivative in option price
