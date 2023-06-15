@@ -36,10 +36,10 @@ class BlackScholesPut(BlackScholesBase):
         """
         return exp(-self.q * self.T) * (self._cdf(self._d1) - 1)
 
-    def forward_delta(self) -> float:
+    def spot_delta(self) -> float:
         """
         Delta discounted for interest rates.
-        For the cash/spot delta, use `delta`.
+        For the forward delta, use `delta`.
         """
         return exp((self.r - self.q) * self.T) * (self._cdf(self._d1) - 1)
 

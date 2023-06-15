@@ -31,14 +31,12 @@ class TestBlackScholesCall:
         )
         np.testing.assert_almost_equal(call_delta - put.delta(), 1.0, decimal=5)
 
-    def test_forward_delta(self):
-        call_forward_delta = self.call.forward_delta()
+    def test_spot_delta(self):
+        call_spot_delta = self.call.spot_delta()
 
-        np.testing.assert_almost_equal(
-            call_forward_delta, 0.7683262250522389, decimal=6
-        )
+        np.testing.assert_almost_equal(call_spot_delta, 0.7683262250522389, decimal=6)
 
-        # Due to put-call parity, Call forward delta + Put forward delta should be 1.
+        # Due to put-call parity, Call spot delta + Put spot delta should be 1.
         put = BlackScholesPut(
             S=test_S,
             K=test_K,
@@ -47,7 +45,7 @@ class TestBlackScholesCall:
             sigma=test_sigma,
         )
         np.testing.assert_almost_equal(
-            call_forward_delta - put.forward_delta(), 1.0, decimal=2
+            call_spot_delta - put.spot_delta(), 1.0, decimal=2
         )
 
     def test_dual_delta(self):
@@ -131,7 +129,7 @@ class TestBlackScholesCall:
         all_greeks = self.call.get_all_greeks()
         expected_result = {
             "delta": 0.766407808509462,
-            "forward_delta": 0.7683262250522389,
+            "spot_delta": 0.7683262250522389,
             "gamma": 0.03712496688031454,
             "vega": 16.84545372194272,
             "theta": -1.3529415670754943,

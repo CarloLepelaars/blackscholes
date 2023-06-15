@@ -61,10 +61,10 @@ class BlackScholesBase(ABC, StandardNormalMixin):
         ...
 
     @abstractmethod
-    def forward_delta(self) -> float:
+    def spot_delta(self) -> float:
         """
         Delta discounted for interest rates.
-        For the cash/spot delta, use `delta`.
+        For the forward delta, use `delta`.
         """
         ...
 
@@ -237,7 +237,7 @@ class BlackScholesBase(ABC, StandardNormalMixin):
         implemented as a dictionary."""
         return {
             "delta": self.delta(),
-            "forward_delta": self.forward_delta(),
+            "spot_delta": self.spot_delta(),
             "gamma": self.gamma(),
             "vega": self.vega(),
             "theta": self.theta(),
@@ -420,17 +420,17 @@ class BlackScholesStructureBase(ABC):
     def delta(self) -> float:
         """Rate of change in structure price
         with respect to the asset price (1st derivative).
-        Note that this is the spot delta.
-        For the forward delta, use `forward_delta`.
+        Note that this is the forward delta.
+        For the spot delta, use `spot_delta`.
         """
         return self._calc_attr(attribute_name="delta")
 
-    def forward_delta(self) -> float:
+    def spot_delta(self) -> float:
         """
         Delta discounted for interest rates.
-        For the cash/spot delta, use `delta`.
+        For the forward delta, use `delta`.
         """
-        return self._calc_attr(attribute_name="forward_delta")
+        return self._calc_attr(attribute_name="spot_delta")
 
     def dual_delta(self) -> float:
         """1st derivative in structure price
@@ -543,7 +543,7 @@ class BlackScholesStructureBase(ABC):
         implemented as a dictionary."""
         return {
             "delta": self.delta(),
-            "forward_delta": self.forward_delta(),
+            "spot_delta": self.spot_delta(),
             "gamma": self.gamma(),
             "vega": self.vega(),
             "theta": self.theta(),
