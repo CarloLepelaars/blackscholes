@@ -420,6 +420,8 @@ class BlackScholesStructureBase(ABC):
     def delta(self) -> float:
         """Rate of change in structure price
         with respect to the asset price (1st derivative).
+        Note that this is the spot delta.
+        For the forward delta, use `forward_delta`.
         """
         return self._calc_attr(attribute_name="delta")
 

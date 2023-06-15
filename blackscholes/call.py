@@ -31,10 +31,8 @@ class BlackScholesCall(BlackScholesBase):
     def delta(self) -> float:
         """Rate of change in option price
         with respect to the forward price (1st derivative).
-        In other words, delta discounted for interest rates.
-        Proxy for probability of the option expiring in the money.
-        Note that this is the forward delta.
-        For the cash/spot delta, use `spot_delta`.
+        Note that this is the spot delta.
+        For the forward delta, use `forward_delta`.
         """
         return exp(-self.q * self.T) * self._cdf(self._d1)
 
