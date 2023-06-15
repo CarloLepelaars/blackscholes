@@ -663,6 +663,7 @@ Black-76 model and option structures.</p>
 <span class="n">call</span> <span class="o">=</span> <span class="n">BlackScholesCall</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="n">q</span><span class="p">)</span>
 <span class="n">call</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## 6.339408</span>
 <span class="n">call</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## 0.766407</span>
+<span class="n">call</span><span class="o">.</span><span class="n">forward_delta</span><span class="p">()</span> <span class="c1">## 0.7683</span>
 <span class="n">call</span><span class="o">.</span><span class="n">charm</span><span class="p">()</span>  <span class="c1">## 0.083267</span>
 </code></pre></div>
 
@@ -671,6 +672,7 @@ Black-76 model and option structures.</p>
 <span class="n">put</span> <span class="o">=</span> <span class="n">BlackScholesPut</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="n">q</span><span class="p">)</span>
 <span class="n">put</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## 1.214564</span>
 <span class="n">put</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>  <span class="c1">## -0.23359</span>
+<span class="n">put</span><span class="o">.</span><span class="n">forward_delta</span><span class="p">()</span> <span class="c1">## -0.23417</span>
 <span class="n">put</span><span class="o">.</span><span class="n">charm</span><span class="p">()</span>  <span class="c1">## 0.083267</span>
 </code></pre></div>
 
