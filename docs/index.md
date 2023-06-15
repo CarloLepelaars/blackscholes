@@ -52,7 +52,7 @@ from blackscholes import BlackScholesCall
 call = BlackScholesCall(S=S, K=K, T=T, r=r, sigma=sigma, q=q)
 call.price()  ## 6.339408
 call.delta()  ## 0.766407
-call.forward_delta() ## 0.7683
+call.spot_delta() ## 0.7683
 call.charm()  ## 0.083267
 ```
 
@@ -63,7 +63,7 @@ from blackscholes import BlackScholesPut
 put = BlackScholesPut(S=S, K=K, T=T, r=r, sigma=sigma, q=q)
 put.price()  ## 1.214564
 put.delta()  ## -0.23359
-put.forward_delta() ## -0.23417
+put.spot_delta() ## -0.23417
 put.charm()  ## 0.083267
 ```
 
