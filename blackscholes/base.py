@@ -209,6 +209,12 @@ class BlackScholesBase(ABC, StandardNormalMixin):
             * (d1d2 * (1.0 - d1d2) + self._d1**2 + self._d2**2)
         )
 
+    def alpha(self) -> float:
+        """Theta to gamma ratio. Also called "gamma rent".
+        More info: "Dynamic Hedging" by Nassim Taleb, p. 178-181.
+        """
+        return abs(self.theta()) / (self.gamma() + 1e-9)
+
     def get_core_greeks(self) -> Dict[str, float]:
         """
         Get the top 5 most well known Greeks.
@@ -255,6 +261,7 @@ class BlackScholesBase(ABC, StandardNormalMixin):
             "ultima": self.ultima(),
             "dual_delta": self.dual_delta(),
             "dual_gamma": self.dual_gamma(),
+            "alpha": self.alpha(),
         }
 
     @property
@@ -342,6 +349,12 @@ class Black76Base(ABC, StandardNormalMixin):
         """2nd order sensitivity to volatility."""
         return self.vega() * self._d1 * self._d2 / self.sigma
 
+    def alpha(self) -> float:
+        """Theta to gamma ratio. Also called "gamma rent".
+        More info: "Dynamic Hedging" by Nassim Taleb, p. 178-181.
+        """
+        return abs(self.theta()) / (self.gamma() + 1e-9)
+
     def get_core_greeks(self) -> Dict[str, float]:
         """
         Get the top 5 most well known Greeks.
@@ -369,6 +382,7 @@ class Black76Base(ABC, StandardNormalMixin):
             "rho": self.rho(),
             "vanna": self.vanna(),
             "vomma": self.vomma(),
+            "alpha": self.alpha(),
         }
 
     @property
@@ -521,6 +535,12 @@ class BlackScholesStructureBase(ABC):
         """
         return self._calc_attr(attribute_name="ultima")
 
+    def alpha(self) -> float:
+        """Theta to gamma ratio. Also called "gamma rent".
+        More info: "Dynamic Hedging" by Nassim Taleb, p. 178-181.
+        """
+        return self._calc_attr(attribute_name="alpha")
+
     def get_core_greeks(self) -> Dict[str, float]:
         """
         Get the top 5 most well known Greeks for the compound.
@@ -561,4 +581,5 @@ class BlackScholesStructureBase(ABC):
             "ultima": self.ultima(),
             "dual_delta": self.dual_delta(),
             "dual_gamma": self.dual_gamma(),
+            "alpha": self.alpha(),
         }

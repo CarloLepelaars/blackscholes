@@ -132,6 +132,7 @@ class TestBlackScholesPut:
             "ultima": -827.4229433648609,
             "dual_delta": 0.2812428189591384,
             "dual_gamma": 0.0449212099251806,
+            "alpha": 33.084302745675686,
         }
         assert set(all_greeks.keys()) == set(expected_result.keys())
         for key in expected_result.keys():
@@ -194,6 +195,7 @@ class TestBlack76Put:
             "rho": -1.2470010007171901,
             "vanna": -1.1551661594303946,
             "vomma": 45.13472833935059,
+            "alpha": 33.94806810170172,
         }
 
         assert set(all_greeks.keys()) == set(expected_result.keys())
