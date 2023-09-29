@@ -20,10 +20,11 @@ jobs:
       - name: Install dependencies
         run: |
           pip install poetry
+          
           poetry install
 
       - name: Build the MkDocs site
-        run: mkdocs build
+        run: poetry run mkdocs build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

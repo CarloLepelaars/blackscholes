@@ -28,4 +28,4 @@ jobs:
         poetry install
     - name: Run tests
       run: |
-        pytest -s
+        pytest -s --cov=blackscholes --cov-report term-missing --cov-config=.coveragerc
