@@ -19,3 +19,6 @@ markdown_extensions:
   - fenced_code
   - codehilite:
       linennums: true
+
+plugins:
+  - mkdocstrings
