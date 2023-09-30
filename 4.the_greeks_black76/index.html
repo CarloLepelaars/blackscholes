@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-8.5.10">
     
     
       
@@ -40,8 +40,6 @@
         <style>:root{--md-text-font:"Ubuntu";--md-code-font:"Roboto Mono"}</style>
       
     
-    
-      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -111,6 +109,39 @@
     </div>
     
     
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
     
     
   </nav>
@@ -404,19 +435,6 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blackscholes.call.Black76Call.delta" class="md-nav__link">
-    blackscholes.call.Black76Call.delta
-  </a>
-  
-    <nav class="md-nav" aria-label="blackscholes.call.Black76Call.delta">
-      <ul class="md-nav__list">
-        
           <li class="md-nav__item">
   <a href="#put" class="md-nav__link">
     Put
@@ -430,13 +448,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#blackscholes.put.Black76Put.delta" class="md-nav__link">
-    blackscholes.put.Black76Put.delta
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#gamma" class="md-nav__link">
     Gamma
   </a>
@@ -444,22 +455,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#blackscholes.base.Black76Base.gamma" class="md-nav__link">
-    blackscholes.base.Black76Base.gamma
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#vega" class="md-nav__link">
     Vega 
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blackscholes.base.Black76Base.vega" class="md-nav__link">
-    blackscholes.base.Black76Base.vega
   </a>
   
 </li>
@@ -479,19 +476,6 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blackscholes.call.Black76Call.theta" class="md-nav__link">
-    blackscholes.call.Black76Call.theta
-  </a>
-  
-    <nav class="md-nav" aria-label="blackscholes.call.Black76Call.theta">
-      <ul class="md-nav__list">
-        
           <li class="md-nav__item">
   <a href="#put_1" class="md-nav__link">
     Put
@@ -501,13 +485,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blackscholes.put.Black76Put.theta" class="md-nav__link">
-    blackscholes.put.Black76Put.theta
-  </a>
   
 </li>
       
@@ -526,19 +503,6 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blackscholes.call.Black76Call.rho" class="md-nav__link">
-    blackscholes.call.Black76Call.rho
-  </a>
-  
-    <nav class="md-nav" aria-label="blackscholes.call.Black76Call.rho">
-      <ul class="md-nav__list">
-        
           <li class="md-nav__item">
   <a href="#put_2" class="md-nav__link">
     Put
@@ -552,13 +516,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#blackscholes.put.Black76Put.rho" class="md-nav__link">
-    blackscholes.put.Black76Put.rho
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#vanna" class="md-nav__link">
     Vanna
   </a>
@@ -566,22 +523,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#blackscholes.base.Black76Base.vanna" class="md-nav__link">
-    blackscholes.base.Black76Base.vanna
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#vomma" class="md-nav__link">
     Vomma
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blackscholes.base.Black76Base.vomma" class="md-nav__link">
-    blackscholes.base.Black76Base.vomma
   </a>
   
 </li>
@@ -717,19 +660,6 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blackscholes.call.Black76Call.delta" class="md-nav__link">
-    blackscholes.call.Black76Call.delta
-  </a>
-  
-    <nav class="md-nav" aria-label="blackscholes.call.Black76Call.delta">
-      <ul class="md-nav__list">
-        
           <li class="md-nav__item">
   <a href="#put" class="md-nav__link">
     Put
@@ -743,13 +673,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#blackscholes.put.Black76Put.delta" class="md-nav__link">
-    blackscholes.put.Black76Put.delta
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#gamma" class="md-nav__link">
     Gamma
   </a>
@@ -757,22 +680,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#blackscholes.base.Black76Base.gamma" class="md-nav__link">
-    blackscholes.base.Black76Base.gamma
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#vega" class="md-nav__link">
     Vega 
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blackscholes.base.Black76Base.vega" class="md-nav__link">
-    blackscholes.base.Black76Base.vega
   </a>
   
 </li>
@@ -792,19 +701,6 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blackscholes.call.Black76Call.theta" class="md-nav__link">
-    blackscholes.call.Black76Call.theta
-  </a>
-  
-    <nav class="md-nav" aria-label="blackscholes.call.Black76Call.theta">
-      <ul class="md-nav__list">
-        
           <li class="md-nav__item">
   <a href="#put_1" class="md-nav__link">
     Put
@@ -814,13 +710,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blackscholes.put.Black76Put.theta" class="md-nav__link">
-    blackscholes.put.Black76Put.theta
-  </a>
   
 </li>
       
@@ -839,19 +728,6 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blackscholes.call.Black76Call.rho" class="md-nav__link">
-    blackscholes.call.Black76Call.rho
-  </a>
-  
-    <nav class="md-nav" aria-label="blackscholes.call.Black76Call.rho">
-      <ul class="md-nav__list">
-        
           <li class="md-nav__item">
   <a href="#put_2" class="md-nav__link">
     Put
@@ -865,13 +741,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#blackscholes.put.Black76Put.rho" class="md-nav__link">
-    blackscholes.put.Black76Put.rho
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#vanna" class="md-nav__link">
     Vanna
   </a>
@@ -879,22 +748,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#blackscholes.base.Black76Base.vanna" class="md-nav__link">
-    blackscholes.base.Black76Base.vanna
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#vomma" class="md-nav__link">
     Vomma
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blackscholes.base.Black76Base.vomma" class="md-nav__link">
-    blackscholes.base.Black76Base.vomma
   </a>
   
 </li>
@@ -938,341 +793,39 @@ code and descriptions.</p>
 <h2 id="delta">Delta</h2>
 <h3 id="call">Call</h3>
 <p>$$e^{-rT}\Phi(d_1)$$</p>
-
-
-<div class="doc doc-object doc-function">
-
-
-<a id="blackscholes.call.Black76Call.delta"></a>
-  <div class="doc doc-contents first">
-  
-      <p>Rate of change in option price
-with respect to the underlying futures price (1st derivative).
-Proxy for probability of the option expiring in the money.</p>
-
-      <details class="quote">
-        <summary>Source code in <code>blackscholes/call.py</code></summary>
-        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">delta</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Rate of change in option price</span>
-<span class="sd">    with respect to the underlying futures price (1st derivative).</span>
-<span class="sd">    Proxy for probability of the option expiring in the money.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-      </details>
-  </div>
-
-</div><h3 id="put">Put</h3>
+<p>::: blackscholes.call.Black76Call.delta</p>
+<h3 id="put">Put</h3>
 <p>$$-e^{-rT}\Phi(-d_1)$$</p>
-
-
-<div class="doc doc-object doc-function">
-
-
-<a id="blackscholes.put.Black76Put.delta"></a>
-  <div class="doc doc-contents first">
-  
-      <p>Rate of change in option price
-with respect to the underlying futures price (1st derivative).
-Proxy for probability of the option expiring in the money.</p>
-
-      <details class="quote">
-        <summary>Source code in <code>blackscholes/put.py</code></summary>
-        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">delta</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Rate of change in option price</span>
-<span class="sd">    with respect to the underlying futures price (1st derivative).</span>
-<span class="sd">    Proxy for probability of the option expiring in the money.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="o">-</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-      </details>
-  </div>
-
-</div><h2 id="gamma">Gamma</h2>
+<p>::: blackscholes.put.Black76Put.delta</p>
+<h2 id="gamma">Gamma</h2>
 <p>$$e^{-rT} \frac{\phi(d_1)}{F \sigma \sqrt{T}}$$</p>
-
-
-<div class="doc doc-object doc-function">
-
-
-<a id="blackscholes.base.Black76Base.gamma"></a>
-  <div class="doc doc-contents first">
-  
-      <p>Rate of change in delta with respect to the underlying stock price (2nd derivative).</p>
-
-      <details class="quote">
-        <summary>Source code in <code>blackscholes/base.py</code></summary>
-        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">306</span>
-<span class="normal">307</span>
-<span class="normal">308</span>
-<span class="normal">309</span>
-<span class="normal">310</span>
-<span class="normal">311</span>
-<span class="normal">312</span>
-<span class="normal">313</span>
-<span class="normal">314</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">gamma</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Rate of change in delta with respect to the underlying stock price (2nd derivative).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">(</span>
-        <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-        <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">)</span>
-        <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">F</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
-    <span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-      </details>
-  </div>
-
-</div><h2 id="vega">Vega <a name="vega"></a></h2>
+<p>::: blackscholes.base.Black76Base.gamma</p>
+<h2 id="vega">Vega <a name="vega"></a></h2>
 <p>Symbol for Vega is <code>$\mathcal{V}$</code>.</p>
 <p>$$Fe^{-rT} \phi(d_1) \sqrt{T}$$</p>
-
-
-<div class="doc doc-object doc-function">
-
-
-<a id="blackscholes.base.Black76Base.vega"></a>
-  <div class="doc doc-contents first">
-  
-      <p>Rate of change in option price with respect to the volatility
-of underlying futures contract.</p>
-
-      <details class="quote">
-        <summary>Source code in <code>blackscholes/base.py</code></summary>
-        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">316</span>
-<span class="normal">317</span>
-<span class="normal">318</span>
-<span class="normal">319</span>
-<span class="normal">320</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">vega</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Rate of change in option price with respect to the volatility</span>
-<span class="sd">    of underlying futures contract.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">)</span> <span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-      </details>
-  </div>
-
-</div><h2 id="theta">Theta</h2>
+<p>::: blackscholes.base.Black76Base.vega</p>
+<h2 id="theta">Theta</h2>
 <h3 id="call_1">Call</h3>
 <p>$$-\frac{Fe^{-rT}\phi(d_1)\sigma}{2\sqrt{T}} - rKe^{-rT}\Phi(d_2)+rFe^{-rT}\Phi(d_1)$$</p>
-
-
-<div class="doc doc-object doc-function">
-
-
-<a id="blackscholes.call.Black76Call.theta"></a>
-  <div class="doc doc-contents first">
-  
-      <p>Rate of change in option price
-with respect to time (i.e. time decay).</p>
-
-      <details class="quote">
-        <summary>Source code in <code>blackscholes/call.py</code></summary>
-        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">theta</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Rate of change in option price</span>
-<span class="sd">    with respect to time (i.e. time decay).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">(</span>
-        <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">F</span>
-        <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-        <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">)</span>
-        <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span>
-        <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
-        <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span>
-        <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">)</span>
-    <span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-      </details>
-  </div>
-
-</div><h3 id="put_1">Put</h3>
+<p>::: blackscholes.call.Black76Call.theta</p>
+<h3 id="put_1">Put</h3>
 <p>$$-\frac{Fe^{-rT}\phi(d_1)\sigma}{2\sqrt{T}} + rKe^{-rT}\Phi(-d_2) - rFe^{-rT}\Phi(-d_1)$$</p>
-
-
-<div class="doc doc-object doc-function">
-
-
-<a id="blackscholes.put.Black76Put.theta"></a>
-  <div class="doc doc-contents first">
-  
-      <p>Rate of change in option price
-with respect to time (i.e. time decay).</p>
-
-      <details class="quote">
-        <summary>Source code in <code>blackscholes/put.py</code></summary>
-        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">theta</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Rate of change in option price</span>
-<span class="sd">    with respect to time (i.e. time decay).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">(</span>
-        <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">F</span>
-        <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-        <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">)</span>
-        <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span>
-        <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
-        <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span>
-        <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">)</span>
-    <span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-      </details>
-  </div>
-
-</div><h2 id="rho">Rho</h2>
+<p>::: blackscholes.put.Black76Put.theta</p>
+<h2 id="rho">Rho</h2>
 <h3 id="call_2">Call</h3>
 <p>$$-Te^{-rT} \bigg[ F\Phi(d_1) - K \Phi(d_2) \bigg]$$</p>
-
-
-<div class="doc doc-object doc-function">
-
-
-<a id="blackscholes.call.Black76Call.rho"></a>
-  <div class="doc doc-contents first">
-  
-      <p>Rate of change in option price
-with respect to the risk-free rate.</p>
-
-      <details class="quote">
-        <summary>Source code in <code>blackscholes/call.py</code></summary>
-        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">rho</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Rate of change in option price</span>
-<span class="sd">    with respect to the risk-free rate.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">(</span>
-        <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span>
-        <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-        <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">F</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">))</span>
-    <span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-      </details>
-  </div>
-
-</div><h3 id="put_2">Put</h3>
+<p>::: blackscholes.call.Black76Call.rho</p>
+<h3 id="put_2">Put</h3>
 <p>$$-Te^{-rT} \bigg[ K\Phi(-d_2) - F \Phi(-d_1) \bigg]$$</p>
-
-
-<div class="doc doc-object doc-function">
-
-
-<a id="blackscholes.put.Black76Put.rho"></a>
-  <div class="doc doc-contents first">
-  
-      <p>Rate of change in option price
-with respect to the risk-free rate.</p>
-
-      <details class="quote">
-        <summary>Source code in <code>blackscholes/put.py</code></summary>
-        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">rho</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Rate of change in option price</span>
-<span class="sd">    with respect to the risk-free rate.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">(</span>
-        <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span>
-        <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-        <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">))</span>
-    <span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-      </details>
-  </div>
-
-</div><h2 id="vanna">Vanna</h2>
+<p>::: blackscholes.put.Black76Put.rho</p>
+<h2 id="vanna">Vanna</h2>
 <p>$$\frac{\mathcal{V}}{F} \bigg[ 1 - \frac{d_1}{\sigma \sqrt{T}}  \bigg]$$</p>
 <p>where <code>$\mathcal{V}$</code> indicates the <a href="#vega">Vega Greek</a>.</p>
-
-
-<div class="doc doc-object doc-function">
-
-
-<a id="blackscholes.base.Black76Base.vanna"></a>
-  <div class="doc doc-contents first">
-  
-      <p>Sensitivity of delta with respect to change in volatility.</p>
-
-      <details class="quote">
-        <summary>Source code in <code>blackscholes/base.py</code></summary>
-        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">337</span>
-<span class="normal">338</span>
-<span class="normal">339</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">vanna</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Sensitivity of delta with respect to change in volatility.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vega</span><span class="p">()</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)))</span>
-</code></pre></div></td></tr></table></div>
-      </details>
-  </div>
-
-</div><h2 id="vomma">Vomma</h2>
+<p>::: blackscholes.base.Black76Base.vanna</p>
+<h2 id="vomma">Vomma</h2>
 <p>$$\mathcal{V} \frac{d_1 d_2}{\sigma}$$</p>
 <p>where <code>$\mathcal{V}$</code> indicates the <a href="#vega">Vega Greek</a>.</p>
-
-
-<div class="doc doc-object doc-function">
-
-
-<a id="blackscholes.base.Black76Base.vomma"></a>
-  <div class="doc doc-contents first">
-  
-      <p>2nd order sensitivity to volatility.</p>
-
-      <details class="quote">
-        <summary>Source code in <code>blackscholes/base.py</code></summary>
-        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">341</span>
-<span class="normal">342</span>
-<span class="normal">343</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">vomma</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;2nd order sensitivity to volatility.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vega</span><span class="p">()</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d2</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span>
-</code></pre></div></td></tr></table></div>
-      </details>
-  </div>
-
-</div>
+<p>::: blackscholes.base.Black76Base.vomma</p>
 
 
 
