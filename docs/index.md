@@ -21,7 +21,7 @@
 [Contribution guide](https://carlolepelaars.github.io/blackscholes/contributing)
 
 
-Black Scholes calculator for Python including all Greeks.
+A Black-Scholes calculator for Python that includes up to the third-order Greeks.
 
 Supports the Black-Scholes-Merton model, 
 Black-76 model and option structures.

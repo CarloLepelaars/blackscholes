@@ -28,4 +28,11 @@ jobs:
         poetry install
     - name: Run tests
       run: |
-        pytest -s --cov=blackscholes --cov-report term-missing --cov-config=.coveragerc
+        pytest -s --cov=blackscholes --cov-report term-missing --cov-config=.coveragerc --cov-report=xml
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        directory: ./coverage/reports/
+        fail_ci_if_error: false
+        verbose: true
+        files: ./coverage.xml

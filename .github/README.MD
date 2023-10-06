@@ -2,8 +2,9 @@
 
 ![](https://img.shields.io/pypi/dm/blackscholes) | 
 ![](https://img.shields.io/pypi/pyversions/blackscholes)
+![](https://img.shields.io/codecov/c/github/carlolepelaars/blackscholes)
 
-Black Scholes calculator for Python including all Greeks.
+A Black-Scholes calculator for Python that includes up to the third-order Greeks.
 
 Supports the Black-Scholes-Merton model, 
 Black-76 model and option structures.
