@@ -1,4 +1,5 @@
-name: Pipeline
+name: Upload coverage to Codecov
+
 on:
   push:
     branches:
