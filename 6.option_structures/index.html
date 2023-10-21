@@ -1032,10 +1032,10 @@ The potential payoff and losses are hereby bounded on both sides.</p>
 <p>For a bull spread:</p>
 <ol>
 <li>
-<p>Buy one call option with a strike price <code>K_1</code>.</p>
+<p>Buy one call option with a strike price <code>$K_1$</code>.</p>
 </li>
 <li>
-<p>Sell one call option with a strike price <code>K_2</code>.</p>
+<p>Sell one call option with a strike price <code>$K_2$</code>.</p>
 </li>
 </ol>
 <p>It must hold that <code>$K_1 &lt; K_2$</code>.</p>
@@ -1051,10 +1051,10 @@ The potential payoff and losses are hereby bounded on both sides.</p>
 <p>For a bear spread:</p>
 <ol>
 <li>
-<p>Buy one put option with a strike price <code>K_1</code>.</p>
+<p>Buy one put option with a strike price <code>$K_1$</code>.</p>
 </li>
 <li>
-<p>Sell one put option with a strike price <code>K_2</code>.</p>
+<p>Sell one put option with a strike price <code>$K_2$</code>.</p>
 </li>
 </ol>
 <p>It must hold that <code>$K_1 &gt; K_2$</code>.</p>
@@ -1070,12 +1070,14 @@ The potential payoff and losses are hereby bounded on both sides.</p>
 <p>For a calendar call spread:</p>
 <ol>
 <li>
-<p>Buy one call option with a time to maturity <code>T_1</code> and strike price <code>K_1</code>. If <code>K_1 != K_2</code> we call it a diagonal spread. If <code>K_1 == K_2</code> we call it a horizontal spread.</p>
+<p>Buy one call option with a time to maturity <code>$T_1$</code> and strike price <code>$K_1$</code>. </p>
 </li>
 <li>
-<p>Sell one call option with a time to maturity <code>T_2</code> and strike price <code>K_2</code>.</p>
+<p>Sell one call option with a time to maturity <code>$T_2$</code> and strike price <code>$K_2$</code>.</p>
 </li>
 </ol>
+<p>If <code>$K_1 \neq K_2$</code> we call it a diagonal call spread. </p>
+<p>If <code>$K_1 = K_2$</code> we call it a horizontal call spread.</p>
 <p>It must hold that <code>$T_1 &gt; T_2$</code>.</p>
 <p>$$C(K_1, T_1) - C(K_2, T_2)$$</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesCalendarCallSpread</span>
@@ -1090,12 +1092,14 @@ The potential payoff and losses are hereby bounded on both sides.</p>
 <p>For a calendar put spread:</p>
 <ol>
 <li>
-<p>Buy one put option with a time to maturity <code>T_1</code> and strike price <code>K_1</code>. If <code>K_1 != K_2</code> we call it a diagonal spread. If <code>K_1 == K_2</code> we call it a horizontal spread.</p>
+<p>Buy one put option with a time to maturity <code>$T_1$</code> and strike price <code>$K_1$</code>. </p>
 </li>
 <li>
-<p>Sell one put option with a time to maturity <code>T_2</code> and strike price <code>K_2</code>.</p>
+<p>Sell one put option with a time to maturity <code>$T_2$</code> and strike price <code>$K_2$</code>.</p>
 </li>
 </ol>
+<p>If <code>$K_1 \neq K_2$</code> we call it a diagonal put spread. </p>
+<p>If <code>$K_1 = K_2$</code> we call it a horizontal put spread.</p>
 <p>It must hold that <code>$T_1 &gt; T_2$</code>.</p>
 <p>$$P(K_1, T_1) - P(K_2, T_2)$$</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesCalendarPutSpread</span>
