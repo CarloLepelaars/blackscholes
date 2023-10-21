@@ -4,7 +4,8 @@ from .straddle import BlackScholesStraddleLong, BlackScholesStraddleShort
 from .strangle import BlackScholesStrangleLong, BlackScholesStrangleShort
 from .butterfly import BlackScholesButterflyLong, BlackScholesButterflyShort
 from .iron_condor import BlackScholesIronCondorLong, BlackScholesIronCondorShort
-from .spread import BlackScholesBullSpread, BlackScholesBearSpread
+from .spread import (BlackScholesBullSpread, BlackScholesBearSpread, 
+                     BlackScholesCalendarCallSpread, BlackScholesCalendarPutSpread) 
 from .iron_butterfly import (
     BlackScholesIronButterflyLong,
     BlackScholesIronButterflyShort,
@@ -25,6 +26,8 @@ __all__ = [
     "BlackScholesIronCondorShort",
     "BlackScholesBullSpread",
     "BlackScholesBearSpread",
+    "BlackScholesCalendarCallSpread",
+    "BlackScholesCalendarPutSpread",
     "BlackScholesIronButterflyLong",
     "BlackScholesIronButterflyShort",
 ]
