@@ -7649,7 +7649,7 @@ of underlying futures contract.</p>
     <span class="k">def</span> <span class="nf">_calc_attr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Combines attributes from two call options into a bull spread. \n</span>
-<span class="sd">        All greeks and price are combined in the same way.</span>
+<span class="sd">        All greeks and prices are combined in the same way.</span>
 
 <span class="sd">        :param attribute_name: String name of option attribute</span>
 <span class="sd">        pointing to a method that can be called on</span>
@@ -7755,8 +7755,7 @@ of underlying futures contract.</p>
 <span class="normal"> 98</span>
 <span class="normal"> 99</span>
 <span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">BlackScholesBearSpread</span><span class="p">(</span><span class="n">BlackScholesStructureBase</span><span class="p">):</span>
+<span class="normal">101</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">BlackScholesBearSpread</span><span class="p">(</span><span class="n">BlackScholesStructureBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create bear spread option structure. \n</span>
 <span class="sd">    - Bear Spread -&gt; Put(K1) - Put(K2)</span>
@@ -7770,7 +7769,6 @@ of underlying futures contract.</p>
 <span class="sd">    :param sigma: Volatility (standard deviation) of stock (0.15 indicates 15%) \n</span>
 <span class="sd">    :param q: Annual dividend yield (0.05 indicates 5% yield) \n</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">S</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
@@ -7793,7 +7791,7 @@ of underlying futures contract.</p>
     <span class="k">def</span> <span class="nf">_calc_attr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Combines attributes from two put options into a bear spread. \n</span>
-<span class="sd">        All greeks and price are combined in the same way.</span>
+<span class="sd">        All greeks and prices are combined in the same way.</span>
 
 <span class="sd">        :param attribute_name: String name of option attribute</span>
 <span class="sd">        pointing to a method that can be called on</span>
