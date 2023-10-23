@@ -1,5 +1,5 @@
-from .call import Black76Call, BlackScholesCall
-from .put import Black76Put, BlackScholesPut
+from .call import BlackScholesCall, Black76Call, BinaryCall
+from .put import BlackScholesPut, Black76Put, BinaryPut
 from .straddle import BlackScholesStraddleLong, BlackScholesStraddleShort
 from .strangle import BlackScholesStrangleLong, BlackScholesStrangleShort
 from .butterfly import BlackScholesButterflyLong, BlackScholesButterflyShort
@@ -14,8 +14,10 @@ from .iron_butterfly import (
 __all__ = [
     "BlackScholesCall",
     "Black76Call",
+    "BinaryCall",
     "BlackScholesPut",
     "Black76Put",
+    "BinaryPut",
     "BlackScholesStraddleLong",
     "BlackScholesStraddleShort",
     "BlackScholesStrangleLong",

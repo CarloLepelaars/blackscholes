@@ -1,6 +1,6 @@
 import numpy as np
 
-from blackscholes import Black76Call, Black76Put, BlackScholesCall, BlackScholesPut
+from blackscholes import Black76Call, Black76Put, BlackScholesCall, BlackScholesPut, BinaryPut
 
 # Test parameters
 test_S = 55.0  # Asset price of 55
@@ -203,3 +203,15 @@ class TestBlack76Put:
             np.testing.assert_almost_equal(
                 all_greeks[key], expected_result[key], decimal=5
             )
+
+class TestBinaryPut:
+    put = BinaryPut(S=test_S, K=test_K, T=test_T, r=test_r, sigma=test_sigma)
+
+    def test_price(self):
+        price = self.put.price()
+        np.testing.assert_almost_equal(price, 0.2812428189591384, decimal=6)
+
+    def test_forward(self):
+        forward = self.put.forward()
+        np.testing.assert_almost_equal(forward, 0.2819468056232066, decimal=6)
+        

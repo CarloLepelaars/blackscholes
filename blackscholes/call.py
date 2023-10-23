@@ -1,11 +1,11 @@
 from math import exp, sqrt
 
-from .base import Black76Base, BlackScholesBase
+from .base import StandardNormalMixin, Black76Base, BlackScholesBase, BinaryBase
 
 
 class BlackScholesCall(BlackScholesBase):
     """
-    Class to calculate (European) call option prices
+    Calculate (European) call option prices
     and Greeks with the Black-Scholes-Merton formula.
 
     :param S: Price of underlying asset \n
@@ -88,7 +88,7 @@ class BlackScholesCall(BlackScholesBase):
 
 class Black76Call(Black76Base):
     """
-    Class to calculate (European) call option prices
+    Calculate (European) call option prices
     and Greeks with the Black-76 formula.
 
     :param F: Price of underlying futures contract \n
@@ -137,3 +137,30 @@ class Black76Call(Black76Base):
             * exp(-self.r * self.T)
             * (self.F * self._cdf(self._d1) - self.K * self._cdf(self._d2))
         )
+
+class BinaryCall(BinaryBase):
+    """
+    Calculate (European) call option prices for a binary option.
+    Also called a digital or exotic option.
+
+    :param S: Price of underlying asset \n
+    :param K: Strike price \n
+    :param T: Time till expiration in years (1/12 indicates 1 month) \n
+    :param r: Risk-free interest rate (0.05 indicates 5%) \n
+    :param sigma: Volatility (standard deviation) of stock (0.15 indicates 15%) \n
+    Assumes dividend yield is 0%.
+    """
+
+    def __init__(
+        self, S: float, K: float, T: float, r: float, sigma: float
+    ):
+        super().__init__(S=S, K=K, T=T, r=r, sigma=sigma)
+
+    def price(self) -> float:
+        """Fair value of binary call option."""
+        return exp(-self.r * self.T) * self._cdf(self._d2)
+    
+    def forward(self) -> float:
+        """Fair value of binary call option without discounting for interest rates."""
+        return self._cdf(self._d2)
+        
