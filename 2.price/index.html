@@ -453,6 +453,67 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#binary-options" class="md-nav__link">
+    Binary options
+  </a>
+  
+    <nav class="md-nav" aria-label="Binary options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#call_2" class="md-nav__link">
+    Call
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.call.BinaryCall.price" class="md-nav__link">
+    price
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.call.BinaryCall.forward" class="md-nav__link">
+    forward
+  </a>
+  
+    <nav class="md-nav" aria-label="forward">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#put_2" class="md-nav__link">
+    Put
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.put.BinaryPut.price" class="md-nav__link">
+    price
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.put.BinaryPut.forward" class="md-nav__link">
+    forward
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -693,6 +754,67 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#binary-options" class="md-nav__link">
+    Binary options
+  </a>
+  
+    <nav class="md-nav" aria-label="Binary options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#call_2" class="md-nav__link">
+    Call
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.call.BinaryCall.price" class="md-nav__link">
+    price
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.call.BinaryCall.forward" class="md-nav__link">
+    forward
+  </a>
+  
+    <nav class="md-nav" aria-label="forward">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#put_2" class="md-nav__link">
+    Put
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.put.BinaryPut.price" class="md-nav__link">
+    price
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackscholes.put.BinaryPut.forward" class="md-nav__link">
+    forward
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -870,6 +992,120 @@ and <a href="#b76">Black-76 model</a>.</p>
     <span class="k">return</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">)</span>
     <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div><h2 id="binary-options">Binary options</h2>
+<p><code>blackscholes</code> supports calculation of the price and the forward (undiscounted price) of binary options. Also called a digital or exotic option.</p>
+<h3 id="call_2">Call</h3>
+<p>$$e^{-rT} \Phi(d_2)$$</p>
+<p>Formula for forward then is just $$\Phi(d_2)$$</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BinaryCall</span>
+
+<span class="n">call</span> <span class="o">=</span> <span class="n">BinaryCall</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">call</span><span class="o">.</span><span class="n">price</span><span class="p">()</span> <span class="c1"># 0.7163</span>
+<span class="n">call</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span> <span class="c1"># 0.7181</span>
+</code></pre></div>
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<a id="blackscholes.call.BinaryCall.price"></a>
+  <div class="doc doc-contents first">
+  
+      <p>Fair value of binary call option.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>blackscholes/call.py</code></summary>
+            <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">price</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fair value of binary call option.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<a id="blackscholes.call.BinaryCall.forward"></a>
+  <div class="doc doc-contents first">
+  
+      <p>Fair value of binary call option without discounting for interest rates.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>blackscholes/call.py</code></summary>
+            <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fair value of binary call option without discounting for interest rates.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div><h3 id="put_2">Put</h3>
+<p>$$e^{-rT} (1 - \Phi(d_2))$$</p>
+<p>Formula for forward then is just $$1 - \Phi(d_2)$$</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BinaryPut</span>
+
+<span class="n">put</span> <span class="o">=</span> <span class="n">BinaryPut</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">put</span><span class="o">.</span><span class="n">price</span><span class="p">()</span> <span class="c1"># 0.2812</span>
+<span class="n">put</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span> <span class="c1"># 0.2819</span>
+</code></pre></div>
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<a id="blackscholes.put.BinaryPut.price"></a>
+  <div class="doc doc-contents first">
+  
+      <p>Fair value of binary call option.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>blackscholes/put.py</code></summary>
+            <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">price</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fair value of binary call option.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<a id="blackscholes.put.BinaryPut.forward"></a>
+  <div class="doc doc-contents first">
+  
+      <p>Fair value of binary call option without discounting for interest rates.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>blackscholes/put.py</code></summary>
+            <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fair value of binary call option without discounting for interest rates.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>

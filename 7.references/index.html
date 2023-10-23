@@ -2385,7 +2385,7 @@ and docstrings in <code>blackscholes</code>.</p>
             Bases: <code><a class="autorefs autorefs-internal" title="blackscholes.base.BlackScholesBase" href="#blackscholes.base.BlackScholesBase">BlackScholesBase</a></code></p>
 
   
-      <p>Class to calculate (European) call option prices
+      <p>Calculate (European) call option prices
 and Greeks with the Black-Scholes-Merton formula.</p>
 <p>:param S: Price of underlying asset </p>
 <p>:param K: Strike price </p>
@@ -2478,7 +2478,7 @@ and Greeks with the Black-Scholes-Merton formula.</p>
 <span class="normal">85</span>
 <span class="normal">86</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">BlackScholesCall</span><span class="p">(</span><span class="n">BlackScholesBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Class to calculate (European) call option prices</span>
+<span class="sd">    Calculate (European) call option prices</span>
 <span class="sd">    and Greeks with the Black-Scholes-Merton formula.</span>
 
 <span class="sd">    :param S: Price of underlying asset \n</span>
@@ -3731,7 +3731,7 @@ and Greeks with the Black-Scholes-Merton formula.</p>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">S</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">K</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="c1"># Parameters checks</span>
+        <span class="c1"># Parameter checks</span>
         <span class="k">assert</span> <span class="n">S</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Asset price (S) needs to be larger than 0. Got &#39;</span><span class="si">{</span><span class="n">S</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
         <span class="k">assert</span> <span class="n">K</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Strike price (K) needs to be larger than 0. Got &#39;</span><span class="si">{</span><span class="n">K</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
         <span class="k">assert</span> <span class="n">T</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Time to maturity (T) needs to be larger than 0. Got &#39;</span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
@@ -5029,7 +5029,7 @@ with respect to time (i.e. time decay).</p>
             Bases: <code><a class="autorefs autorefs-internal" title="blackscholes.base.Black76Base" href="#blackscholes.base.Black76Base">Black76Base</a></code></p>
 
   
-      <p>Class to calculate (European) call option prices
+      <p>Calculate (European) call option prices
 and Greeks with the Black-76 formula.</p>
 <p>:param F: Price of underlying futures contract </p>
 <p>:param K: Strike price </p>
@@ -5091,7 +5091,7 @@ and Greeks with the Black-76 formula.</p>
 <span class="normal">138</span>
 <span class="normal">139</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Black76Call</span><span class="p">(</span><span class="n">Black76Base</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Class to calculate (European) call option prices</span>
+<span class="sd">    Calculate (European) call option prices</span>
 <span class="sd">    and Greeks with the Black-76 formula.</span>
 
 <span class="sd">    :param F: Price of underlying futures contract \n</span>
