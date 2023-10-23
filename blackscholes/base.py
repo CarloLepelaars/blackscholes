@@ -605,6 +605,16 @@ class BinaryBase(ABC, StandardNormalMixin):
             sigma > 0.0
         ), f"Volatility (sigma) needs to be larger than 0. Got '{sigma}'"
         self.S, self.K, self.T, self.r, self.sigma = S, K, T, r, sigma
+
+    @abstractmethod
+    def price(self) -> float:
+        """Fair value for binary option."""
+        ...
+
+    @abstractmethod
+    def forward(self) -> float:
+        """Undiscounted fair value for binary option."""
+        ...
     
     @property
     def _d1(self) -> float:
@@ -617,3 +627,4 @@ class BinaryBase(ABC, StandardNormalMixin):
     def _d2(self) -> float:
         """2nd probability parameter that acts as a multiplication factor for discounting."""
         return self._d1 - self.sigma * sqrt(self.T)
+    
