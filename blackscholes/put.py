@@ -1,6 +1,6 @@
 from math import exp, sqrt
 
-from .base import Black76Base, BlackScholesBase
+from .base import Black76Base, BlackScholesBase, BinaryBase
 
 
 class BlackScholesPut(BlackScholesBase):
@@ -127,3 +127,30 @@ class Black76Put(Black76Base):
             * exp(-self.r * self.T)
             * (self.K * self._cdf(-self._d2) - self.F * self._cdf(-self._d1))
         )
+
+class BinaryPut(BinaryBase):
+    """
+    Calculate (European) put option prices for a binary option.
+    Also called a digital or exotic option.
+
+    :param S: Price of underlying asset \n
+    :param K: Strike price \n
+    :param T: Time till expiration in years (1/12 indicates 1 month) \n
+    :param r: Risk-free interest rate (0.05 indicates 5%) \n
+    :param sigma: Volatility (standard deviation) of stock (0.15 indicates 15%) \n
+    Assumes dividend yield is 0%.
+    """
+
+    def __init__(
+        self, S: float, K: float, T: float, r: float, sigma: float
+    ):
+        super().__init__(S=S, K=K, T=T, r=r, sigma=sigma)
+
+    def price(self) -> float:
+        """Fair value of binary call option."""
+        return exp(-self.r * self.T) * (1 - self._cdf(self._d2))
+    
+    def forward(self) -> float:
+        """Fair value of binary call option without discounting for interest rates."""
+        return 1 - self._cdf(self._d2)
+    

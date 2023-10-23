@@ -33,7 +33,7 @@ class BlackScholesBase(ABC, StandardNormalMixin):
     """
 
     def __init__(self, S: float, K: float, T: float, r: float, sigma: float, q: float):
-        # Parameters checks
+        # Parameter checks
         assert S > 0.0, f"Asset price (S) needs to be larger than 0. Got '{S}'"
         assert K > 0.0, f"Strike price (K) needs to be larger than 0. Got '{K}'"
         assert T > 0.0, f"Time to maturity (T) needs to be larger than 0. Got '{T}'"
@@ -583,3 +583,48 @@ class BlackScholesStructureBase(ABC):
             "dual_gamma": self.dual_gamma(),
             "alpha": self.alpha(),
         }
+
+
+class BinaryBase(ABC, StandardNormalMixin):
+    """
+    Base class for (European) binary options.
+    Also called a digital or exotic option.
+
+    :param S: Price of underlying asset \n
+    :param K: Strike price \n
+    :param T: Time till expiration in years (1/12 indicates 1 month) \n
+    :param r: Risk-free interest rate (0.05 indicates 5%) \n
+    :param sigma: Volatility (standard deviation) of stock (0.15 indicates 15%) \n
+    Assumes dividend yield is 0%.
+    """
+    def __init__(self, S: float, K: float, T: float, r: float, sigma: float):
+        assert S > 0.0, f"Asset price (S) needs to be larger than 0. Got '{S}'"
+        assert K > 0.0, f"Strike price (K) needs to be larger than 0. Got '{K}'"
+        assert T > 0.0, f"Time to maturity (T) needs to be larger than 0. Got '{T}'"
+        assert (
+            sigma > 0.0
+        ), f"Volatility (sigma) needs to be larger than 0. Got '{sigma}'"
+        self.S, self.K, self.T, self.r, self.sigma = S, K, T, r, sigma
+
+    @abstractmethod
+    def price(self) -> float:
+        """Fair value for binary option."""
+        ...
+
+    @abstractmethod
+    def forward(self) -> float:
+        """Undiscounted fair value for binary option."""
+        ...
+    
+    @property
+    def _d1(self) -> float:
+        """1st probability factor that acts as a multiplication factor for stock prices."""
+        return (1.0 / (self.sigma * sqrt(self.T))) * (
+            log(self.S / self.K) + (self.r + 0.5 * self.sigma**2) * self.T
+        )
+
+    @property
+    def _d2(self) -> float:
+        """2nd probability parameter that acts as a multiplication factor for discounting."""
+        return self._d1 - self.sigma * sqrt(self.T)
+    
