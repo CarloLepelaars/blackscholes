@@ -1,6 +1,6 @@
 from math import exp, sqrt
 
-from .base import StandardNormalMixin, Black76Base, BlackScholesBase, BinaryBase
+from .base import Black76Base, BlackScholesBase, BinaryBase
 
 
 class BlackScholesCall(BlackScholesBase):
