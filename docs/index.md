@@ -179,3 +179,10 @@ iron_butterfly = BlackScholesIronButterflyShort(S=55, K1=95, K2=100, K3=105,
 iron_butterfly.price()  ## -4.9873
 iron_butterfly.delta()  ## 0.0001
 ```
+
+### Binary options
+
+Binary options are also called exotic, digital or bet options. `blackscholes` supports Greeks for binary calls and puts.
+
+
+
