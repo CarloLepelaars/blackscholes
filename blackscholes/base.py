@@ -628,3 +628,56 @@ class BinaryBase(ABC, StandardNormalMixin):
         """2nd probability parameter that acts as a multiplication factor for discounting."""
         return self._d1 - self.sigma * sqrt(self.T)
     
+    @abstractmethod
+    def delta(self) -> float:
+        """Rate of change in structure price
+        with respect to the asset price (1st derivative).
+        Note that this is the forward delta.
+        """
+        ...
+
+    def gamma(self) -> float:
+        """Rate of change in delta
+        with respect to the underlying price (2nd derivative).
+        """
+        return (self._pdf(self._d1) * (self._d1 / (self.T * self.sigma * self.S) - 1 / self.S**2)) / (self.S * self.sigma * sqrt(self.T))
+
+    @abstractmethod
+    def vega(self) -> float:
+        """Rate of change in option price
+        with respect to the volatility (1st derivative).
+        """
+        ...
+
+    @abstractmethod
+    def theta(self) -> float:
+        """
+        Rate of change in structure price
+        with respect to time (i.e. time decay).
+        """
+        ...
+
+    @abstractmethod
+    def rho(self) -> float:
+        """Rate of change in structure price
+        with respect to the risk-free rate.
+        """
+        ...
+
+    def get_core_greeks(self) -> Dict[str, float]:
+        """
+        Get the top 5 most well known Greeks for the binary option.
+        1. Delta
+        2. Gamma
+        3. Vega
+        4. Theta
+        5. Rho
+        """
+        return {
+            "delta": self.delta(),
+            "gamma": self.gamma(),
+            "vega": self.vega(),
+            "theta": self.theta(),
+            "rho": self.rho(),
+        }
+    

@@ -1,6 +1,6 @@
 import numpy as np
 
-from blackscholes import Black76Call, Black76Put, BlackScholesCall, BlackScholesPut, BinaryPut
+from blackscholes import Black76Call, Black76Put, BlackScholesCall, BlackScholesPut, BinaryPut, BinaryCall
 
 # Test parameters
 test_S = 55.0  # Asset price of 55
@@ -206,6 +206,7 @@ class TestBlack76Put:
 
 class TestBinaryPut:
     put = BinaryPut(S=test_S, K=test_K, T=test_T, r=test_r, sigma=test_sigma)
+    call = BinaryCall(S=test_S, K=test_K, T=test_T, r=test_r, sigma=test_sigma)
 
     def test_price(self):
         price = self.put.price()
@@ -214,4 +215,44 @@ class TestBinaryPut:
     def test_forward(self):
         forward = self.put.forward()
         np.testing.assert_almost_equal(forward, 0.2819468056232066, decimal=6)
+
+    def test_delta(self):
+        delta = self.put.delta()
+        np.testing.assert_almost_equal(delta, -0.3055162306516324, decimal=6)
+
+    def test_gamma(self):
+        gamma = self.put.gamma()
+        call_gamma = self.call.gamma()
+        np.testing.assert_almost_equal(gamma, call_gamma, decimal=16)
+        np.testing.assert_almost_equal(gamma, 0.0032595297589864043, decimal=6)
+
+    def test_vega(self):
+        vega = self.put.vega()
+        call_vega = self.call.vega()
+        np.testing.assert_almost_equal(vega, -call_vega, decimal=16)
+        np.testing.assert_almost_equal(vega, -81.65192052446703, decimal=6)
+
+    def test_theta(self):
+        theta = self.put.theta()
+        np.testing.assert_almost_equal(theta, -1.2985643815155963, decimal=6)
+
+    def test_rho(self):
+        rho = self.put.rho()
+        np.testing.assert_almost_equal(rho, -14.062140947956921, decimal=6)
+
+    def test_get_core_greeks(self):
+        core_greeks = self.put.get_core_greeks()
+        expected_result = {
+            "delta": -0.3055162306516324,
+            "gamma": 0.0032595297589864043,
+            "vega": -81.65192052446703,
+            "theta": -1.2985643815155963,
+            "rho": -14.062140947956921,
+        }
+
+        assert set(core_greeks.keys()) == set(expected_result.keys())
+        for key in expected_result.keys():
+            np.testing.assert_almost_equal(
+                core_greeks[key], expected_result[key], decimal=5
+            )
         

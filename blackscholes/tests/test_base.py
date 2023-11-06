@@ -2,7 +2,7 @@ import numpy as np
 import pytest
 from scipy.stats import norm
 
-from blackscholes.base import Black76Base, BlackScholesBase, StandardNormalMixin
+from blackscholes.base import Black76Base, BlackScholesBase, BinaryBase, StandardNormalMixin
 
 # Test parameters
 test_S = 55.0  # Asset price of 55
@@ -233,3 +233,82 @@ class TestBlack76Base:
     def test_vomma(self):
         vomma = self.meta.vomma()
         np.testing.assert_almost_equal(vomma, 45.13472833935059, decimal=5)
+
+
+class BinaryMeta(BinaryBase):
+    """Dummy class for testing Binary base methods."""
+
+    def __init__(self, S: float, K: float, T: float, r: float, sigma: float):
+        super().__init__(S=S, K=K, T=T, r=r, sigma=sigma)
+
+    def price(self):
+        ...
+
+    def forward(self):
+        ...
+
+    def delta(self):
+        ...
+
+    def vega(self):
+        ...
+
+    def theta(self):
+        ...
+
+    def rho(self):
+        ...
+
+
+class TestBinaryBase:
+    meta = BinaryMeta(S=test_S, K=test_K, T=test_T, r=test_r, sigma=test_sigma)
+
+    def test_arg_assert(self):
+        # Should not be able to initialize if S, K, T, or sigma is negative.
+        with pytest.raises(AssertionError):
+            BinaryMeta(
+                S=-test_S,
+                K=test_K,
+                T=test_T,
+                r=test_r,
+                sigma=test_sigma,
+            )
+            BinaryMeta(
+                S=test_S,
+                K=-test_K,
+                T=test_T,
+                r=test_r,
+                sigma=test_sigma,
+            )
+            BinaryMeta(
+                S=-test_S,
+                K=test_K,
+                T=-test_T,
+                r=test_r,
+                sigma=test_sigma,
+            )
+            BinaryMeta(
+                S=test_S,
+                K=test_K,
+                T=test_T,
+                r=test_r,
+                sigma=-test_sigma,
+            )
+
+        # Initializing with negative r (interest rate) is possible.
+        BinaryMeta(
+            S=test_S,
+            K=test_K,
+            T=test_T,
+            r=-test_r,
+            sigma=test_sigma,
+        )
+
+    def test_d(self):
+        # d1 and d2 should be accurate up to at least 6 decimals
+        np.testing.assert_almost_equal(self.meta._d1, 0.7270678653621663, decimal=6)
+        np.testing.assert_almost_equal(self.meta._d2, 0.5770678653621663, decimal=6)
+
+    def test_gamma(self):
+        gamma = self.meta.gamma()
+        np.testing.assert_almost_equal(gamma, 0.0032595297589864043, decimal=6)

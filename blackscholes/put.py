@@ -154,3 +154,27 @@ class BinaryPut(BinaryBase):
         """Fair value of binary call option without discounting for interest rates."""
         return 1 - self._cdf(self._d2)
     
+    def delta(self) -> float:
+        """Rate of change in option price
+        with respect to the underlying price (1st derivative).
+        """
+        return -exp(-self.r * self.T) * self._pdf(self._d1) / sqrt(self.T)
+    
+    def vega(self) -> float:
+        """Rate of change in option price
+        with respect to the volatility (1st derivative).
+        """
+        return -self.S * sqrt(self.T) * self._pdf(self._d1) * self._d1 / self.sigma
+    
+    def theta(self) -> float:
+        """Rate of change in option price
+        with respect to time (i.e. time decay).
+        """
+        return -self.r * self.K * exp(-self.r * self.T) * self._cdf(-self._d2) - (self.S * self._pdf(self._d1) * self.sigma) / (2 * sqrt(self.T))
+    
+    def rho(self) -> float:
+        """Rate of change in option price
+        with respect to the risk-free rate.
+        """
+        return -(self.T * self.K * exp(-self.r * self.T) * self._cdf(-self._d2))
+    
