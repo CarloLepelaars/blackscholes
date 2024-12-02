@@ -1,6 +1,6 @@
 import pytest
 
-from .. import BlackScholesIronCondorLong, BlackScholesIronCondorShort
+from blackscholes import BlackScholesIronCondorLong, BlackScholesIronCondorShort
 
 # Test parameters
 test_S = 55.0  # Asset price of 55

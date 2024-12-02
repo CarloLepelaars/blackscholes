@@ -1,6 +1,6 @@
 import pytest
 
-from .. import (BlackScholesBullSpread, BlackScholesBearSpread, 
+from blackscholes import (BlackScholesBullSpread, BlackScholesBearSpread, 
                 BlackScholesCalendarCallSpread, BlackScholesCalendarPutSpread)
 
 # Test parameters

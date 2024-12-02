@@ -1,6 +1,6 @@
 import pytest
 
-from .. import BlackScholesStrangleLong, BlackScholesStrangleShort
+from blackscholes import BlackScholesStrangleLong, BlackScholesStrangleShort
 
 # Test parameters
 test_S = 55.0  # Asset price of 55

@@ -1,4 +1,4 @@
-from .. import BlackScholesStraddleLong, BlackScholesStraddleShort
+from blackscholes import BlackScholesStraddleLong, BlackScholesStraddleShort
 
 # Test parameters
 test_S = 55.0  # Asset price of 55
