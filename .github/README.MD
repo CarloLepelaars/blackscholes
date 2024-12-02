@@ -11,6 +11,8 @@ A Black-Scholes calculator for Python that includes up to the third-order Greeks
 Supports the Black-Scholes-Merton model, 
 Black-76 model and option structures.
 
+There is also a graphical interface available at: [https://carlo.ai/tools/blackscholes](https://carlo.ai/tools/blackscholes)
+
 ## Installation
 
 `pip install blackscholes`

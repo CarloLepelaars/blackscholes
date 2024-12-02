@@ -35,6 +35,8 @@ Black-76 model and option structures.
 Currently only supports 
 [European options](https://www.investopedia.com/articles/optioninvestor/08/american-european-options.asp).
 
+There is also a graphical interface available at: [https://carlo.ai/tools/blackscholes](https://carlo.ai/tools/blackscholes)
+
 ## Installation
 
 `pip install blackscholes`
