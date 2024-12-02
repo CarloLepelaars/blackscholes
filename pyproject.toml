@@ -1,25 +1,36 @@
-[tool.poetry]
+[project]
 name = "blackscholes"
-version = "0.1.8"
-description = "Black Scholes calculator for Python including all Greeks"
-authors = ["CarloLepelaars <info@carlolepelaars.nl>"]
-license = "MIT"
+version = "0.2.0"
+description = "Black Scholes calculator for Python"
+authors = [
+    {name = "Carlo Lepelaars", email = "info@carlolepelaars.nl"},
+]
+license = {text = "MIT License"}
 readme = ".github/README.MD"
+requires-python = ">=3.10,<4"
 
-[tool.poetry.dependencies]
-python = "^3.8.1"
+[project.optional-dependencies]
+dev = [
+    "mkdocs>=1.4.2",
+    "mkdocs-material>=8.5.11",
+    "mkdocstrings-python>=1.7.1",
+    "pytest>=7.2.0",
+    "pytest-cov>=4.1.0",
+    "numpy>=1.23.5",
+    "scipy>=1.9.3",
+    "griffe>=0.36.4",
+]
 
-[tool.poetry.group.dev.dependencies]
-mkdocs = "^1.4.2"
-mkdocs-material = "^8.5.11"
-pytest = "^7.2.0"
-black = "^22.10.0"
-numpy = "^1.23.5"
-scipy = "^1.9.3"
-pytest-cov = "^4.1.0"
-griffe = "^0.36.4"
-mkdocstrings-python = "^1.7.1"
+[tool.ruff]
+line-length = 300
+
+[tool.ruff.lint]
+ignore = ["F403", "F811"] 
+select = ["E", "F", "I"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
