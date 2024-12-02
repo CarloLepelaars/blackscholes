@@ -1,5 +1,11 @@
 # blackscholes
 
+![](https://img.shields.io/pypi/dm/blackscholes)
+![Python Version](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/carlolepelaars/blackscholes/master/pyproject.toml&query=%24.project%5B%22requires-python%22%5D&label=python&color=blue) 
+![](https://img.shields.io/codecov/c/github/carlolepelaars/blackscholes)
+[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+
 ## Documentation structure:
 
 [1. Quickstart](https://carlolepelaars.github.io/blackscholes/1.quickstart)

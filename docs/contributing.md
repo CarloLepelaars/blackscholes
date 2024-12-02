@@ -12,8 +12,8 @@ Check out the [Github Issues](https://github.com/CarloLepelaars/blackscholes/iss
 - Install `blackscholes` including development dependencies:
 
 ```commandline
-pip install poetry
-poetry install
+pip install uv
+uv pip install -e ".[dev]"
 ```
 
 - Install the pre-commit hooks with:
