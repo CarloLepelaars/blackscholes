@@ -16,10 +16,6 @@ pip install uv
 uv pip install -e ".[dev]"
 ```
 
-- Install the pre-commit hooks with:
-
-`pre-commit install`
-
 - Discuss what you want to implement on [Github Issues](https://github.com/CarloLepelaars/blackscholes/issues) before creating a Pull Request.
 - Consider and communicate if you would be open to maintain this feature in the future.
 
