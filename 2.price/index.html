@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
     
     
       
@@ -24,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.6f8fc17f.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.a40c8224.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
@@ -1043,7 +1043,7 @@ and <a href="#b76">Black-76 model</a>.</p>
 <p><code>$d_2 = d_1 - \sigma\sqrt{T}$</code></p>
 <h3 id="call">Call</h3>
 <p>$$ S e^{-qT} \Phi(d_1) - e^{-rT}K\Phi(d_2)$$</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesCall</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">blackscholes</span><span class="w"> </span><span class="kn">import</span> <span class="n">BlackScholesCall</span>
 <span class="n">call</span> <span class="o">=</span> <span class="n">BlackScholesCall</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
 <span class="n">call</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## 6.339408</span>
 </code></pre></div>
@@ -1066,7 +1066,7 @@ and <a href="#b76">Black-76 model</a>.</p>
 <span class="normal">26</span>
 <span class="normal">27</span>
 <span class="normal">28</span>
-<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">price</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">price</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Fair value of Black-Scholes call option.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">S</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">q</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">)</span>
@@ -1078,7 +1078,7 @@ and <a href="#b76">Black-76 model</a>.</p>
 
 </div><h3 id="put">Put</h3>
 <p>$$e^{-rT}K\Phi(-d_2) - S e^{-qT} \Phi(-d_1)$$</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesPut</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">blackscholes</span><span class="w"> </span><span class="kn">import</span> <span class="n">BlackScholesPut</span>
 <span class="n">put</span> <span class="o">=</span> <span class="n">BlackScholesPut</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
 <span class="n">put</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## 1.214564</span>
 </code></pre></div>
@@ -1100,7 +1100,7 @@ and <a href="#b76">Black-76 model</a>.</p>
 <span class="normal">25</span>
 <span class="normal">26</span>
 <span class="normal">27</span>
-<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">price</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">price</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Fair value of a Black-Scholes put option.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">S</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span>
         <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">q</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span>
@@ -1114,7 +1114,7 @@ and <a href="#b76">Black-76 model</a>.</p>
 <p><code>$d_2 = d_1 - \sigma\sqrt{T}$</code></p>
 <h3 id="call_1">Call</h3>
 <p>$$e^{-rT} \bigg[F \Phi(d_1) - K\Phi(d_2) \bigg]$$</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">Black76Call</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">blackscholes</span><span class="w"> </span><span class="kn">import</span> <span class="n">Black76Call</span>
 <span class="n">call</span> <span class="o">=</span> <span class="n">Black76Call</span><span class="p">(</span><span class="n">F</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
 <span class="n">call</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## 6.2345</span>
 </code></pre></div>
@@ -1136,7 +1136,7 @@ and <a href="#b76">Black-76 model</a>.</p>
 <span class="normal">105</span>
 <span class="normal">106</span>
 <span class="normal">107</span>
-<span class="normal">108</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">price</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">108</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">price</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Fair value of a Black-76 call option.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">F</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span>
@@ -1147,7 +1147,7 @@ and <a href="#b76">Black-76 model</a>.</p>
 
 </div><h3 id="put_1">Put</h3>
 <p>$$e^{-rT} \bigg[K \Phi(-d_2) - F\Phi(-d_1) \bigg]$$</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">Black76Put</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">blackscholes</span><span class="w"> </span><span class="kn">import</span> <span class="n">Black76Put</span>
 <span class="n">F</span> <span class="o">=</span> <span class="mf">55.</span> <span class="c1"># Discounted futures price</span>
 <span class="n">put</span> <span class="o">=</span> <span class="n">Black76Put</span><span class="p">(</span><span class="n">F</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
 <span class="n">put</span><span class="o">.</span><span class="n">price</span><span class="p">()</span>  <span class="c1">## 1.2470</span>
@@ -1170,7 +1170,7 @@ and <a href="#b76">Black-76 model</a>.</p>
 <span class="normal">95</span>
 <span class="normal">96</span>
 <span class="normal">97</span>
-<span class="normal">98</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">price</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">98</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">price</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Fair value of a Black-76 put option.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_d1</span><span class="p">)</span>
@@ -1184,7 +1184,7 @@ and <a href="#b76">Black-76 model</a>.</p>
 <h3 id="call_2">Call</h3>
 <p>$$e^{-rT} \Phi(d_2)$$</p>
 <p>Formula for forward then is just $$\Phi(d_2)$$</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BinaryCall</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">blackscholes</span><span class="w"> </span><span class="kn">import</span> <span class="n">BinaryCall</span>
 
 <span class="n">call</span> <span class="o">=</span> <span class="n">BinaryCall</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
 <span class="n">call</span><span class="o">.</span><span class="n">price</span><span class="p">()</span> <span class="c1"># 0.7163</span>
@@ -1206,7 +1206,7 @@ and <a href="#b76">Black-76 model</a>.</p>
               <summary>Source code in <code>src/blackscholes/call.py</code></summary>
               <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">159</span>
 <span class="normal">160</span>
-<span class="normal">161</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">price</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">161</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">price</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Fair value of binary call option.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -1228,7 +1228,7 @@ and <a href="#b76">Black-76 model</a>.</p>
               <summary>Source code in <code>src/blackscholes/call.py</code></summary>
               <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">163</span>
 <span class="normal">164</span>
-<span class="normal">165</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">165</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Fair value of binary call option without discounting for interest rates.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -1238,7 +1238,7 @@ and <a href="#b76">Black-76 model</a>.</p>
 </div><h3 id="put_2">Put</h3>
 <p>$$e^{-rT} (1 - \Phi(d_2))$$</p>
 <p>Formula for forward then is just $$1 - \Phi(d_2)$$</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BinaryPut</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">blackscholes</span><span class="w"> </span><span class="kn">import</span> <span class="n">BinaryPut</span>
 
 <span class="n">put</span> <span class="o">=</span> <span class="n">BinaryPut</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
 <span class="n">put</span><span class="o">.</span><span class="n">price</span><span class="p">()</span> <span class="c1"># 0.2812</span>
@@ -1260,7 +1260,7 @@ and <a href="#b76">Black-76 model</a>.</p>
               <summary>Source code in <code>src/blackscholes/put.py</code></summary>
               <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">149</span>
 <span class="normal">150</span>
-<span class="normal">151</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">price</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">151</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">price</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Fair value of binary call option.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">))</span>
 </code></pre></div></td></tr></table></div>
@@ -1282,7 +1282,7 @@ and <a href="#b76">Black-76 model</a>.</p>
               <summary>Source code in <code>src/blackscholes/put.py</code></summary>
               <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">153</span>
 <span class="normal">154</span>
-<span class="normal">155</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">155</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Fair value of binary call option without discounting for interest rates.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -1342,10 +1342,10 @@ and <a href="#b76">Black-76 model</a>.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "navigation.tabs", "navigation.tracking", "navigation.tabs.sticky", "navigation.expand"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "navigation.tabs", "navigation.tracking", "navigation.tabs.sticky", "navigation.expand"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      <script src="../assets/javascripts/bundle.60a45f97.min.js"></script>
       
     
   </body>

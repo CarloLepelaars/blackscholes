@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
     
     
       
@@ -24,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.6f8fc17f.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.a40c8224.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
@@ -894,7 +894,7 @@ estimate the probability of an option being
 In other words, the estimate of a call plus that of a put with same input parameters always equals <code>$1$</code>.</p>
 <h3 id="call">Call</h3>
 <p>$$\Phi(d_2)$$</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesCall</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">blackscholes</span><span class="w"> </span><span class="kn">import</span> <span class="n">BlackScholesCall</span>
 <span class="n">call</span> <span class="o">=</span> <span class="n">BlackScholesCall</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
 <span class="n">call</span><span class="o">.</span><span class="n">in_the_money</span><span class="p">()</span>  <span class="c1">## 0.71805</span>
 </code></pre></div>
@@ -914,7 +914,7 @@ In other words, the estimate of a call plus that of a put with same input parame
               <summary>Source code in <code>src/blackscholes/call.py</code></summary>
               <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">84</span>
 <span class="normal">85</span>
-<span class="normal">86</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">in_the_money</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">86</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">in_the_money</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Naive Probability that call option will be in the money at maturity.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -923,7 +923,7 @@ In other words, the estimate of a call plus that of a put with same input parame
 
 </div><h3 id="put">Put</h3>
 <p>$$1 - \Phi(d_2)$$</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesPut</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">blackscholes</span><span class="w"> </span><span class="kn">import</span> <span class="n">BlackScholesPut</span>
 <span class="n">put</span> <span class="o">=</span> <span class="n">BlackScholesPut</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
 <span class="n">put</span><span class="o">.</span><span class="n">in_the_money</span><span class="p">()</span>  <span class="c1">## 0.28194</span>
 </code></pre></div>
@@ -943,7 +943,7 @@ In other words, the estimate of a call plus that of a put with same input parame
               <summary>Source code in <code>src/blackscholes/put.py</code></summary>
               <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">85</span>
 <span class="normal">86</span>
-<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">in_the_money</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">in_the_money</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Naive Probability that put option will be in the money at maturity.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_d2</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -957,7 +957,7 @@ that an option will expire in-the-money. </p>
 In other words, the dual delta of call plus dual delta of put with same input parameters always equals <code>$1$</code>.</p>
 <h3 id="call_1">Call</h3>
 <p>$$e^{-rT}\Phi(d_2)$$</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesCall</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">blackscholes</span><span class="w"> </span><span class="kn">import</span> <span class="n">BlackScholesCall</span>
 <span class="n">call</span> <span class="o">=</span> <span class="n">BlackScholesCall</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
 <span class="n">call</span><span class="o">.</span><span class="n">dual_delta</span><span class="p">()</span>  <span class="c1">## 0.71626</span>
 </code></pre></div>
@@ -980,7 +980,7 @@ with respect to strike price.</p>
 <span class="normal">47</span>
 <span class="normal">48</span>
 <span class="normal">49</span>
-<span class="normal">50</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">dual_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">50</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">dual_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;1st derivative in option price</span>
 <span class="sd">    with respect to strike price.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -991,7 +991,7 @@ with respect to strike price.</p>
 
 </div><h3 id="put_1">Put</h3>
 <p>$$e^{-rT}\Phi(-d_2)$$</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">blackscholes</span> <span class="kn">import</span> <span class="n">BlackScholesPut</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">blackscholes</span><span class="w"> </span><span class="kn">import</span> <span class="n">BlackScholesPut</span>
 <span class="n">put</span> <span class="o">=</span> <span class="n">BlackScholesPut</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
 <span class="n">put</span><span class="o">.</span><span class="n">dual_delta</span><span class="p">()</span>  <span class="c1">## 0.28124</span>
 </code></pre></div>
@@ -1014,7 +1014,7 @@ with respect to strike price.</p>
 <span class="normal">47</span>
 <span class="normal">48</span>
 <span class="normal">49</span>
-<span class="normal">50</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">dual_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">50</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">dual_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;1st derivative in option price</span>
 <span class="sd">    with respect to strike price.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1076,10 +1076,10 @@ with respect to strike price.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "navigation.tabs", "navigation.tracking", "navigation.tabs.sticky", "navigation.expand"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "navigation.tabs", "navigation.tracking", "navigation.tabs.sticky", "navigation.expand"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      <script src="../assets/javascripts/bundle.60a45f97.min.js"></script>
       
     
   </body>
