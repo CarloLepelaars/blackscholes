@@ -2,6 +2,7 @@ from math import exp, sqrt
 
 from .base import Black76Base, BlackScholesBase, BinaryBase
 
+from scipy.optimize import newton
 
 class BlackScholesCall(BlackScholesBase):
     """
@@ -84,7 +85,25 @@ class BlackScholesCall(BlackScholesBase):
     def in_the_money(self) -> float:
         """Naive Probability that call option will be in the money at maturity."""
         return self._cdf(self._d2)
+    
+    def find_implied_volatility(self,target_price) ->float:
+        """ Calculate implied volatility given a target option price.
+        """
 
+        model = lambda vol: BlackScholesCall(
+            S=self.S,
+            K=self.K,
+            T=self.T,
+            r=self.r,
+            sigma=vol,
+            q=self.q
+        )
+        
+        func = lambda vol: model(vol).price() - target_price
+        fprime = lambda vol:  model(vol)._vega
+
+        return float(newton(func=func, fprime=fprime, x0=1.0))
+    
 
 class Black76Call(Black76Base):
     """
@@ -138,6 +157,24 @@ class Black76Call(Black76Base):
             * (self.F * self._cdf(self._d1) - self.K * self._cdf(self._d2))
         )
 
+    def find_implied_volatility(self,target_price) ->float:
+        """ Calculate implied volatility given a target option price.
+        """
+
+        model = lambda vol: Black76Call(
+            F=self.F,
+            K=self.K,
+            T=self.T,
+            r=self.r,
+            sigma=vol
+        )
+        
+        func = lambda vol: model(vol).price() - target_price
+        fprime = lambda vol:  model(vol)._vega
+
+        return float(newton(func=func, fprime=fprime, x0=1.0))    
+
+
 class BinaryCall(BinaryBase):
     """
     Calculate (European) call option prices for a binary option.
@@ -161,6 +198,7 @@ class BinaryCall(BinaryBase):
         return exp(-self.r * self.T) * self._cdf(self._d2)
     
     def forward(self) -> float:
+
         """Fair value of binary call option without discounting for interest rates."""
         return self._cdf(self._d2)
     

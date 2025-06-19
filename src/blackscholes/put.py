@@ -2,6 +2,7 @@ from math import exp, sqrt
 
 from .base import Black76Base, BlackScholesBase, BinaryBase
 
+from scipy.optimize import newton
 
 class BlackScholesPut(BlackScholesBase):
     """
@@ -86,6 +87,25 @@ class BlackScholesPut(BlackScholesBase):
         """Naive Probability that put option will be in the money at maturity."""
         return 1.0 - self._cdf(self._d2)
 
+    def find_implied_volatility(self,target_price) ->float:
+        """ Calculate implied volatility for put given a target option price.
+        """
+
+        model = lambda vol: BlackScholesPut(
+            S=self.S,
+            K=self.K,
+            T=self.T,
+            r=self.r,
+            sigma=vol,
+            q=self.q
+        )
+        
+        func = lambda vol: model(vol).price() - target_price
+        fprime = lambda vol:  model(vol)._vega
+
+        return float(newton(func=func, fprime=fprime, x0=1.0))
+
+
 
 class Black76Put(Black76Base):
     def __init__(self, F: float, K: float, T: float, r: float, sigma: float):
@@ -127,6 +147,23 @@ class Black76Put(Black76Base):
             * exp(-self.r * self.T)
             * (self.K * self._cdf(-self._d2) - self.F * self._cdf(-self._d1))
         )
+
+    def find_implied_volatility(self,target_price) ->float:
+        """ Calculate implied volatility for put given a target option price.
+        """
+
+        model = lambda vol: Black76Put(
+            F=self.F,
+            K=self.K,
+            T=self.T,
+            r=self.r,
+            sigma=vol,
+        )
+        
+        func = lambda vol: model(vol).price() - target_price
+        fprime = lambda vol:  model(vol)._vega
+
+        return float(newton(func=func, fprime=fprime, x0=1.0))
 
 class BinaryPut(BinaryBase):
     """
