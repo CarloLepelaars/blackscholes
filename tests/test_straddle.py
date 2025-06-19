@@ -1,7 +1,8 @@
-from blackscholes import BlackScholesStraddleLong, BlackScholesStraddleShort
+from blackscholes import BlackScholesStraddleLong, BlackScholesStraddleShort,Black76StraddleLong, Black76StraddleShort
 
 # Test parameters
 test_S = 55.0  # Asset price of 55
+test_F = 55.0  # Asset price of 55 (for Black76)
 test_K = 50.0  # Strike price of 50
 test_T = 1.0  # 1 year to maturity
 test_r = 0.0025  # 0.25% risk-free rate
@@ -25,6 +26,33 @@ class TestBlackScholesStraddleLong:
 class TestBlackScholesStraddleShort:
     def test_individual_methods(self):
         straddle = BlackScholesStraddleShort(test_S, test_K, test_T, test_r, test_sigma)
+        test_methods = list(straddle.call1.get_all_greeks().keys()) + [
+            "price",
+        ]
+        # Short straddle = - Put1 - Call1
+        for attr in test_methods:
+            assert (
+                getattr(straddle, attr)()
+                == -getattr(straddle.put1, attr)() - getattr(straddle.call1, attr)()
+            )
+
+class TestBlack76StraddleLong:
+    def test_individual_methods(self):
+        straddle = Black76StraddleLong(test_F, test_K, test_T, test_r, test_sigma)
+        test_methods = list(straddle.call1.get_all_greeks().keys()) + [
+            "price",
+        ]
+        # Long straddle = Put1 + Call1
+        for attr in test_methods:
+            assert (
+                getattr(straddle, attr)()
+                == getattr(straddle.put1, attr)() + getattr(straddle.call1, attr)()
+            )
+
+
+class TestBlack76StraddleShort:
+    def test_individual_methods(self):
+        straddle = Black76StraddleShort(test_F, test_K, test_T, test_r, test_sigma)
         test_methods = list(straddle.call1.get_all_greeks().keys()) + [
             "price",
         ]
