@@ -188,6 +188,18 @@ iron_butterfly.price()  ## -4.9873
 iron_butterfly.delta()  ## 0.0001
 ```
 
+## For Black76  sctructures
+
+We create analogous classes as to **Short Iron Butterfly**
+
+```python
+from blackscholes import Black76IronButterflyShort
+iron_butterfly = Black76IronButterflyShort(F=55, K1=95, K2=100, K3=105, 
+                                                T=1.0, r=0.0025, sigma=0.15)
+iron_butterfly.price()  ## -4.9875
+iron_butterfly.delta()  ## 0.0001
+```
+
 ### Binary options
 
 Binary options are also called exotic, digital or bet options. `blackscholes` supports Greeks for binary calls and puts.
