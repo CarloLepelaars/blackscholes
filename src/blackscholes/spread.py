@@ -356,7 +356,7 @@ class Black76CalendarCallSpread(Black76StructureBase):
         return call1_attr() - call2_attr()
     
 
-class BlackScholesCalendarPutSpread(Black76StructureBase):
+class Black76CalendarPutSpread(Black76StructureBase):
     """
     Create a calendar put spread option structure. \n
     Horizontal Calendar Put Spread -> K1 == K2 \n 
