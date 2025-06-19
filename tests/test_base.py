@@ -55,6 +55,8 @@ class BlackScholesMeta(BlackScholesBase):
     def charm(self):
         ...
 
+    def find_implied_volatility(self,target_price) -> float:
+        ...
 
 class TestBlackScholesBase:
     meta = BlackScholesMeta(S=test_S, K=test_K, T=test_T, r=test_r, sigma=test_sigma)
@@ -114,6 +116,7 @@ class TestBlackScholesBase:
         np.testing.assert_almost_equal(dual_gamma, 0.0449212099251806, decimal=6)
 
     def test_vega(self):
+        np.testing.assert_almost_equal(self.meta._vega, 16.84545372194272, decimal=6)
         vega = self.meta.vega()
         np.testing.assert_almost_equal(vega, 16.84545372194272, decimal=6)
 
@@ -168,6 +171,8 @@ class Black76Meta(Black76Base):
     def rho(self):
         ...
 
+    def find_implied_volatility(self,target_price) -> float:
+        ...
 
 class TestBlack76Base:
     meta = Black76Meta(F=test_S, K=test_K, T=test_T, r=test_r, sigma=test_sigma)
@@ -223,6 +228,7 @@ class TestBlack76Base:
         np.testing.assert_almost_equal(gamma, 0.03747854417414418, decimal=5)
 
     def test_vega(self):
+        np.testing.assert_almost_equal(self.meta._vega, 17.00588941901792, decimal=5)
         vega = self.meta.vega()
         np.testing.assert_almost_equal(vega, 17.00588941901792, decimal=5)
 
