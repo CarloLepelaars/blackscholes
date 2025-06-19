@@ -54,6 +54,11 @@ class BlackScholesBase(ABC, StandardNormalMixin):
         ...
 
     @abstractmethod
+    def find_implied_volatility(self) -> float:
+        """Calculates the implied volaticity."""
+        ...
+
+    @abstractmethod
     def delta(self) -> float:
         """Rate of change in option price
         with respect to the forward price (1st derivative).
@@ -319,6 +324,11 @@ class Black76Base(ABC, StandardNormalMixin):
             * self._pdf(self._d1)
             / (self.F * self.sigma * sqrt(self.T))
         )
+
+    @abstractmethod
+    def find_implied_volatility(self) -> float:
+        """Calculates the implied volaticity."""
+        ...
 
     def vega(self) -> float:
         """Rate of change in option price with respect to the volatility
