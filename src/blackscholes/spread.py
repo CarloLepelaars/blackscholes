@@ -222,7 +222,7 @@ class Black76BullSpread(Black76StructureBase):
 
     def __init__(
         self,
-        S: float,
+        F: float,
         K1: float,
         K2: float,
         T: float,
@@ -235,8 +235,8 @@ class Black76BullSpread(Black76StructureBase):
         ), f"""1st strike price should be smaller than 2nd.
         Got K1={K1}, which is not smaller than K2={K2}.
         """
-        self.call1 = Black76Call(S=S, K=K1, T=T, r=r, sigma=sigma, q=q)
-        self.call2 = Black76Call(S=S, K=K2, T=T, r=r, sigma=sigma, q=q)
+        self.call1 = Black76Call(F=F, K=K1, T=T, r=r, sigma=sigma)
+        self.call2 = Black76Call(F=F, K=K2, T=T, r=r, sigma=sigma)
         super().__init__()
 
     def _calc_attr(self, attribute_name: str) -> float:
@@ -271,7 +271,7 @@ class Black76BearSpread(Black76StructureBase):
     """
     def __init__(
         self,
-        S: float,
+        F: float,
         K1: float,
         K2: float,
         T: float,
@@ -284,8 +284,8 @@ class Black76BearSpread(Black76StructureBase):
         ), f"""1st strike price should be larger than 2nd.
         Got K1={K1}, which is not larger than K2={K2}.
         """
-        self.put1 = Black76Put(S=S, K=K1, T=T, r=r, sigma=sigma, q=q)
-        self.put2 = Black76Put(S=S, K=K2, T=T, r=r, sigma=sigma, q=q)
+        self.put1 = Black76Put(F=F, K=K1, T=T, r=r, sigma=sigma)
+        self.put2 = Black76Put(F=F, K=K2, T=T, r=r, sigma=sigma)
         super().__init__()
 
     def _calc_attr(self, attribute_name: str) -> float:
@@ -322,7 +322,7 @@ class Black76CalendarCallSpread(Black76StructureBase):
     """
     def __init__(
         self,
-        S: float,
+        F: float,
         K1: float,
         K2: float,
         T1: float,
@@ -336,8 +336,8 @@ class Black76CalendarCallSpread(Black76StructureBase):
         ), f"""1st time to maturity should be longer than 2nd.
         Got T1={T1}, which is not longer than T2={T2}.
         """
-        self.call1 = Black76Call(S=S, K=K1, T=T1, r=r, sigma=sigma, q=q)
-        self.call2 = Black76Call(S=S, K=K2, T=T2, r=r, sigma=sigma, q=q)
+        self.call1 = Black76Call(F=F, K=K1, T=T1, r=r, sigma=sigma)
+        self.call2 = Black76Call(F=F, K=K2, T=T2, r=r, sigma=sigma)
         super().__init__()
 
     def _calc_attr(self, attribute_name: str) -> float:
@@ -374,7 +374,7 @@ class Black76CalendarPutSpread(Black76StructureBase):
     """
     def __init__(
         self,
-        S: float,
+        F: float,
         K1: float,
         K2: float,
         T1: float,
@@ -388,8 +388,8 @@ class Black76CalendarPutSpread(Black76StructureBase):
         ), f"""1st time to maturity should be longer than 2nd.
         Got T1={T1}, which is not longer than T2={T2}.
         """
-        self.put1 = Black76Put(S=S, K=K1, T=T1, r=r, sigma=sigma, q=q)
-        self.put2 = Black76Put(S=S, K=K2, T=T2, r=r, sigma=sigma, q=q)
+        self.put1 = Black76Put(F=F, K=K1, T=T1, r=r, sigma=sigma)
+        self.put2 = Black76Put(F=F, K=K2, T=T2, r=r, sigma=sigma)
         super().__init__()
 
     def _calc_attr(self, attribute_name: str) -> float:

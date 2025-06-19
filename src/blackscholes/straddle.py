@@ -101,15 +101,15 @@ class Black76StraddleLong(Black76StructureBase):
 
     def __init__(
         self,
-        S: float,
+        F: float,
         K: float,
         T: float,
         r: float,
         sigma: float,
         q: float = 0.0,
     ):
-        self.call1 = Black76Call(S=S, K=K, T=T, r=r, sigma=sigma, q=q)
-        self.put1 = Black76Put(S=S, K=K, T=T, r=r, sigma=sigma, q=q)
+        self.call1 = Black76Call(F=F, K=K, T=T, r=r, sigma=sigma)
+        self.put1 = Black76Put(F=F, K=K, T=T, r=r, sigma=sigma)
         super().__init__()
 
     def _calc_attr(self, attribute_name: str) -> float:
@@ -143,15 +143,15 @@ class Black76StraddleShort(Black76StructureBase):
 
     def __init__(
         self,
-        S: float,
+        F: float,
         K: float,
         T: float,
         r: float,
         sigma: float,
         q: float = 0.0,
     ):
-        self.call1 = Black76Call(S=S, K=K, T=T, r=r, sigma=sigma, q=q)
-        self.put1 = Black76Put(S=S, K=K, T=T, r=r, sigma=sigma, q=q)
+        self.call1 = Black76Call(F=F, K=K, T=T, r=r, sigma=sigma)
+        self.put1 = Black76Put(F=F, K=K, T=T, r=r, sigma=sigma)
         super().__init__()
 
     def _calc_attr(self, attribute_name: str) -> float:
