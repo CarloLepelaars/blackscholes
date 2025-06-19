@@ -1,9 +1,10 @@
 [project]
 name = "blackscholes"
-version = "0.2.0"
+version = "0.2.1"
 description = "Black Scholes calculator for Python"
 authors = [
     {name = "Carlo Lepelaars", email = "info@carlolepelaars.nl"},
+    {name = "Tito Conte", email = "tito.conte@gmail.com"},
 ]
 license = {text = "MIT License"}
 readme = ".github/README.MD"

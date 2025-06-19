@@ -118,7 +118,7 @@ class Black76StrangleLong(Black76StructureBase):
 
     def __init__(
         self,
-        S: float,
+        F: float,
         K1: float,
         K2: float,
         T: float,
@@ -130,8 +130,8 @@ class Black76StrangleLong(Black76StructureBase):
         ), f"""1st strike price should be smaller than 2nd.
         Got K1={K1}, which is not smaller than K2={K2}.
         """
-        self.put1 = Black76Put(S=S, K=K1, T=T, r=r, sigma=sigma)
-        self.call1 = Black76Call(S=S, K=K2, T=T, r=r, sigma=sigma)
+        self.put1 = Black76Put(F=F, K=K1, T=T, r=r, sigma=sigma)
+        self.call1 = Black76Call(F=F, K=K2, T=T, r=r, sigma=sigma)
         super().__init__()
 
     def _calc_attr(self, attribute_name: str) -> float:
@@ -166,7 +166,7 @@ class Black76StrangleShort(Black76StructureBase):
 
     def __init__(
         self,
-        S: float,
+        F: float,
         K1: float,
         K2: float,
         T: float,
@@ -178,8 +178,8 @@ class Black76StrangleShort(Black76StructureBase):
         ), f"""1st strike price should be smaller than 2nd.
         Got K1={K1}, which is not smaller than K2={K2}.
         """
-        self.put1 = Black76Put(S=S, K=K1, T=T, r=r, sigma=sigma)
-        self.call1 = Black76Call(S=S, K=K2, T=T, r=r, sigma=sigma)
+        self.put1 = Black76Put(F=F, K=K1, T=T, r=r, sigma=sigma)
+        self.call1 = Black76Call(F=F, K=K2, T=T, r=r, sigma=sigma)
         super().__init__()
 
     def _calc_attr(self, attribute_name: str) -> float:

@@ -141,7 +141,7 @@ class Black76ButterflyLong(Black76StructureBase):
 
     def __init__(
         self,
-        S: float,
+        F: float,
         K1: float,
         K2: float,
         K3: float,
@@ -161,9 +161,9 @@ class Black76ButterflyLong(Black76StructureBase):
                         Got {K2}-{K1} != {K3}-{K2}.
                         """
         super().__init__()
-        self.call1 = Black76Call(S=S, K=K1, T=T, r=r, sigma=sigma, q=q)
-        self.call2 = Black76Call(S=S, K=K2, T=T, r=r, sigma=sigma, q=q)
-        self.call3 = Black76Call(S=S, K=K3, T=T, r=r, sigma=sigma, q=q)
+        self.call1 = Black76Call(F=F, K=K1, T=T, r=r, sigma=sigma)
+        self.call2 = Black76Call(F=F, K=K2, T=T, r=r, sigma=sigma)
+        self.call3 = Black76Call(F=F, K=K3, T=T, r=r, sigma=sigma)
 
     def _calc_attr(self, attribute_name: str) -> float:
         """
@@ -201,7 +201,7 @@ class Black76ButterflyShort(Black76StructureBase):
 
     def __init__(
         self,
-        S: float,
+        F: float,
         K1: float,
         K2: float,
         K3: float,
@@ -221,9 +221,9 @@ class Black76ButterflyShort(Black76StructureBase):
                         Got {K2}-{K1} != {K3}-{K2}.
                         """
         super().__init__()
-        self.put1 = Black76Put(S=S, K=K1, T=T, r=r, sigma=sigma, q=q)
-        self.put2 = Black76Put(S=S, K=K2, T=T, r=r, sigma=sigma, q=q)
-        self.put3 = Black76Put(S=S, K=K3, T=T, r=r, sigma=sigma, q=q)
+        self.put1 = Black76Put(F=F, K=K1, T=T, r=r, sigma=sigma)
+        self.put2 = Black76Put(F=F, K=K2, T=T, r=r, sigma=sigma)
+        self.put3 = Black76Put(F=F, K=K3, T=T, r=r, sigma=sigma)
 
     def _calc_attr(self, attribute_name: str) -> float:
         """
