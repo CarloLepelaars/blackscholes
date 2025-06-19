@@ -585,6 +585,117 @@ class BlackScholesStructureBase(ABC):
         }
 
 
+class Black76StructureBase(ABC):
+    """
+    Option structure base class. \n
+    `_calc_attr` should be implemented for every option structure.
+    """
+
+    @abstractmethod
+    def _calc_attr(self, attribute_name: str) -> float:
+        """
+        Combines attributes from several put and call options.
+
+        Ex. Long Straddle \n
+        ```python
+        def _calc_attr(self, attribute_name: str) -> float:
+            put_attr = getattr(self.put1, attribute_name)
+            call_attr = getattr(self.call1, attribute_name)
+            return put_attr() + call_attr()
+        ```
+        In this way all greeks and price are combined in the same way. \n
+        In this case only simple addition is performed.
+
+        :param attribute_name: String name of option attribute
+        pointing to a method that can be called on
+        Black76Call and Black76Put.
+
+        :return: Combined value (float)
+        """
+        ...
+
+    def price(self) -> float:
+        """Fair value of Black-Scholes option structure."""
+        return self._calc_attr(attribute_name="price")
+
+    def delta(self) -> float:
+        """Rate of change in structure price
+        with respect to the asset price (1st derivative).
+        Note that this is the forward delta.
+        For the spot delta, use `spot_delta`.
+        """
+        return self._calc_attr(attribute_name="delta")
+
+    def theta(self) -> float:
+        """Rate of change in structure price
+        with respect to time (i.e. time decay).
+        """
+        return self._calc_attr(attribute_name="theta")
+
+    def rho(self) -> float:
+        """Rate of change in structure price
+        with respect to the risk-free rate.
+        """
+        return self._calc_attr(attribute_name="rho")
+
+    def gamma(self) -> float:
+        """
+        Rate of change in delta with respect to the underlying asset price (2nd derivative).
+        """
+        return self._calc_attr(attribute_name="gamma")
+
+    def vega(self) -> float:
+        """
+        Rate of change in structure price with respect to the volatility of the asset.
+        """
+        return self._calc_attr(attribute_name="vega")
+
+    def vanna(self) -> float:
+        """Sensitivity of delta with respect to change in volatility."""
+        return self._calc_attr(attribute_name="vanna")
+
+    def vomma(self) -> float:
+        """2nd order sensitivity to volatility."""
+        return self._calc_attr(attribute_name="vomma")
+
+    def alpha(self) -> float:
+        """Theta to gamma ratio. Also called "gamma rent".
+        More info: "Dynamic Hedging" by Nassim Taleb, p. 178-181.
+        """
+        return self._calc_attr(attribute_name="alpha")
+
+    def get_core_greeks(self) -> Dict[str, float]:
+        """
+        Get the top 5 most well known Greeks for the compound.
+        1. Delta
+        2. Gamma
+        3. Vega
+        4. Theta
+        5. Rho
+        """
+        return {
+            "delta": self.delta(),
+            "gamma": self.gamma(),
+            "vega": self.vega(),
+            "theta": self.theta(),
+            "rho": self.rho(),
+        }
+
+    def get_all_greeks(self) -> Dict[str, float]:
+        """Retrieve all Greeks for the compound
+        implemented as a dictionary."""
+        return {
+            "delta": self.delta(),
+            "gamma": self.gamma(),
+            "vega": self.vega(),
+            "theta": self.theta(),
+            "rho": self.rho(),
+            "vanna": self.vanna(),
+            "vomma": self.vomma(),
+            "alpha": self.alpha(),
+        }
+
+
 class BinaryBase(ABC, StandardNormalMixin):
     """
     Base class for (European) binary options.
