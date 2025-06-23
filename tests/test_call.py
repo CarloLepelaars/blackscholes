@@ -155,6 +155,10 @@ class TestBlackScholesCall:
                 all_greeks[key], expected_result[key], decimal=5
             )
 
+    def test_find_implied_volatility(self):
+        target_price = 6.339408
+        implied_vol = self.call.find_implied_volatility(target_price)
+        np.testing.assert_almost_equal(implied_vol, test_sigma, decimal=5)
 
 class TestBlack76Call:
     call = Black76Call(F=test_S, K=test_K, T=test_T, r=test_r, sigma=test_sigma)
@@ -218,6 +222,11 @@ class TestBlack76Call:
             np.testing.assert_almost_equal(
                 all_greeks[key], expected_result[key], decimal=5
             )
+
+    def test_find_implied_volatility(self):
+        target_price = 6.234516612704489
+        implied_vol = self.call.find_implied_volatility(target_price)
+        np.testing.assert_almost_equal(implied_vol, test_sigma, decimal=5)
 
 class TestBinaryCall:
     call = BinaryCall(S=test_S, K=test_K, T=test_T, r=test_r, sigma=test_sigma)

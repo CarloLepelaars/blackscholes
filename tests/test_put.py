@@ -140,6 +140,10 @@ class TestBlackScholesPut:
                 all_greeks[key], expected_result[key], decimal=5
             )
 
+    def test_find_implied_volatility(self):
+        target_price = 1.214564
+        implied_vol = self.put.find_implied_volatility(target_price)
+        np.testing.assert_almost_equal(implied_vol, test_sigma, decimal=4)
 
 class TestBlack76Put:
     put = Black76Put(F=test_S, K=test_K, T=test_T, r=test_r, sigma=test_sigma)
@@ -203,6 +207,11 @@ class TestBlack76Put:
             np.testing.assert_almost_equal(
                 all_greeks[key], expected_result[key], decimal=5
             )
+
+    def test_find_implied_volatility(self):
+        target_price = 1.2470010007171901
+        implied_vol = self.put.find_implied_volatility(target_price)
+        np.testing.assert_almost_equal(implied_vol, test_sigma, decimal=4)
 
 class TestBinaryPut:
     put = BinaryPut(S=test_S, K=test_K, T=test_T, r=test_r, sigma=test_sigma)
