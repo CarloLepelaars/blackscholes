@@ -190,7 +190,7 @@ iron_butterfly.delta()  ## 0.0001
 
 ### Binary options
 
-Binary options are also called exotic, digital or bet options. `blackscholes` supports Greeks for binary calls and puts.
+Binary options are also called exotic, digital or bet options. `blackscholes` supports **cash-or-nothing** (cash amount $1$, $q=0$) prices and Greeks for binary calls and puts.
 
 
 
