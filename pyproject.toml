@@ -5,7 +5,8 @@ description = "Black Scholes calculator for Python"
 authors = [
     {name = "Carlo Lepelaars", email = "info@carlolepelaars.nl"},
 ]
-license = {text = "MIT License"}
+license = "MIT"
+license-files = ["LICENSE"]
 readme = ".github/README.MD"
 requires-python = ">=3.10,<4"
 
@@ -36,5 +37,5 @@ testpaths = ["tests"]
 pythonpath = ["src"]
 
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=77.0.0"]
 build-backend = "setuptools.build_meta"
