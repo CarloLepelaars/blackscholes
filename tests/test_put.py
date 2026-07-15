@@ -66,6 +66,25 @@ class TestBlackScholesPut:
         put_theta = self.put.theta()
         np.testing.assert_almost_equal(put_theta, -1.2282536767758119, decimal=6)
 
+    def test_theta_with_dividend(self):
+        # With q>0, put theta density term must use exp(-qT) (not exp(+qT)).
+        put_q = BlackScholesPut(
+            S=test_S, K=test_K, T=test_T, r=test_r, sigma=test_sigma, q=0.05
+        )
+        call_q = BlackScholesCall(
+            S=test_S, K=test_K, T=test_T, r=test_r, sigma=test_sigma, q=0.05
+        )
+        # Put-call theta parity (continuous dividend): theta_C - theta_P = q S e^{-qT} - r K e^{-rT}
+        from math import exp
+
+        lhs = call_q.theta() - put_q.theta()
+        rhs = (
+            0.05 * test_S * exp(-0.05 * test_T)
+            - test_r * test_K * exp(-test_r * test_T)
+        )
+        np.testing.assert_almost_equal(lhs, rhs, decimal=6)
+
+
     def test_epsilon(self):
         call_epsilon = self.put.epsilon()
         np.testing.assert_almost_equal(call_epsilon, 12.84757053197959, decimal=6)
@@ -218,36 +237,36 @@ class TestBinaryPut:
 
     def test_delta(self):
         delta = self.put.delta()
-        np.testing.assert_almost_equal(delta, -0.3055162306516324, decimal=6)
+        np.testing.assert_almost_equal(delta, -0.04083746356834601, decimal=6)
 
     def test_gamma(self):
         gamma = self.put.gamma()
         call_gamma = self.call.gamma()
-        np.testing.assert_almost_equal(gamma, call_gamma, decimal=16)
-        np.testing.assert_almost_equal(gamma, 0.0032595297589864043, decimal=6)
+        np.testing.assert_almost_equal(gamma, -call_gamma, decimal=12)
+        np.testing.assert_almost_equal(gamma, 0.003598982722841523, decimal=6)
 
     def test_vega(self):
         vega = self.put.vega()
         call_vega = self.call.vega()
-        np.testing.assert_almost_equal(vega, -call_vega, decimal=16)
-        np.testing.assert_almost_equal(vega, -81.65192052446703, decimal=6)
+        np.testing.assert_almost_equal(vega, -call_vega, decimal=12)
+        np.testing.assert_almost_equal(vega, 1.6330384104893412, decimal=6)
 
     def test_theta(self):
         theta = self.put.theta()
-        np.testing.assert_almost_equal(theta, -1.2985643815155963, decimal=6)
+        np.testing.assert_almost_equal(theta, -0.11615962249865515, decimal=6)
 
     def test_rho(self):
         rho = self.put.rho()
-        np.testing.assert_almost_equal(rho, -14.062140947956921, decimal=6)
+        np.testing.assert_almost_equal(rho, -2.5273033152181688, decimal=6)
 
     def test_get_core_greeks(self):
         core_greeks = self.put.get_core_greeks()
         expected_result = {
-            "delta": -0.3055162306516324,
-            "gamma": 0.0032595297589864043,
-            "vega": -81.65192052446703,
-            "theta": -1.2985643815155963,
-            "rho": -14.062140947956921,
+            "delta": -0.04083746356834601,
+            "gamma": 0.003598982722841523,
+            "vega": 1.6330384104893412,
+            "theta": -0.11615962249865515,
+            "rho": -2.5273033152181688,
         }
 
         assert set(core_greeks.keys()) == set(expected_result.keys())

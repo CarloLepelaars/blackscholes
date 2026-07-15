@@ -165,27 +165,33 @@ class BinaryCall(BinaryBase):
         return self._cdf(self._d2)
     
     def delta(self) -> float:
-        """Rate of change in option price
-        with respect to the forward price (1st derivative).
-        Note that this is the forward delta.
-        """
-        return exp(-self.r * self.T) * self._pdf(self._d1) / sqrt(self.T)
-    
+        """Cash-or-nothing call delta: e^{-rT} n(d2) / (S σ √T)."""
+        return (
+            exp(-self.r * self.T)
+            * self._pdf(self._d2)
+            / (self.S * self.sigma * sqrt(self.T))
+        )
+
     def vega(self) -> float:
-        """Rate of change in option price
-        with respect to the volatility (1st derivative).
-        """
-        return self.S * sqrt(self.T) * self._pdf(self._d1) * self._d1 / self.sigma
-    
+        """Cash-or-nothing call vega: -e^{-rT} n(d2) d1 / σ."""
+        return (
+            -exp(-self.r * self.T)
+            * self._pdf(self._d2)
+            * self._d1
+            / self.sigma
+        )
+
     def theta(self) -> float:
-        """Rate of change in option price
-        with respect to time (i.e. time decay).
-        """
-        return self.r * self.K * exp(-self.r * self.T) * self._cdf(self._d2) - (self.S * self._pdf(self._d1) * self.sigma) / (2 * sqrt(self.T))
-    
+        """Cash-or-nothing call theta (∂V/∂t = -∂V/∂T)."""
+        return exp(-self.r * self.T) * (
+            self.r * self._cdf(self._d2)
+            - self._pdf(self._d2) * self._d2_dT()
+        )
+
     def rho(self) -> float:
-        """Rate of change in option price
-        with respect to the risk-free rate.
-        """
-        return self.T * self.K * exp(-self.r * self.T) * self._cdf(self._d2)
+        """Cash-or-nothing call rho: e^{-rT} [-T N(d2) + n(d2) √T / σ]."""
+        return exp(-self.r * self.T) * (
+            -self.T * self._cdf(self._d2)
+            + self._pdf(self._d2) * sqrt(self.T) / self.sigma
+        )
     

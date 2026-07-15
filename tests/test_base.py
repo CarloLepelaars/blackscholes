@@ -173,36 +173,17 @@ class TestBlack76Base:
     meta = Black76Meta(F=test_S, K=test_K, T=test_T, r=test_r, sigma=test_sigma)
 
     def test_arg_assert(self):
-        # Should not be able to initialize if F, K, T, or sigma is negative.
-        with pytest.raises(AssertionError):
-            Black76Meta(
-                F=-test_S,
-                K=test_K,
-                T=test_T,
-                r=test_r,
-                sigma=test_sigma,
-            )
-            Black76Meta(
-                F=test_S,
-                K=-test_K,
-                T=test_T,
-                r=test_r,
-                sigma=test_sigma,
-            )
-            Black76Meta(
-                F=-test_S,
-                K=test_K,
-                T=-test_T,
-                r=test_r,
-                sigma=test_sigma,
-            )
-            Black76Meta(
-                F=test_S,
-                K=test_K,
-                T=test_T,
-                r=test_r,
-                sigma=-test_sigma,
-            )
+        # F, K, T, sigma must be strictly positive (zeros and negatives rejected).
+        for kwargs in (
+            dict(F=-test_S, K=test_K, T=test_T, r=test_r, sigma=test_sigma),
+            dict(F=0.0, K=test_K, T=test_T, r=test_r, sigma=test_sigma),
+            dict(F=test_S, K=0.0, T=test_T, r=test_r, sigma=test_sigma),
+            dict(F=test_S, K=test_K, T=0.0, r=test_r, sigma=test_sigma),
+            dict(F=test_S, K=test_K, T=test_T, r=test_r, sigma=0.0),
+            dict(F=test_S, K=test_K, T=test_T, r=test_r, sigma=-test_sigma),
+        ):
+            with pytest.raises(AssertionError):
+                Black76Meta(**kwargs)
 
         # Initializing with negative r (interest rate) is possible.
         Black76Meta(
@@ -311,4 +292,4 @@ class TestBinaryBase:
 
     def test_gamma(self):
         gamma = self.meta.gamma()
-        np.testing.assert_almost_equal(gamma, 0.0032595297589864043, decimal=6)
+        np.testing.assert_almost_equal(gamma, -0.003598982722841523, decimal=6)

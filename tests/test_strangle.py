@@ -26,6 +26,8 @@ class TestBlackScholesStrangleLong:
         test_methods = list(strangle.call1.get_all_greeks().keys()) + [
             "price",
         ]
+        # lambda/alpha are structure-level (not sum of leg ratios)
+        test_methods = [m for m in test_methods if m not in ("lambda_greek", "alpha")]
         # Long strangle = Put1 + Call1
         for attr in test_methods:
             assert (
@@ -49,6 +51,8 @@ class TestBlackScholesStrangleShort:
         test_methods = list(strangle.call1.get_all_greeks().keys()) + [
             "price",
         ]
+        # lambda/alpha are structure-level (not sum of leg ratios)
+        test_methods = [m for m in test_methods if m not in ("lambda_greek", "alpha")]
         # Short strangle = -Put1 - Call1
         for attr in test_methods:
             assert (

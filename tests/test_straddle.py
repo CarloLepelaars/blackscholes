@@ -14,6 +14,8 @@ class TestBlackScholesStraddleLong:
         test_methods = list(straddle.call1.get_all_greeks().keys()) + [
             "price",
         ]
+        # lambda/alpha are structure-level (not sum of leg ratios)
+        test_methods = [m for m in test_methods if m not in ("lambda_greek", "alpha")]
         # Long straddle = Put1 + Call1
         for attr in test_methods:
             assert (
@@ -28,6 +30,8 @@ class TestBlackScholesStraddleShort:
         test_methods = list(straddle.call1.get_all_greeks().keys()) + [
             "price",
         ]
+        # lambda/alpha are structure-level (not sum of leg ratios)
+        test_methods = [m for m in test_methods if m not in ("lambda_greek", "alpha")]
         # Short straddle = - Put1 - Call1
         for attr in test_methods:
             assert (

@@ -74,6 +74,8 @@ class TestBlackScholesIronButterflyLong:
         test_methods = list(iron_butterfly.call1.get_all_greeks().keys()) + [
             "price",
         ]
+        # lambda/alpha are structure-level (not sum of leg ratios)
+        test_methods = [m for m in test_methods if m not in ("lambda_greek", "alpha")]
         # Long iron butterfly = -Put1 + Put2 + Call1 - Call2
         for attr in test_methods:
             assert (
@@ -147,6 +149,8 @@ class TestBlackScholesIronButterflyShort:
         test_methods = list(iron_butterfly.call1.get_all_greeks().keys()) + [
             "price",
         ]
+        # lambda/alpha are structure-level (not sum of leg ratios)
+        test_methods = [m for m in test_methods if m not in ("lambda_greek", "alpha")]
         # Short iron butterfly = Put1 - Put2 - Call1 + Call2
         for attr in test_methods:
             assert (

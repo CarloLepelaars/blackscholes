@@ -28,6 +28,8 @@ class TestBlackScholesBullSpread:
         test_methods = list(spread.call1.get_all_greeks().keys()) + [
             "price",
         ]
+        # lambda/alpha are structure-level (not sum of leg ratios)
+        test_methods = [m for m in test_methods if m not in ("lambda_greek", "alpha")]
         # Bull spread = Call1 - Call2
         for attr in test_methods:
             assert (
@@ -51,6 +53,8 @@ class TestBlackScholesBearSpread:
         test_methods = list(spread.put1.get_all_greeks().keys()) + [
             "price",
         ]
+        # lambda/alpha are structure-level (not sum of leg ratios)
+        test_methods = [m for m in test_methods if m not in ("lambda_greek", "alpha")]
         # Bear spread = Put1 - Put2
         for attr in test_methods:
             assert (
@@ -73,6 +77,8 @@ class TestBlackScholesCalendarCallSpread:
         test_methods = list(spread.call1.get_all_greeks().keys()) + [
             "price",
         ]
+        # lambda/alpha are structure-level (not sum of leg ratios)
+        test_methods = [m for m in test_methods if m not in ("lambda_greek", "alpha")]
         # Calendar Call Spread = Call1 - Call2
         for attr in test_methods:
             assert (
@@ -95,6 +101,8 @@ class TestBlackScholesCalendarPutSpread:
         test_methods = list(spread.put1.get_all_greeks().keys()) + [
             "price",
         ]
+        # lambda/alpha are structure-level (not sum of leg ratios)
+        test_methods = [m for m in test_methods if m not in ("lambda_greek", "alpha")]
         # Calendar Put Spread = Put1 - Put2
         for attr in test_methods:
             assert (
