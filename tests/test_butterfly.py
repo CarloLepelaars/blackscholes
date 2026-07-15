@@ -36,6 +36,8 @@ class TestBlackScholesButterflyLong:
         test_methods = list(butterfly.call1.get_all_greeks().keys()) + [
             "price",
         ]
+        # lambda/alpha are structure-level (not sum of leg ratios)
+        test_methods = [m for m in test_methods if m not in ("lambda_greek", "alpha")]
         # Long (call) butterfly = Call1 - 2 * Call2 + Call3
         for attr in test_methods:
             assert (
@@ -70,6 +72,8 @@ class TestBlackScholesButterflyShort:
         test_methods = list(butterfly.put1.get_all_greeks().keys()) + [
             "price",
         ]
+        # lambda/alpha are structure-level (not sum of leg ratios)
+        test_methods = [m for m in test_methods if m not in ("lambda_greek", "alpha")]
         # Short (put) butterfly = -Put1 + 2 * Put2 - Put3
         for attr in test_methods:
             assert (

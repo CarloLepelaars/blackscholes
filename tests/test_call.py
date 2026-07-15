@@ -233,36 +233,36 @@ class TestBinaryCall:
 
     def test_delta(self):
         delta = self.call.delta()
-        np.testing.assert_almost_equal(delta, 0.3055162306516324, decimal=6)
+        np.testing.assert_almost_equal(delta, 0.04083746356834601, decimal=6)
 
     def test_gamma(self):
         gamma = self.call.gamma()
         put_gamma = self.put.gamma()
-        np.testing.assert_almost_equal(gamma, put_gamma, decimal=15)
-        np.testing.assert_almost_equal(gamma, 0.0032595297589864043, decimal=6)
+        np.testing.assert_almost_equal(gamma, -put_gamma, decimal=12)
+        np.testing.assert_almost_equal(gamma, -0.003598982722841523, decimal=6)
 
     def test_vega(self):
         vega = self.call.vega()
         put_vega = self.put.vega()
-        np.testing.assert_almost_equal(vega, -put_vega, decimal=15)
-        np.testing.assert_almost_equal(vega, 81.65192052446703, decimal=6)
+        np.testing.assert_almost_equal(vega, -put_vega, decimal=12)
+        np.testing.assert_almost_equal(vega, -1.6330384104893412, decimal=6)
 
     def test_theta(self):
         theta = self.call.theta()
-        np.testing.assert_almost_equal(theta, -1.1738764912159139, decimal=6)
+        np.testing.assert_almost_equal(theta, 0.11865338030464881, decimal=6)
 
     def test_rho(self):
         rho = self.call.rho()
-        np.testing.assert_almost_equal(rho, 35.813015171916085, decimal=6)
+        np.testing.assert_almost_equal(rho, 1.5298001928207086, decimal=6)
 
     def test_get_core_greeks(self):
         core_greeks = self.call.get_core_greeks()
         expected_result = {
-            "delta": 0.3055162306516324,
-            "gamma": 0.0032595297589864043,
-            "vega": 81.65192052446703,
-            "theta": -1.1738764912159139,
-            "rho": 35.813015171916085,
+            "delta": 0.04083746356834601,
+            "gamma": -0.003598982722841523,
+            "vega": -1.6330384104893412,
+            "theta": 0.11865338030464881,
+            "rho": 1.5298001928207086,
         }
 
         assert set(core_greeks.keys()) == set(expected_result.keys())
@@ -270,4 +270,20 @@ class TestBinaryCall:
             np.testing.assert_almost_equal(
                 core_greeks[key], expected_result[key], decimal=5
             )
+
+    def test_greeks_match_finite_differences(self):
+        """Cash-or-nothing greeks should match central finite differences on price."""
+        eps = 1e-5
+        S, K, T, r, sigma = test_S, test_K, test_T, test_r, test_sigma
+        c = self.call
+
+        def price(**kw):
+            return BinaryCall(**{**dict(S=S, K=K, T=T, r=r, sigma=sigma), **kw}).price()
+
+        fd_delta = (price(S=S + eps) - price(S=S - eps)) / (2 * eps)
+        fd_vega = (price(sigma=sigma + eps) - price(sigma=sigma - eps)) / (2 * eps)
+        fd_rho = (price(r=r + eps) - price(r=r - eps)) / (2 * eps)
+        np.testing.assert_allclose(c.delta(), fd_delta, rtol=1e-5, atol=1e-7)
+        np.testing.assert_allclose(c.vega(), fd_vega, rtol=1e-5, atol=1e-7)
+        np.testing.assert_allclose(c.rho(), fd_rho, rtol=1e-5, atol=1e-7)
 

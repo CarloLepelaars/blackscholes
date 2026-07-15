@@ -97,7 +97,7 @@ class BlackScholesBase(ABC, StandardNormalMixin):
         """
         Rate of change in option price with respect to the volatility of the asset.
         """
-        return self.S * self._pdf(self._d1) * sqrt(self.T)
+        return self.S * exp(-self.q * self.T) * self._pdf(self._d1) * sqrt(self.T)
 
     @abstractmethod
     def theta(self) -> float:
@@ -128,7 +128,7 @@ class BlackScholesBase(ABC, StandardNormalMixin):
 
     def vanna(self) -> float:
         """Sensitivity of delta with respect to change in volatility."""
-        return -self._pdf(self._d1) * self._d2 / self.sigma
+        return -exp(-self.q * self.T) * self._pdf(self._d1) * self._d2 / self.sigma
 
     @abstractmethod
     def charm(self) -> float:
@@ -292,11 +292,11 @@ class Black76Base(ABC, StandardNormalMixin):
     """
 
     def __init__(self, F: float, K: float, T: float, r: float, sigma: float):
-        # Some parameters must be positive
-        for param in [F, K, T, sigma]:
+        # F, K, T, sigma must be strictly positive (zeros break log/d1/gamma)
+        for name, param in ("F", F), ("K", K), ("T", T), ("sigma", sigma):
             assert (
-                param >= 0.0
-            ), f"Some parameters cannot be negative. Got '{param}' as an argument."
+                param > 0.0
+            ), f"{name} needs to be larger than 0. Got '{param}'"
         self.F, self.K, self.T, self.r, self.sigma = F, K, T, r, sigma
 
     @abstractmethod
@@ -490,8 +490,9 @@ class BlackScholesStructureBase(ABC):
     def lambda_greek(self) -> float:
         """Percentage change in structure price per %
         change in asset price. Also called gearing.
+        Computed on the aggregate (not sum of leg gearings).
         """
-        return self._calc_attr(attribute_name="lambda_greek")
+        return self.delta() * self._underlying_spot() / self.price()
 
     def vanna(self) -> float:
         """Sensitivity of delta with respect to change in volatility."""
@@ -538,8 +539,16 @@ class BlackScholesStructureBase(ABC):
     def alpha(self) -> float:
         """Theta to gamma ratio. Also called "gamma rent".
         More info: "Dynamic Hedging" by Nassim Taleb, p. 178-181.
+        Computed on the aggregate (not sum of leg alphas).
         """
-        return self._calc_attr(attribute_name="alpha")
+        return abs(self.theta()) / (self.gamma() + 1e-9)
+
+    def _underlying_spot(self) -> float:
+        """Spot of the common underlying (from any leg with attribute S)."""
+        for leg in self.__dict__.values():
+            if hasattr(leg, "S"):
+                return leg.S
+        raise AttributeError("No option leg with spot price S found on structure")
 
     def get_core_greeks(self) -> Dict[str, float]:
         """
@@ -636,11 +645,23 @@ class BinaryBase(ABC, StandardNormalMixin):
         """
         ...
 
+    def _d2_dT(self) -> float:
+        """Partial of d2 with respect to time-to-maturity T (q=0)."""
+        return -self._d2 / (2.0 * self.T) + (
+            self.r - 0.5 * self.sigma**2
+        ) / (self.sigma * sqrt(self.T))
+
     def gamma(self) -> float:
-        """Rate of change in delta
-        with respect to the underlying price (2nd derivative).
+        """Cash-or-nothing call gamma (put subclasses negate).
+
+        Γ_call = -e^{-rT} n(d2) d1 / (S² σ² T)
         """
-        return (self._pdf(self._d1) * (self._d1 / (self.T * self.sigma * self.S) - 1 / self.S**2)) / (self.S * self.sigma * sqrt(self.T))
+        return (
+            -exp(-self.r * self.T)
+            * self._pdf(self._d2)
+            * self._d1
+            / (self.S**2 * self.sigma**2 * self.T)
+        )
 
     @abstractmethod
     def vega(self) -> float:
