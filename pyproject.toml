@@ -1,6 +1,6 @@
 [project]
 name = "blackscholes"
-version = "0.2.1"
+version = "0.2.2"
 description = "Black Scholes calculator for Python"
 authors = [
     {name = "Carlo Lepelaars", email = "info@carlolepelaars.nl"},
@@ -15,7 +15,7 @@ dev = [
     "mkdocs>=1.4.2",
     "mkdocs-material>=8.5.11",
     "mkdocstrings-python>=1.7.1",
-    "pytest>=7.2.0",
+    "pytest>=9.0.3",
     "pytest-cov>=4.1.0",
     "numpy>=1.23.5",
     "scipy>=1.9.3",
