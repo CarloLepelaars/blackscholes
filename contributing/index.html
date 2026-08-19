@@ -787,7 +787,10 @@ Check out the <a href="https://github.com/CarloLepelaars/blackscholes/issues">Gi
 <li>Consider and communicate if you would be open to maintain this feature in the future.</li>
 </ul>
 <h2 id="tests">Tests</h2>
-<p>Please write tests for every new feature that is implemented.
+<p>Please write tests for every new feature that is implemented.</p>
+<p>Expected prices and greeks for calls, puts, Black-76, and binaries live in
+<code>tests/fixtures/*.json</code>. To cover another market, append a case with <code>inputs</code>
+and the numbers the option should return.
 When dealing with complicated formulas, see if you can check your outputs
 against an existing software library to guarantee good output.
 If you don't know how to do this, the community might be able to help out with performing checks.</p>
