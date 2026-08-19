@@ -32,3 +32,5 @@ If you don't know how to do this, the community might be able to help out with p
 Also don't forget to document your new feature. 
 Check out this documentation to decide if you should
 add a section to an existing doc file or even create a new Markdown file.
+
+Public option classes must be listed in `blackscholes.__all__` so the MCP server (`mcp.py`) exposes them as `kind`s. Keep MCP stdlib-only — do not add the `mcp` SDK.

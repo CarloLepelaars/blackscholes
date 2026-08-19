@@ -24,6 +24,8 @@
 
 [8. Disclaimer](https://carlolepelaars.github.io/blackscholes/8.disclaimer)
 
+[9. MCP](https://carlolepelaars.github.io/blackscholes/9.mcp)
+
 [Contribution guide](https://carlolepelaars.github.io/blackscholes/contributing)
 
 
@@ -36,6 +38,8 @@ Currently only supports
 [European options](https://www.investopedia.com/articles/optioninvestor/08/american-european-options.asp).
 
 There is also a graphical interface available at: [https://carlo.ai/tools/blackscholes](https://carlo.ai/tools/blackscholes)
+
+Agents can call the same formulas over MCP: [9. MCP](https://carlolepelaars.github.io/blackscholes/9.mcp).
 
 ## Installation
 

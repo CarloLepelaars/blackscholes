@@ -1,12 +1,13 @@
 # blackscholes
 
-> Closed-form Black-Scholes-Merton, Black-76, binary options, and option structures. No runtime dependencies.
+> Closed-form Black-Scholes-Merton, Black-76, binary options, and option structures. No runtime dependencies. MCP stdio server included.
 
 ## Docs
 
 - [AGENTS.md](AGENTS.md) — agent conventions
 - [.github/README.MD](.github/README.MD) — usage
-- [docs/](docs/) — mkdocs (price, greeks, structures)
+- [docs/](docs/) — mkdocs (price, greeks, structures, MCP)
+- [docs/9.mcp.md](docs/9.mcp.md) — MCP tools and client config
 
 ## Code
 
@@ -20,4 +21,5 @@
 - [src/blackscholes/iron_condor.py](src/blackscholes/iron_condor.py)
 - [src/blackscholes/spread.py](src/blackscholes/spread.py)
 - [src/blackscholes/__init__.py](src/blackscholes/__init__.py) — public API
-- [tests/](tests/) — expected prices/greeks + put-call parity
+- [src/blackscholes/mcp.py](src/blackscholes/mcp.py) — MCP stdio (`price`, `instruments`)
+- [tests/](tests/) — expected prices/greeks + put-call parity + MCP handshake

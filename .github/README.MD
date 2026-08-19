@@ -102,6 +102,27 @@ straddle.delta()  ## 0.5328
 
 Binary options are also called exotic, digital or bet options. `blackscholes` supports Greeks for binary calls and puts.
 
+### MCP
+
+Agents can price through [MCP](https://modelcontextprotocol.io) with no extra install:
+
+```commandline
+python -m blackscholes.mcp
+```
+
+```json
+{
+  "mcpServers": {
+    "blackscholes": {
+      "command": "python",
+      "args": ["-m", "blackscholes.mcp"]
+    }
+  }
+}
+```
+
+Two tools: `instruments` (kinds + params) and `price` (`kind`, market params, `fields=price|core|all`). Same numbers as the Python classes. See [9. MCP](https://carlolepelaars.github.io/blackscholes/9.mcp).
+
 ## Contributing
 
 We very much welcome new contributions! Check out the [Github Issues](https://github.com/CarloLepelaars/blackscholes/issues)
