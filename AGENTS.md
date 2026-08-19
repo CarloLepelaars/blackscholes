@@ -11,6 +11,8 @@ src/blackscholes/   library (stdlib only)
   call.py put.py    BSM, Black-76, binary
   *.py              structures (straddle, spread, …)
 tests/test_*.py     one file per module
+tests/fixtures/     example inputs and expected prices/greeks
+tests/helpers.py    load cases + shared asserts
 docs/               mkdocs (user-facing)
 ```
 
@@ -24,7 +26,7 @@ Public classes are re-exported from `__init__.py`.
 - Structures compose legs via `_calc_attr` — never reimplement greeks.
 - Params: `S, K, T, r, sigma, q=0` (BSM); `F, K, T, r, sigma` (Black-76).
 - Assert `S, K, T, sigma > 0`. Use `float` throughout.
-- Tests: golden values + put-call parity. `np.testing.assert_almost_equal`.
+- Tests: JSON cases + put-call parity. Add a case in `tests/fixtures/*.json` to cover another market.
 - Do not expand the public API or add dependencies without asking.
 
 ## Commands

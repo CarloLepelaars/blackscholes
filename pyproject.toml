@@ -1,6 +1,6 @@
 [project]
 name = "blackscholes"
-version = "0.2.2"
+version = "0.2.3"
 description = "Black Scholes calculator for Python"
 authors = [
     {name = "Carlo Lepelaars", email = "info@carlolepelaars.nl"},

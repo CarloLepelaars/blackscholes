@@ -20,4 +20,4 @@
 - [src/blackscholes/iron_condor.py](src/blackscholes/iron_condor.py)
 - [src/blackscholes/spread.py](src/blackscholes/spread.py)
 - [src/blackscholes/__init__.py](src/blackscholes/__init__.py) — public API
-- [tests/](tests/) — golden values + parity
+- [tests/](tests/) — expected prices/greeks + put-call parity
