@@ -2,161 +2,31 @@ import pytest
 
 from blackscholes import BlackScholesIronButterflyLong, BlackScholesIronButterflyShort
 
-# Test parameters
-test_S = 25.0  # Asset price of 30
-test_K1 = 20.0  # Strike price of 20
-test_K2 = 25.0  # Strike price of 25
-test_K3 = 30.0  # Strike price of 30
-test_T = 1.0  # 1 year to maturity
-test_r = 0.0025  # 0.25% risk-free rate
-test_sigma = 0.15  # 15% vol
+from tests.helpers import MARKET_IB, assert_rejects, assert_structure
+
+_BAD_WINGS = (
+    dict(K1=60, K2=50, K3=60),
+    dict(K1=40, K2=40, K3=50),
+    dict(K1=19, K2=25, K3=35),
+    dict(K1=20, K2=25, K3=36),
+    dict(K1=19, K2=25, K3=30),
+)
+
+
+@pytest.mark.parametrize("cls", [BlackScholesIronButterflyLong, BlackScholesIronButterflyShort])
+def test_init_requires_equidistant_strikes(cls):
+    assert_rejects(cls, MARKET_IB, *_BAD_WINGS)
 
 
 class TestBlackScholesIronButterflyLong:
-    def test_init(self):
-        # Assert K1 < K2 < K3
-        with pytest.raises(AssertionError):
-            BlackScholesIronButterflyLong(
-                S=test_S,
-                K1=60,
-                K2=50,
-                K3=60,
-                T=test_T,
-                r=test_r,
-                sigma=test_sigma,
-            )
-        with pytest.raises(AssertionError):
-            BlackScholesIronButterflyLong(
-                S=test_S,
-                K1=40,
-                K2=40,
-                K3=50,
-                T=test_T,
-                r=test_r,
-                sigma=test_sigma,
-            )
-        # Assert equidistance between strike prices
-        with pytest.raises(AssertionError):
-            BlackScholesIronButterflyLong(
-                S=test_S,
-                K1=19,
-                K2=25,
-                K3=35,
-                T=test_T,
-                r=test_r,
-                sigma=test_sigma,
-            )
-        with pytest.raises(AssertionError):
-            BlackScholesIronButterflyLong(
-                S=test_S,
-                K1=20,
-                K2=25,
-                K3=36,
-                T=test_T,
-                r=test_r,
-                sigma=test_sigma,
-            )
-        with pytest.raises(AssertionError):
-            BlackScholesIronButterflyLong(
-                S=test_S,
-                K1=19,
-                K2=25,
-                K3=30,
-                T=test_T,
-                r=test_r,
-                sigma=test_sigma,
-            )
-
     def test_individual_methods(self):
-        iron_butterfly = BlackScholesIronButterflyLong(
-            test_S, test_K1, test_K2, test_K3, test_T, test_r, test_sigma
-        )
-        test_methods = list(iron_butterfly.call1.get_all_greeks().keys()) + [
-            "price",
-        ]
-        # lambda/alpha are structure-level (not sum of leg ratios)
-        test_methods = [m for m in test_methods if m not in ("lambda_greek", "alpha")]
+        ib = BlackScholesIronButterflyLong(**MARKET_IB)
         # Long iron butterfly = -Put1 + Put2 + Call1 - Call2
-        for attr in test_methods:
-            assert (
-                getattr(iron_butterfly, attr)()
-                == -getattr(iron_butterfly.put1, attr)()
-                + getattr(iron_butterfly.put2, attr)()
-                + getattr(iron_butterfly.call1, attr)()
-                - getattr(iron_butterfly.call2, attr)()
-            )
+        assert_structure(ib, lambda s, a: -getattr(s.put1, a)() + getattr(s.put2, a)() + getattr(s.call1, a)() - getattr(s.call2, a)())
 
 
 class TestBlackScholesIronButterflyShort:
-    def test_init(self):
-        # Assert K1 < K2 < K3
-        with pytest.raises(AssertionError):
-            BlackScholesIronButterflyShort(
-                S=test_S,
-                K1=60,
-                K2=50,
-                K3=60,
-                T=test_T,
-                r=test_r,
-                sigma=test_sigma,
-            )
-        with pytest.raises(AssertionError):
-            BlackScholesIronButterflyShort(
-                S=test_S,
-                K1=40,
-                K2=40,
-                K3=50,
-                T=test_T,
-                r=test_r,
-                sigma=test_sigma,
-            )
-        # Assert equidistance between strike prices
-        with pytest.raises(AssertionError):
-            BlackScholesIronButterflyShort(
-                S=test_S,
-                K1=19,
-                K2=25,
-                K3=35,
-                T=test_T,
-                r=test_r,
-                sigma=test_sigma,
-            )
-        with pytest.raises(AssertionError):
-            BlackScholesIronButterflyShort(
-                S=test_S,
-                K1=20,
-                K2=25,
-                K3=36,
-                T=test_T,
-                r=test_r,
-                sigma=test_sigma,
-            )
-        with pytest.raises(AssertionError):
-            BlackScholesIronButterflyShort(
-                S=test_S,
-                K1=19,
-                K2=25,
-                K3=30,
-                T=test_T,
-                r=test_r,
-                sigma=test_sigma,
-            )
-
     def test_individual_methods(self):
-        iron_butterfly = BlackScholesIronButterflyShort(
-            test_S, test_K1, test_K2, test_K3, test_T, test_r, test_sigma
-        )
-        test_methods = list(iron_butterfly.call1.get_all_greeks().keys()) + [
-            "price",
-        ]
-        # lambda/alpha are structure-level (not sum of leg ratios)
-        test_methods = [m for m in test_methods if m not in ("lambda_greek", "alpha")]
+        ib = BlackScholesIronButterflyShort(**MARKET_IB)
         # Short iron butterfly = Put1 - Put2 - Call1 + Call2
-        for attr in test_methods:
-            assert (
-                getattr(iron_butterfly, attr)()
-                == getattr(iron_butterfly.put1, attr)()
-                - getattr(iron_butterfly.put2, attr)()
-                - getattr(iron_butterfly.call1, attr)()
-                + getattr(iron_butterfly.call2, attr)()
-            )
+        assert_structure(ib, lambda s, a: getattr(s.put1, a)() - getattr(s.put2, a)() - getattr(s.call1, a)() + getattr(s.call2, a)())
