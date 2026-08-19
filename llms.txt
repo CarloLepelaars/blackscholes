@@ -1,0 +1,23 @@
+# blackscholes
+
+> Closed-form Black-Scholes-Merton, Black-76, binary options, and option structures. No runtime dependencies.
+
+## Docs
+
+- [AGENTS.md](AGENTS.md) — agent conventions
+- [.github/README.MD](.github/README.MD) — usage
+- [docs/](docs/) — mkdocs (price, greeks, structures)
+
+## Code
+
+- [src/blackscholes/base.py](src/blackscholes/base.py) — d1/d2, PDF/CDF, shared greeks
+- [src/blackscholes/call.py](src/blackscholes/call.py) — BSM / Black-76 / binary call
+- [src/blackscholes/put.py](src/blackscholes/put.py) — BSM / Black-76 / binary put
+- [src/blackscholes/straddle.py](src/blackscholes/straddle.py)
+- [src/blackscholes/strangle.py](src/blackscholes/strangle.py)
+- [src/blackscholes/butterfly.py](src/blackscholes/butterfly.py)
+- [src/blackscholes/iron_butterfly.py](src/blackscholes/iron_butterfly.py)
+- [src/blackscholes/iron_condor.py](src/blackscholes/iron_condor.py)
+- [src/blackscholes/spread.py](src/blackscholes/spread.py)
+- [src/blackscholes/__init__.py](src/blackscholes/__init__.py) — public API
+- [tests/](tests/) — golden values + parity
