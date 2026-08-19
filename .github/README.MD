@@ -104,24 +104,11 @@ Binary options are also called exotic, digital or bet options. `blackscholes` su
 
 ### MCP
 
-Agents can price through [MCP](https://modelcontextprotocol.io) with no extra install:
+Chat hosts that cannot import Python can call the same formulas over MCP:
 
-```commandline
-python -m blackscholes.mcp
-```
+`python -m blackscholes.mcp`
 
-```json
-{
-  "mcpServers": {
-    "blackscholes": {
-      "command": "python",
-      "args": ["-m", "blackscholes.mcp"]
-    }
-  }
-}
-```
-
-Two tools: `instruments` (kinds + params) and `price` (`kind`, market params, `fields=price|core|all`). Same numbers as the Python classes. See [9. MCP](https://carlolepelaars.github.io/blackscholes/9.mcp).
+See [9. MCP](https://carlolepelaars.github.io/blackscholes/9.mcp).
 
 ## Contributing
 

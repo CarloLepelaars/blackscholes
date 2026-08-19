@@ -10,7 +10,7 @@ src/blackscholes/   library (stdlib only)
   base.py           d1/d2, PDF/CDF, shared greeks
   call.py put.py    BSM, Black-76, binary
   *.py              structures (straddle, spread, …)
-  mcp.py            MCP stdio server (JSON-RPC, no extra deps)
+  mcp.py            thin MCP stdio adapter (price / instruments)
 tests/test_*.py     one file per module
 tests/fixtures/     example inputs and expected prices/greeks
 tests/helpers.py    load cases + shared asserts
@@ -29,7 +29,7 @@ Public classes are re-exported from `__init__.py`. Do not re-export `mcp`.
 - Assert `S, K, T, sigma > 0`. Use `float` throughout.
 - Tests: JSON cases + put-call parity. Add a case in `tests/fixtures/*.json` to cover another market.
 - Do not expand the public API or add dependencies without asking.
-- MCP is stdlib JSON-RPC in `mcp.py` (`price` / `instruments`). New public classes go in `__all__` so they become kinds. Do not add the `mcp` SDK.
+- MCP in `mcp.py` is a thin stdio adapter — explicit `KINDS`, `price()`, `instruments()`. Add new classes to `KINDS` by hand. Do not grow a protocol layer or add the `mcp` SDK.
 
 ## Commands
 

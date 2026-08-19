@@ -1,6 +1,6 @@
 # blackscholes
 
-> Closed-form Black-Scholes-Merton, Black-76, binary options, and option structures. No runtime dependencies. MCP stdio server included.
+> Closed-form Black-Scholes-Merton, Black-76, binary options, and option structures. No runtime dependencies.
 
 ## Docs
 
@@ -21,5 +21,5 @@
 - [src/blackscholes/iron_condor.py](src/blackscholes/iron_condor.py)
 - [src/blackscholes/spread.py](src/blackscholes/spread.py)
 - [src/blackscholes/__init__.py](src/blackscholes/__init__.py) — public API
-- [src/blackscholes/mcp.py](src/blackscholes/mcp.py) — MCP stdio (`price`, `instruments`)
-- [tests/](tests/) — expected prices/greeks + put-call parity + MCP handshake
+- [src/blackscholes/mcp.py](src/blackscholes/mcp.py) — thin MCP adapter (`price`, `instruments`)
+- [tests/](tests/) — expected prices/greeks + put-call parity

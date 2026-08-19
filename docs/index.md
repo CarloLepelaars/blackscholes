@@ -39,7 +39,7 @@ Currently only supports
 
 There is also a graphical interface available at: [https://carlo.ai/tools/blackscholes](https://carlo.ai/tools/blackscholes)
 
-Agents can call the same formulas over MCP: [9. MCP](https://carlolepelaars.github.io/blackscholes/9.mcp).
+Chat hosts can call the same formulas over MCP: [9. MCP](https://carlolepelaars.github.io/blackscholes/9.mcp).
 
 ## Installation
 
