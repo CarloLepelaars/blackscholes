@@ -22,8 +22,9 @@ uv pip install -e ".[dev]"
 ## Tests
 Please write tests for every new feature that is implemented.
 
-Vanilla call/put/Black-76/binary goldens live in `tests/fixtures/*.json`.
-To add a market scenario, append a `test_cases` entry with `inputs` and expected `outputs`.
+Expected prices and greeks for calls, puts, Black-76, and binaries live in
+`tests/fixtures/*.json`. To cover another market, append a case with `inputs`
+and the numbers the option should return.
 When dealing with complicated formulas, see if you can check your outputs
 against an existing software library to guarantee good output.
 If you don't know how to do this, the community might be able to help out with performing checks.

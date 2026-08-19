@@ -1,58 +1,42 @@
 import numpy as np
 import pytest
 
-from blackscholes import BinaryCall, BinaryPut, Black76Call, Black76Put, BlackScholesCall, BlackScholesPut
+from blackscholes import BinaryCall, BinaryPut, Black76Call, BlackScholesCall
 
-from tests.helpers import assert_almost_dict, assert_outputs, cases, discount_q, discount_r, spot_delta_factor
+from tests.helpers import assert_black76_parity, assert_bsm_parity, assert_option, cases
 
 
 @pytest.mark.parametrize("case", cases("bsm"), ids=lambda c: c["id"])
 class TestBlackScholesCall:
-    def test_outputs(self, case):
-        call = BlackScholesCall(**case["inputs"])
-        assert_outputs(call, case["call"]["outputs"])
-        assert_almost_dict(call.get_core_greeks(), case["call"]["core_greeks"])
-        assert_almost_dict(call.get_itm_proxies(), case["call"]["itm_proxies"])
-        assert_almost_dict(call.get_all_greeks(), case["call"]["all_greeks"])
+    def test_price_and_greeks(self, case):
+        assert_option(BlackScholesCall(**case["inputs"]), case["call"])
 
     def test_put_call_parity(self, case):
-        inp, call, put = case["inputs"], BlackScholesCall(**case["inputs"]), BlackScholesPut(**case["inputs"])
-        np.testing.assert_almost_equal(call.delta() - put.delta(), discount_q(inp), decimal=5)
-        np.testing.assert_almost_equal(call.spot_delta() - put.spot_delta(), spot_delta_factor(inp), decimal=5)
-        np.testing.assert_almost_equal(put.dual_delta() + call.dual_delta(), discount_r(inp), decimal=5)
-        itm = call.in_the_money()
-        assert 0.0 < itm < 1.0
-        assert 0.0 < call.dual_delta() < 1.0
-        assert itm + put.in_the_money() == 1.0
+        assert_bsm_parity(case["inputs"])
 
 
 @pytest.mark.parametrize("case", cases("black76"), ids=lambda c: c["id"])
 class TestBlack76Call:
-    def test_outputs(self, case):
-        call = Black76Call(**case["inputs"])
-        assert_outputs(call, case["call"]["outputs"])
-        assert_almost_dict(call.get_core_greeks(), case["call"]["core_greeks"])
-        assert_almost_dict(call.get_all_greeks(), case["call"]["all_greeks"])
+    def test_price_and_greeks(self, case):
+        assert_option(Black76Call(**case["inputs"]), case["call"])
 
     def test_put_call_parity(self, case):
-        call, put = Black76Call(**case["inputs"]), Black76Put(**case["inputs"])
-        np.testing.assert_almost_equal(call.delta() - put.delta(), discount_r(case["inputs"]), decimal=5)
+        assert_black76_parity(case["inputs"])
 
 
 @pytest.mark.parametrize("case", cases("binary"), ids=lambda c: c["id"])
 class TestBinaryCall:
-    def test_outputs(self, case):
-        call = BinaryCall(**case["inputs"])
-        assert_outputs(call, case["call"]["outputs"])
-        assert_almost_dict(call.get_core_greeks(), case["call"]["core_greeks"])
+    def test_price_and_greeks(self, case):
+        assert_option(BinaryCall(**case["inputs"]), case["call"])
 
     def test_put_is_opposite_gamma_vega(self, case):
         call, put = BinaryCall(**case["inputs"]), BinaryPut(**case["inputs"])
-        np.testing.assert_almost_equal(call.gamma(), -put.gamma(), decimal=12)
-        np.testing.assert_almost_equal(call.vega(), -put.vega(), decimal=12)
+        almost = np.testing.assert_almost_equal
+        almost(call.gamma(), -put.gamma(), decimal=12)
+        almost(call.vega(), -put.vega(), decimal=12)
 
     def test_greeks_match_finite_differences(self, case):
-        """Cash-or-nothing greeks should match central finite differences on price."""
+        """Binary greeks should match a small numerical bump in price."""
         eps, inp, c = 1e-5, case["inputs"], BinaryCall(**case["inputs"])
 
         def price(**kw):

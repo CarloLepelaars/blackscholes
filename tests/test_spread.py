@@ -4,42 +4,32 @@ from blackscholes import BlackScholesBearSpread, BlackScholesBullSpread, BlackSc
 
 from tests.helpers import MARKET_2K, MARKET_CAL, assert_rejects, assert_structure
 
-
-class TestBlackScholesBullSpread:
-    def test_init(self):
-        assert_rejects(BlackScholesBullSpread, MARKET_2K, dict(K1=50, K2=45))
-
-    def test_individual_methods(self):
-        spread = BlackScholesBullSpread(**MARKET_2K)
-        # Bull spread = Call1 - Call2
-        assert_structure(spread, lambda s, a: getattr(s.call1, a)() - getattr(s.call2, a)())
+BEAR = {**MARKET_2K, "K1": 50.0, "K2": 40.0}
 
 
-class TestBlackScholesBearSpread:
-    def test_init(self):
-        # Bear spread requires K1 > K2
-        assert_rejects(BlackScholesBearSpread, {**MARKET_2K, "K1": 50.0, "K2": 40.0}, dict(K1=45, K2=50))
-
-    def test_individual_methods(self):
-        spread = BlackScholesBearSpread(**{**MARKET_2K, "K1": 50.0, "K2": 40.0})
-        # Bear spread = Put1 - Put2
-        assert_structure(spread, lambda s, a: getattr(s.put1, a)() - getattr(s.put2, a)())
-
-
-@pytest.mark.parametrize("cls", [BlackScholesCalendarCallSpread, BlackScholesCalendarPutSpread])
-def test_calendar_requires_t1_gt_t2(cls):
-    assert_rejects(cls, MARKET_CAL, dict(T1=1.0, T2=1.5))
+@pytest.mark.parametrize(
+    "cls, valid, bad",
+    [
+        (BlackScholesBullSpread, MARKET_2K, dict(K1=50, K2=45)),
+        (BlackScholesBearSpread, BEAR, dict(K1=45, K2=50)),
+        (BlackScholesCalendarCallSpread, MARKET_CAL, dict(T1=1.0, T2=1.5)),
+        (BlackScholesCalendarPutSpread, MARKET_CAL, dict(T1=1.0, T2=1.5)),
+    ],
+    ids=["bull K1<K2", "bear K1>K2", "calendar call T1>T2", "calendar put T1>T2"],
+)
+def test_spread_init(cls, valid, bad):
+    assert_rejects(cls, valid, bad)
 
 
-class TestBlackScholesCalendarCallSpread:
-    def test_individual_methods(self):
-        spread = BlackScholesCalendarCallSpread(**MARKET_CAL)
-        # Calendar Call Spread = Call1 - Call2
-        assert_structure(spread, lambda s, a: getattr(s.call1, a)() - getattr(s.call2, a)())
-
-
-class TestBlackScholesCalendarPutSpread:
-    def test_individual_methods(self):
-        spread = BlackScholesCalendarPutSpread(**MARKET_CAL)
-        # Calendar Put Spread = Put1 - Put2
-        assert_structure(spread, lambda s, a: getattr(s.put1, a)() - getattr(s.put2, a)())
+@pytest.mark.parametrize(
+    "cls, kwargs, combo",
+    [
+        (BlackScholesBullSpread, MARKET_2K, lambda s, a: getattr(s.call1, a)() - getattr(s.call2, a)()),
+        (BlackScholesBearSpread, BEAR, lambda s, a: getattr(s.put1, a)() - getattr(s.put2, a)()),
+        (BlackScholesCalendarCallSpread, MARKET_CAL, lambda s, a: getattr(s.call1, a)() - getattr(s.call2, a)()),
+        (BlackScholesCalendarPutSpread, MARKET_CAL, lambda s, a: getattr(s.put1, a)() - getattr(s.put2, a)()),
+    ],
+    ids=["bull = call1-call2", "bear = put1-put2", "cal call = call1-call2", "cal put = put1-put2"],
+)
+def test_spread_legs(cls, kwargs, combo):
+    assert_structure(cls(**kwargs), combo)
